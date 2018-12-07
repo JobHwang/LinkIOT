@@ -27,7 +27,7 @@
     <session id="-1813667258">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.136" value="1" />
           <entry key="project.open.time.16" value="2" />
@@ -35,20 +35,22 @@
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.28" value="1" />
+          <entry key="project.open.time.46" value="1" />
+          <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.52" value="1" />
           <entry key="project.open.time.67" value="1" />
           <entry key="project.open.time.68" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="adoc" value="3" />
-          <entry key="class" value="23" />
+          <entry key="adoc" value="6" />
+          <entry key="class" value="39" />
           <entry key="cmd" value="1" />
-          <entry key="java" value="28" />
+          <entry key="java" value="68" />
           <entry key="kotlin_builtins" value="1" />
-          <entry key="kt" value="41" />
+          <entry key="kt" value="88" />
           <entry key="md" value="1" />
           <entry key="properties" value="1" />
           <entry key="xml" value="12" />
@@ -56,10 +58,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="23" />
-          <entry key="JAVA" value="28" />
-          <entry key="Kotlin" value="41" />
-          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="CLASS" value="39" />
+          <entry key="JAVA" value="68" />
+          <entry key="Kotlin" value="88" />
+          <entry key="PLAIN_TEXT" value="8" />
           <entry key="Properties" value="1" />
           <entry key="XML" value="12" />
           <entry key="kotlin_builtins" value="1" />
@@ -67,15 +69,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="384" />
-          <entry key="kt" value="6313" />
+          <entry key="java" value="1011" />
+          <entry key="kt" value="13203" />
           <entry key="xml" value="174" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="384" />
-          <entry key="Kotlin" value="6313" />
+          <entry key="JAVA" value="1011" />
+          <entry key="Kotlin" value="13203" />
           <entry key="XML" value="174" />
         </counts>
       </usages-collector>
@@ -83,29 +85,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoVerticle.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/http/HTTPVerticle.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="33">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataStorageVerticle.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="584">
+              <caret line="34" column="32" lean-forward="true" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/impl/DataStorageMySql.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="81" column="45" lean-forward="true" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/AbstractDataHandleService.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.12.7/scala-library-2.12.7.jar!/scala/concurrent/impl/CallbackRunnable.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
         </entry>
@@ -117,9 +146,11 @@
       <list>
         <option value="Kotlin Interface" />
         <option value="Kotlin Enum" />
-        <option value="Kotlin Class" />
         <option value="Interface" />
+        <option value="package-info" />
+        <option value="Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -127,7 +158,20 @@
     <findStrings>
       <find>compile</find>
       <find>Vertx</find>
+      <find>future.fail(WRONG_DATA_TYPE)</find>
+      <find>Glo</find>
+      <find>GlobalScope.launch</find>
+      <find>@launch</find>
+      <find>@async</find>
+      <find>GlobalScope.async</find>
     </findStrings>
+    <replaceStrings>
+      <replace>fail(WRONG_DATA_TYPE,data,handler)</replace>
+      <replace>GlobalScope.async</replace>
+      <replace>@async</replace>
+      <replace>@lunc</replace>
+      <replace>GlobalScope.launch</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -150,17 +194,31 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceStatus.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/mqtt/MQTTVerticle.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/TestVerticle.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoService.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/package-info.java" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoTestService.java" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfo.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoService.java" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoVerticle.kt" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/utils/Message.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataRaw.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataRaw.java" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataParseService.java" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/impl/DataParseServiceImpl.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/Test.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DataType.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/SensorInfo.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfo.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoVerticle.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/TestVerticle.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/utils/RawData.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataStorageVerticle.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataHandleService.java" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/impl/DataStorageMySql.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/http/HTTPVerticle.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/launch/Launcher.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/AbstractDataHandleService.kt" />
       </list>
     </option>
   </component>
@@ -203,8 +261,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -235,7 +293,42 @@
               <item name="linkServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
               <item name="device" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -244,32 +337,9 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="linkServer" type="462c0819:PsiDirectoryNode" />
               <item name="device" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
@@ -288,6 +358,35 @@
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="linkServer" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="launch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="linkServer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="linkServer" type="b2602c69:ProjectViewProjectNode" />
@@ -333,7 +432,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Kotlin.launch.LauncherKt">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -346,20 +445,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestMainVerticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="linkServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.hdussta.link.linkServer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.hdussta.link.linkServer" />
+      <option name="MAIN_CLASS_NAME" value="cn.hdussta.link.linkServer.TestMainVerticle" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cn.hdussta.link.linkServer.transport.TestVerticleKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+    <configuration name="launch.LauncherKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="linkServer" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="cn.hdussta.link.linkServer.transport.TestVerticleKt" />
+      <option name="MAIN_CLASS_NAME" value="launch.LauncherKt" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -382,9 +496,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.TestMainVerticle" />
+      <item itemvalue="Kotlin.launch.LauncherKt" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.cn.hdussta.link.linkServer.transport.TestVerticleKt" />
+        <item itemvalue="Kotlin.launch.LauncherKt" />
+        <item itemvalue="JUnit.TestMainVerticle" />
       </list>
     </recent_temporary>
   </component>
@@ -408,30 +527,42 @@
       <workItem from="1544064352900" duration="1388000" />
       <workItem from="1544080851090" duration="7346000" />
       <workItem from="1544100655465" duration="83000" />
-      <workItem from="1544100792567" duration="404000" />
+      <workItem from="1544100792567" duration="7048000" />
+      <workItem from="1544148277421" duration="24974000" />
+      <workItem from="1544188643843" duration="2663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42284000" />
+    <option name="totallyTimeSpent" value="76565000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1366" height="720" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22003035" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25037935" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32964602" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49893162" weight="0.39695945" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39933628" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49893162" weight="0.3935811" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5219595" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3293919" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3293919" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3293919" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50106835" side_tool="true" weight="0.39823008" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3277027" />
@@ -449,290 +580,233 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.adoc" />
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt</url>
+          <line>87</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/impl/DataStorageMySql.kt</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/common/RestAPIVerticle.java">
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/ref/WeakReference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="40" column="37" lean-forward="true" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+        <state relative-caret-position="56">
+          <caret line="52" column="6" lean-forward="true" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.3.0/kotlin-stdlib-1.3.0.jar!/kotlin/kotlin.kotlin_builtins">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/shareddata/AsyncMap.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
-          <caret line="431" column="22" selection-start-line="431" selection-start-column="22" selection-end-line="431" selection-end-column="22" />
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/db/TestVerticle.kt" />
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-service-proxy/3.6.0/vertx-service-proxy-3.6.0.jar!/io/vertx/serviceproxy/ProxyHelper.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/shareddata/AsyncMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="15" column="26" lean-forward="true" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        <state relative-caret-position="254">
+          <caret line="83" column="7" selection-start-line="83" selection-start-column="7" selection-end-line="83" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-mysql-postgresql-client/3.6.0/vertx-mysql-postgresql-client-3.6.0.jar!/io/vertx/ext/asyncsql/impl/ClientHelper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-mysql-postgresql-client/3.6.0/vertx-mysql-postgresql-client-3.6.0.jar!/io/vertx/ext/asyncsql/MySQLClient.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-mqtt/3.6.0/vertx-mqtt-3.6.0.jar!/io/vertx/mqtt/MqttServerOptions.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-292">
-          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="81" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-web/3.6.0/vertx-web-3.6.0.jar!/io/vertx/ext/web/Route.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin/3.6.0/vertx-lang-kotlin-3.6.0-sources.jar!/io/vertx/kotlin/core/json/json.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
-          <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/Vertx.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin/3.6.0/vertx-lang-kotlin-3.6.0-sources.jar!/io/vertx/kotlin/core/shareddata/AsyncMap.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="111" column="9" selection-start-line="111" selection-start-column="9" selection-end-line="111" selection-end-column="9" />
+        <state relative-caret-position="202">
+          <caret line="97" column="14" lean-forward="true" selection-start-line="97" selection-start-column="14" selection-end-line="97" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/TestVerticle.kt">
+    <entry file="file://$PROJECT_DIR$/src/test/kotlin/cn/hdussta/link/linkServer/TestMainVerticle.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+        <state relative-caret-position="284">
+          <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.adoc">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvnw.cmd">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/maven/plugins/maven-compiler-plugin/3.5.1/maven-compiler-plugin-3.5.1.jar!/META-INF/maven/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="262" column="8" selection-start-line="262" selection-start-column="8" selection-end-line="262" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/generated/cn/hdussta/link/linkServer/device/DeviceInfoTestServiceVertxEBProxy.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/generated/cn/hdussta/link/linkServer/device/DeviceInfoTestServiceVertxEBProxy.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoTestService.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/MainVerticle.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/http/HttpServer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-web/3.6.0/vertx-web-3.6.0.jar!/io/vertx/ext/web/Router.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/AsyncResult.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/json/JsonObject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.3.10/kotlin-stdlib-1.3.10-sources.jar!/kotlin/Enum.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/logging/LoggerFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceStatus.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataRaw.kt" />
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataRaw.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/Test.kt" />
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/impl/DataParseServiceImpl.kt" />
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        <state relative-caret-position="66">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdussta/link/linkServer/device/DeviceInfoServiceVertxEBProxy.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/mqtt/MQTTVerticle.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-service-discovery/3.6.0/vertx-service-discovery-3.6.0.jar!/io/vertx/servicediscovery/types/EventBusService.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="51" column="27" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-web/3.6.0/vertx-web-3.6.0.jar!/io/vertx/ext/web/sstore/SessionStore.class">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataParseService.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-sql-common/3.6.0/vertx-sql-common-3.6.0.jar!/io/vertx/ext/sql/ResultSet.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
-          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+          <caret line="87" column="28" selection-start-line="87" selection-start-column="28" selection-end-line="87" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/shareddata/SharedData.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/json/JsonArray.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+        <state relative-caret-position="246">
+          <caret line="397" column="19" selection-start-line="397" selection-start-column="19" selection-end-line="397" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0.jar!/io/vertx/core/shareddata/LocalMap.class">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DataType.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+        <state relative-caret-position="66">
+          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/common/BaseMicroserviceVerticle.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-common/1.3.10/kotlin-stdlib-common-1.3.10-sources.jar!/generated/_Arrays.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="34" selection-start-line="34" selection-end-line="35" />
+        <state relative-caret-position="188">
+          <caret line="8684" column="38" selection-start-line="8684" selection-start-column="38" selection-end-line="8684" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/SensorInfo.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="106" column="30" selection-start-line="106" selection-start-column="30" selection-end-line="106" selection-end-column="30" />
+        <state relative-caret-position="726">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdussta/link/linkServer/device/DeviceInfoServiceVertxProxyHandler.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-common/1.3.10/kotlin-stdlib-common-1.3.10-sources.jar!/kotlin/collections/Maps.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-335">
-          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/utils/Message.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="8" column="144" selection-start-line="8" selection-start-column="144" selection-end-line="8" selection-end-column="144" />
-          <folding>
-            <element signature="e#42#157#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfo.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+        <state relative-caret-position="650">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding>
+            <element signature="e#43#206#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.0.1/kotlinx-coroutines-core-1.0.1.jar!/kotlinx/coroutines/BuildersKt.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/json/JsonObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+        <state relative-caret-position="312">
+          <caret line="134" column="21" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.0.1/kotlinx-coroutines-core-1.0.1.jar!/kotlinx/coroutines/GlobalScope.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/Future.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        <state relative-caret-position="180">
+          <caret line="128" column="7" selection-start-line="128" selection-start-column="7" selection-end-line="128" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-web/3.6.0/vertx-web-3.6.0-sources.jar!/io/vertx/ext/web/sstore/SessionStore.java">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/TestVerticle.kt" />
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-service-discovery/3.6.0/vertx-service-discovery-3.6.0.jar!/io/vertx/servicediscovery/types/EventBusService.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="135" column="7" selection-start-line="135" selection-start-column="7" selection-end-line="135" selection-end-column="7" />
+        <state relative-caret-position="336">
+          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin/3.6.0/vertx-lang-kotlin-3.6.0.jar!/io/vertx/kotlin/ext/web/sstore/SessionStoreKt.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-service-discovery/3.6.0/vertx-service-discovery-3.6.0-sources.jar!/io/vertx/servicediscovery/types/EventBusService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="56" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
+        <state relative-caret-position="240">
+          <caret line="120" column="39" lean-forward="true" selection-start-line="120" selection-start-column="39" selection-end-line="120" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin-coroutines/3.6.0/vertx-lang-kotlin-coroutines-3.6.0.jar!/io/vertx/kotlin/coroutines/VertxCoroutineKt.class">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/utils/RawData.kt" />
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-web/3.6.0/vertx-web-3.6.0-sources.jar!/io/vertx/ext/web/RoutingContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        <state relative-caret-position="320">
+          <caret line="248" column="22" selection-start-line="248" selection-start-column="22" selection-end-line="248" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin-coroutines/3.6.0/vertx-lang-kotlin-coroutines-3.6.0-sources.jar!/io/vertx/kotlin/coroutines/VertxCoroutine.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoVerticle.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="82" column="24" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="24" />
+        <state relative-caret-position="264">
+          <caret line="23" column="51" lean-forward="true" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin/3.6.0/vertx-lang-kotlin-3.6.0-sources.jar!/io/vertx/kotlin/ext/sql/SQLClient.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/common/BaseMicroserviceVerticle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="181" column="14" lean-forward="true" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
+        <state relative-caret-position="220">
+          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/logging/LoggerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="62" column="19" lean-forward="true" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/logging/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataHandleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.0.1/kotlinx-coroutines-core-1.0.1.jar!/kotlinx/coroutines/Job.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="257">
           <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -740,27 +814,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/DeviceInfoVerticle.kt">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/http/HttpServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="254">
+          <caret line="159" column="16" lean-forward="true" selection-start-line="159" selection-start-column="16" selection-end-line="159" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt">
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/Vertx.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+        <state relative-caret-position="378">
+          <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin-coroutines/3.6.0/vertx-lang-kotlin-coroutines-3.6.0-sources.jar!/io/vertx/kotlin/coroutines/VertxCoroutine.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="137" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.0.1/kotlinx-coroutines-core-1.0.1.jar!/kotlinx/coroutines/Deferred.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="70" selection-start-line="12" selection-start-column="70" selection-end-line="12" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.0.1/kotlinx-coroutines-core-1.0.1.jar!/kotlinx/coroutines/BuildersKt.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-sql-common/3.6.0/vertx-sql-common-3.6.0.jar!/io/vertx/ext/sql/SQLOperations.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-lang-kotlin/3.6.0/vertx-lang-kotlin-3.6.0-sources.jar!/io/vertx/kotlin/ext/sql/SQLClient.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="41" column="50" lean-forward="true" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/jre/lib/rt.jar!/sun/nio/ch/EPollArrayWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="225" column="23" selection-start-line="225" selection-start-column="23" selection-end-line="225" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/vertx/vertx-core/3.6.0/vertx-core-3.6.0-sources.jar!/io/vertx/core/eventbus/impl/HandlerRegistration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="260" selection-start-line="260" selection-end-line="260" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/hdussta/link/linkServer/device/DeviceInfoServiceVertxProxyHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1001">
+          <caret line="63" column="36" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/launch/Launcher.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/transport/http/HTTPVerticle.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="33">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.12.7/scala-library-2.12.7.jar!/scala/concurrent/impl/CallbackRunnable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/AbstractDataHandleService.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/impl/DataStorageMySql.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="81" column="45" lean-forward="true" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/data/DataStorageVerticle.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="34" column="32" lean-forward="true" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cn/hdussta/link/linkServer/device/impl/DeviceInfoServiceImpl.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
         </state>
       </provider>
     </entry>

@@ -10,10 +10,10 @@ import io.vertx.core.Vertx
 import io.vertx.core.json.JsonArray
 import io.vertx.core.logging.LoggerFactory
 import io.vertx.ext.sql.SQLClient
-import io.vertx.ext.sql.UpdateResult
 import io.vertx.ext.web.sstore.SessionStore
-import io.vertx.kotlin.coroutines.awaitEvent
 import io.vertx.kotlin.coroutines.dispatcher
+import io.vertx.kotlin.ext.sql.querySingleWithParamsAwait
+import io.vertx.kotlin.ext.sql.queryWithParamsAwait
 import io.vertx.kotlin.ext.sql.updateWithParamsAwait
 import io.vertx.kotlin.ext.web.sstore.deleteAwait
 import io.vertx.kotlin.ext.web.sstore.getAwait
@@ -23,37 +23,34 @@ import kotlinx.coroutines.launch
 class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient, private val sessionStore: SessionStore) : DeviceInfoService {
   private val logger = LoggerFactory.getLogger(DeviceInfoService::class.java)
   override fun login(id: String, secret: String, handler: Handler<AsyncResult<String>>): DeviceInfoService {
-    GlobalScope.launch(vertx.dispatcher()) {
-      val result = awaitEvent<AsyncResult<JsonArray>> {
-        sqlClient.querySingleWithParams("SELECT deviceid,name,secret,state,config FROM sstalink_device WHERE deviceid=? and secret=?"
-          , JsonArray(listOf(id, secret)), it)
-      }
-      val future: Future<String> = Future.future()
-      future.setHandler(handler)
-      when {
-        result.failed() -> {
-          future.fail(result.cause())
-          return@launch
-        }
-        result.result() == null -> {
-          future.fail(DEVICE_NOT_FOUND)
-          return@launch
-        }
-      }
-      val update = awaitEvent<AsyncResult<UpdateResult>> {
-        sqlClient.updateWithParams("UPDATE sstalink_device SET state=? WHERE deviceid=?", JsonArray(listOf(DeviceStatus.ON.ordinal, id)), it)
-      }
-      if (update.failed()) {
-        future.fail(update.cause())
+    val future: Future<String> = Future.future()
+    future.setHandler(handler)
+    GlobalScope.launch(vertx.dispatcher()){
+      val result = sqlClient.querySingleWithParamsAwait("SELECT deviceid,name,secret,state,config FROM sstalink_device WHERE deviceid=? and secret=? and state=${DeviceStatus.OFF.ordinal}"
+          , JsonArray(listOf(id, secret)))
+      if(result==null){
+        future.fail(DEVICE_NOT_FOUND)
         return@launch
       }
+      val sensorResult = sqlClient.queryWithParamsAwait("SELECT id,datatype FROM sstalink_sensor WHERE deviceid=?"
+        , JsonArray(listOf(id)))
+
+      if(sensorResult.results.size==0){
+        future.fail(SENSOR_NOT_FOUND)
+        return@launch
+      }
+      sqlClient.updateWithParamsAwait("UPDATE sstalink_device SET state=? WHERE deviceid=?", JsonArray(listOf(DeviceStatus.ON.ordinal, id)))
       val session = sessionStore.createSession(SESSION_TIME_OUT)
-      session.put("device", DeviceInfo(result.result()))
+      session.put("device", DeviceInfo(result,sensorResult.results))
       sessionStore.put(session) { put ->
         if (put.failed())
           future.fail(put.cause())
         else
           future.complete(session.id())
+      }
+    }.invokeOnCompletion {
+      if(it!=null){
+        future.fail(it)
       }
     }
     return this
@@ -106,7 +103,8 @@ class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQL
 
   companion object {
     const val SESSION_TIME_OUT = 24 * 60 * 60 * 1000L
-    const val DEVICE_NOT_FOUND = "没有找到设备"
+    const val DEVICE_NOT_FOUND = "没有找到设备或设备状态有误"
+    const val SENSOR_NOT_FOUND = "设备未设置传感器"
     const val UPDATE_DEVICE_INFO_FAIL = "更新设备信息失败"
   }
 }
