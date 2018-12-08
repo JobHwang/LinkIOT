@@ -30,6 +30,7 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
     router.route("/api/auth/login/:id/:secret").handler { handleAuthLogin(it) }
     router.route("/api/auth/logout/:token").handler { handleAuthLogout(it, it.request().getParam("token")) }
     router.route(HttpMethod.POST, "/api/data/:token").handler { handleData(it, it.request().getParam("token")) }
+    router.route(HttpMethod.POST,"/api/state/:token").handler{ handleState(it,it.request().getParam("token")) }
     EventBusService.getProxy(discovery, DeviceInfoService::class.java) {
       if (it.failed()) {
         logger.error(it.cause().localizedMessage)
@@ -95,12 +96,25 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
     }
   }
 
+  private fun handleState(context: RoutingContext,token:String){
+    val state = context.bodyAsJson
+    deviceInfoService.setDeviceState(token,state){
+      when {
+          it.failed() -> context.response().end(message(-1,it.cause().localizedMessage))
+          it.result()==null -> context.response().end(message(1, UPDATE_STATE_SUCCESS))
+          else -> context.response().end(message(2, NEED_UPDATE_STATE,it.result()))
+      }
+    }
+  }
+
   companion object {
     private const val MAX_BODY_SIZE = 100 * 1024L
     private const val LOGIN_SUCCESS_MSG = "登录成功"
     private const val LOGOUT_SUCCESS_MSG = "登出成功"
     private const val GET_DEVICEINFO_SERVICE = "成功获取设备信息服务"
     private const val GET_BASIC_SERVICE = "成功获取基础处理服务"
+    private const val UPDATE_STATE_SUCCESS = "更新状态成功"
+    private const val NEED_UPDATE_STATE = "需要更新状态"
     const val BASIC_SERVICE_NAME = DataStorageMySql.SERVICE_NAME
   }
 }

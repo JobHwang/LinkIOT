@@ -44,7 +44,9 @@ import io.vertx.serviceproxy.HelperUtils;
 import cn.hdussta.link.linkServer.device.DeviceInfoService;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.vertx.core.Vertx;
+import cn.hdussta.link.linkServer.manager.ManagerService;
 import cn.hdussta.link.linkServer.device.DeviceInfo;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
 import io.vertx.ext.sql.SQLClient;
 import io.vertx.core.Handler;
@@ -118,21 +120,6 @@ public class DeviceInfoServiceVertxProxyHandler extends ProxyHandler {
       if (action == null) throw new IllegalStateException("action not specified");
       accessed();
       switch (action) {
-        case "getDeviceInfo": {
-          service.getDeviceInfo((java.lang.String)json.getValue("id"),
-                        res -> {
-                        if (res.failed()) {
-                          if (res.cause() instanceof ServiceException) {
-                            msg.reply(res.cause());
-                          } else {
-                            msg.reply(new ServiceException(-1, res.cause().getMessage()));
-                          }
-                        } else {
-                          msg.reply(res.result() == null ? null : res.result().toJson());
-                        }
-                     });
-          break;
-        }
         case "getDeviceByToken": {
           service.getDeviceByToken((java.lang.String)json.getValue("token"),
                         res -> {
@@ -156,6 +143,17 @@ public class DeviceInfoServiceVertxProxyHandler extends ProxyHandler {
         }
         case "logout": {
           service.logout((java.lang.String)json.getValue("token"),
+                        HelperUtils.createHandler(msg));
+          break;
+        }
+        case "setDeviceState": {
+          service.setDeviceState((java.lang.String)json.getValue("token"),
+                        (io.vertx.core.json.JsonObject)json.getValue("state"),
+                        HelperUtils.createHandler(msg));
+          break;
+        }
+        case "getDeviceState": {
+          service.getDeviceState((java.lang.String)json.getValue("token"),
                         HelperUtils.createHandler(msg));
           break;
         }

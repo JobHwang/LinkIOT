@@ -3,14 +3,17 @@ package cn.hdussta.link.linkServer.device.impl
 import cn.hdussta.link.linkServer.device.DeviceInfo
 import cn.hdussta.link.linkServer.device.DeviceInfoService
 import cn.hdussta.link.linkServer.device.DeviceStatus
+import cn.hdussta.link.linkServer.manager.ManagerService
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonArray
+import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.LoggerFactory
 import io.vertx.ext.sql.SQLClient
 import io.vertx.ext.web.sstore.SessionStore
+import io.vertx.kotlin.coroutines.awaitResult
 import io.vertx.kotlin.coroutines.dispatcher
 import io.vertx.kotlin.ext.sql.querySingleWithParamsAwait
 import io.vertx.kotlin.ext.sql.queryWithParamsAwait
@@ -20,36 +23,34 @@ import io.vertx.kotlin.ext.web.sstore.getAwait
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient, private val sessionStore: SessionStore) : DeviceInfoService {
+class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient, private val sessionStore: SessionStore, private val managerService: ManagerService) : DeviceInfoService {
   private val logger = LoggerFactory.getLogger(DeviceInfoService::class.java)
   override fun login(id: String, secret: String, handler: Handler<AsyncResult<String>>): DeviceInfoService {
     val future: Future<String> = Future.future()
     future.setHandler(handler)
-    GlobalScope.launch(vertx.dispatcher()){
+    GlobalScope.launch(vertx.dispatcher()) {
       val result = sqlClient.querySingleWithParamsAwait("SELECT deviceid,name,secret,state,config FROM sstalink_device WHERE deviceid=? and secret=? and state=${DeviceStatus.OFF.ordinal}"
-          , JsonArray(listOf(id, secret)))
-      if(result==null){
+        , JsonArray(listOf(id, secret)))
+      if (result == null) {
         future.fail(DEVICE_NOT_FOUND)
         return@launch
       }
       val sensorResult = sqlClient.queryWithParamsAwait("SELECT id,datatype FROM sstalink_sensor WHERE deviceid=?"
         , JsonArray(listOf(id)))
 
-      if(sensorResult.results.size==0){
+      if (sensorResult.results.size == 0) {
         future.fail(SENSOR_NOT_FOUND)
         return@launch
       }
       sqlClient.updateWithParamsAwait("UPDATE sstalink_device SET state=? WHERE deviceid=?", JsonArray(listOf(DeviceStatus.ON.ordinal, id)))
       val session = sessionStore.createSession(SESSION_TIME_OUT)
-      session.put("device", DeviceInfo(result,sensorResult.results))
-      sessionStore.put(session) { put ->
-        if (put.failed())
-          future.fail(put.cause())
-        else
-          future.complete(session.id())
-      }
+      val deviceInfo = DeviceInfo(result, sensorResult.results)
+      session.put("device", deviceInfo)
+      awaitResult<Void> { sessionStore.put(session,it) }
+      awaitResult<Void> { managerService.register(deviceInfo,session.id(),it) }
+      future.complete(session.id())
     }.invokeOnCompletion {
-      if(it!=null){
+      if (it != null) {
         future.fail(it)
       }
     }
@@ -61,23 +62,23 @@ class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQL
     future.setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
       val deviceInfo = sessionStore.getAwait(token)?.get<DeviceInfo>("device")
-      if(deviceInfo==null) {
+      if (deviceInfo == null) {
         future.fail(DEVICE_NOT_FOUND)
         return@launch
       }
-      sessionStore.deleteAwait(token)
-      try {
-        val result = sqlClient.updateWithParamsAwait("UPDATE sstalink_device SET state=? WHERE deviceid=?"
-          , JsonArray(listOf(DeviceStatus.OFF.ordinal, deviceInfo.id)))
-        if(result.updated==0){
-          future.fail(UPDATE_DEVICE_INFO_FAIL)
-        }
-      }catch (e:Throwable){
-        logger.error(e.localizedMessage)
+      val result = sqlClient.updateWithParamsAwait("UPDATE sstalink_device SET state=? WHERE deviceid=?"
+        , JsonArray(listOf(DeviceStatus.OFF.ordinal, deviceInfo.id)))
+      if (result.updated == 0) {
         future.fail(UPDATE_DEVICE_INFO_FAIL)
-        return@launch
       }
+      awaitResult<Void> {
+        managerService.unregister(deviceInfo.id, it)
+      }
+      sessionStore.deleteAwait(token)
       future.complete()
+    }.invokeOnCompletion {
+      if (it != null)
+        future.fail(it)
     }
     return this
   }
@@ -85,9 +86,8 @@ class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQL
 
   override fun getDeviceByToken(token: String, handler: Handler<AsyncResult<DeviceInfo>>): DeviceInfoService {
     sessionStore.get(token) {
-      val future = Future.future<DeviceInfo>()
-      future.setHandler(handler)
-      if (it.failed()) {
+      val future = Future.future<DeviceInfo>().setHandler(handler)
+      if (it.failed() || it.result() == null) {
         future.fail(DEVICE_NOT_FOUND)
       } else {
         future.complete(it.result().get("device"))
@@ -96,8 +96,37 @@ class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQL
     return this
   }
 
-  override fun getDeviceInfo(id: String, handler: Handler<AsyncResult<DeviceInfo>>): DeviceInfoService {
-    //TODO
+  override fun setDeviceState(token: String, state: JsonObject, handler: Handler<AsyncResult<JsonObject>>): DeviceInfoService {
+    val future = Future.future<JsonObject>().setHandler(handler)
+    sessionStore.get(token) { session ->
+      if (session.failed() || session.result() == null)
+        future.fail(DEVICE_NOT_FOUND)
+      else {
+        val deviceInfo = session.result().get<DeviceInfo>("device")
+        managerService.updateState(deviceInfo.id,state) { desired ->
+          when {
+              desired.failed() -> future.fail(desired.cause())
+              desired.result()==null ->{
+                session.result().put("state", state)
+                future.complete()
+              }
+              else -> future.complete(desired.result())
+          }
+        }
+      }
+    }
+    return this
+  }
+
+  override fun getDeviceState(token: String, handler: Handler<AsyncResult<JsonObject>>): DeviceInfoService {
+    val future = Future.future<JsonObject>()
+    sessionStore.get(token) {
+      if (it.failed() || it.result() == null) {
+        future.fail(DEVICE_NOT_FOUND)
+      } else {
+        future.complete(it.result().get("state") ?: JsonObject())
+      }
+    }
     return this
   }
 

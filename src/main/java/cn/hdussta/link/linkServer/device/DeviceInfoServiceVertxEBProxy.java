@@ -36,7 +36,9 @@ import io.vertx.serviceproxy.ProxyUtils;
 import cn.hdussta.link.linkServer.device.DeviceInfoService;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.vertx.core.Vertx;
+import cn.hdussta.link.linkServer.manager.ManagerService;
 import cn.hdussta.link.linkServer.device.DeviceInfo;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
 import io.vertx.ext.sql.SQLClient;
 import io.vertx.core.Handler;
@@ -65,26 +67,6 @@ public class DeviceInfoServiceVertxEBProxy implements DeviceInfoService {
     } catch (IllegalStateException ex) {}
   }
 
-  @Override
-  public  DeviceInfoService getDeviceInfo(String id, Handler<AsyncResult<DeviceInfo>> handler){
-    if (closed) {
-      handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
-      return this;
-    }
-    JsonObject _json = new JsonObject();
-    _json.put("id", id);
-
-    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
-    _deliveryOptions.addHeader("action", "getDeviceInfo");
-    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
-      if (res.failed()) {
-        handler.handle(Future.failedFuture(res.cause()));
-      } else {
-        handler.handle(Future.succeededFuture(res.result().body() == null ? null : new DeviceInfo(res.result().body())));
-      }
-    });
-    return this;
-  }
   @Override
   public  DeviceInfoService getDeviceByToken(String token, Handler<AsyncResult<DeviceInfo>> handler){
     if (closed) {
@@ -138,6 +120,47 @@ public class DeviceInfoServiceVertxEBProxy implements DeviceInfoService {
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "logout");
     _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+      if (res.failed()) {
+        handler.handle(Future.failedFuture(res.cause()));
+      } else {
+        handler.handle(Future.succeededFuture(res.result().body()));
+      }
+    });
+    return this;
+  }
+  @Override
+  public  DeviceInfoService setDeviceState(String token, JsonObject state, Handler<AsyncResult<JsonObject>> handler){
+    if (closed) {
+      handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+      return this;
+    }
+    JsonObject _json = new JsonObject();
+    _json.put("token", token);
+    _json.put("state", state);
+
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "setDeviceState");
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
+      if (res.failed()) {
+        handler.handle(Future.failedFuture(res.cause()));
+      } else {
+        handler.handle(Future.succeededFuture(res.result().body()));
+      }
+    });
+    return this;
+  }
+  @Override
+  public  DeviceInfoService getDeviceState(String token, Handler<AsyncResult<JsonObject>> handler){
+    if (closed) {
+      handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+      return this;
+    }
+    JsonObject _json = new JsonObject();
+    _json.put("token", token);
+
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "getDeviceState");
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         handler.handle(Future.failedFuture(res.cause()));
       } else {

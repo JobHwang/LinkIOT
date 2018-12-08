@@ -1,8 +1,6 @@
 package cn.hdussta.link.linkServer.data.impl
 
-import cn.hdussta.link.linkServer.AbstractDataHandleService
 import cn.hdussta.link.linkServer.data.DataHandleService
-import cn.hdussta.link.linkServer.data.DataHandleService.generated
 import cn.hdussta.link.linkServer.device.DataType
 import cn.hdussta.link.linkServer.device.DeviceInfo
 import io.vertx.core.AsyncResult
@@ -15,7 +13,7 @@ import io.vertx.ext.sql.SQLClient
 import io.vertx.kotlin.core.json.get
 import io.vertx.servicediscovery.ServiceDiscovery
 
-class DataStorageMySql(private val vertx:Vertx,override val discovery: ServiceDiscovery,private val sqlClient: SQLClient):AbstractDataHandleService() {
+class DataStorageMySql(private val vertx:Vertx,override val discovery: ServiceDiscovery,private val sqlClient: SQLClient): AbstractDataHandleService() {
   override val ruleName: String = RULE_NAME
   override val logger = LoggerFactory.getLogger(DataStorageMySql::class.java)!!
   override fun handle(device: DeviceInfo, sensorId: Int, data: JsonObject, handler: Handler<AsyncResult<JsonObject>>): DataHandleService {

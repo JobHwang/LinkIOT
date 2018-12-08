@@ -56,6 +56,6 @@ class DeviceInfo() {
       ,"secret" to secret
       ,"status" to status.ordinal
       ,"sensors" to JsonArray(sensors.map { it.value.toJson() })
-      ,"rules" to rules.joinToString { "|" }))
+      ,"rules" to rules.joinToString("|") { it }))
   }
 }

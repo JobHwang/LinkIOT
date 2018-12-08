@@ -23,7 +23,7 @@
     <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
     <junit-platform-launcher.version>1.2.0</junit-platform-launcher.version>
 
-    <main.verticle>cn.hdussta.link.linkServer.MainVerticle</main.verticle>
+    <main.verticle>cn.hdussta.link.linkServer.launch.MainVerticle</main.verticle>
   </properties>
 
   <dependencyManagement>
