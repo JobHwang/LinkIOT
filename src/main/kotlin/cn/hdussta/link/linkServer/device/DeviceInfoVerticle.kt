@@ -17,6 +17,11 @@ import io.vertx.serviceproxy.ServiceProxyBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * @name DeviceInfoVerticle
+ * @description 部署DeviceInfoService
+ * @author Wooyme
+ */
 class DeviceInfoVerticle : BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(DeviceInfoVerticle::class.java)
 

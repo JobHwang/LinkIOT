@@ -21,15 +21,21 @@ import io.vertx.serviceproxy.ServiceProxyBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * @name ManagerVerticle
+ * @description 用于部署ManagerService,并提供一个Restful服务
+ * @author Wooyme
+ */
 class ManagerVerticle:BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(ManagerVerticle::class.java)
-  lateinit var binder: ServiceBinder
-  lateinit var consumer: MessageConsumer<JsonObject>
-  lateinit var managerService: ManagerService
+  private lateinit var binder: ServiceBinder
+  private lateinit var consumer: MessageConsumer<JsonObject>
+  private lateinit var managerService: ManagerService
   override fun start() {
     super.start()
+    //发布DeviceInfoService
     publishEventBusService(DeviceInfoService.SERVICE_NAME, DeviceInfoService.SERVICE_ADDRESS, DeviceInfoService::class.java)
-
+    //发布ManagerService
     publishEventBusService(ManagerService.SERVICE_NAME, ManagerService.SERVICE_ADDRESS, ManagerService::class.java)
 
     GlobalScope.launch {
@@ -42,7 +48,9 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
       if(it!=null) logger.error(it.localizedMessage)
     }
   }
-
+  /**
+   * 部署ManagerService
+   */
   private suspend fun publishManagerService(){
     val eventBus = vertx.eventBus()
     val deviceInfoService = awaitResult<DeviceInfoService> {
@@ -60,7 +68,11 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
 
     logger.info(PUBLISH_SUCCESS)
   }
-
+  /**
+   * 部署Restful服务
+   * @API 下发设备状态 POST /api/manage/state/{设备id}
+   * @API 查询设备状态 GET /api/manage/state/{设备id}
+   */
   private fun initRouter(){
     val router = Router.router(vertx)
     router.route().handler(BodyHandler.create().setBodyLimit(100*1024))

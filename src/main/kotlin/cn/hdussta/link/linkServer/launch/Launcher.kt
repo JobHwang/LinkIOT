@@ -6,6 +6,9 @@ import cn.hdussta.link.linkServer.transport.http.HTTPVerticle
 import io.vertx.core.Vertx
 import io.vertx.kotlin.coroutines.awaitResult
 
+/**
+ * 测试用入口函数
+ */
 suspend fun main(args: Array<String>) {
   val vertx = Vertx.vertx()
   val managerVerticleId = awaitResult<String> {

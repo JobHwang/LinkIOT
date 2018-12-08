@@ -7,7 +7,13 @@ import javax.xml.crypto.Data
 
 @DataObject
 class SensorInfo(){
+  /**
+   * 传感器ID
+   */
   var id:Int = 0
+  /**
+   * 传感器数据类型
+   */
   lateinit var type: DataType
   constructor(jsonArray: JsonArray):this(){
     id = jsonArray.getInteger(0)

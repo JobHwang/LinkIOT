@@ -7,11 +7,29 @@ import java.io.Serializable
 
 @DataObject
 class DeviceInfo():Serializable {
+  /**
+   * 设备ID
+   */
   lateinit var id:String
+  /**
+   * 设备名称
+   */
   lateinit var name:String
+  /**
+   * 设备秘钥
+   */
   lateinit var secret:String
+  /**
+   * 设备状态(指连接情况和权限等)
+   */
   lateinit var status:DeviceStatus
+  /**
+   * 设备下所有传感器
+   */
   lateinit var sensors:Map<Int,SensorInfo>
+  /**
+   * 设备对应规则链
+   */
   lateinit var rules:Array<String>
 
   constructor(json:JsonObject):this(){

@@ -18,18 +18,26 @@ import io.vertx.servicediscovery.types.EventBusService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * @name HTTPVerticle
+ * @description 部署Http服务端
+ * @author Wooyme
+ */
 class HTTPVerticle : BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(HTTPVerticle::class.java)
   lateinit var deviceInfoService: DeviceInfoService
   lateinit var basicHandleService: DataHandleService
   override fun start() {
     super.start()
-    val router = Router.router(vertx)
-    router.route().handler(BodyHandler.create().setBodyLimit(MAX_BODY_SIZE))
-    router.route("/api/auth/login/:id/:secret").handler { handleAuthLogin(it) }
-    router.route("/api/auth/logout/:token").handler { handleAuthLogout(it, it.request().getParam("token")) }
-    router.route(HttpMethod.POST, "/api/data/:token").handler { handleData(it, it.request().getParam("token")) }
-    router.route(HttpMethod.POST,"/api/state/:token").handler{ handleState(it,it.request().getParam("token")) }
+    initProxy()
+    initRouter()
+  }
+
+  /**
+   * 获取DeviceInfoService和BasicService
+   * 暂时将DataStorageService作为BasicService
+   */
+  private fun initProxy(){
     EventBusService.getProxy(discovery, DeviceInfoService::class.java) {
       if (it.failed()) {
         logger.error(it.cause().localizedMessage)
@@ -48,11 +56,25 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
         logger.info(GET_BASIC_SERVICE)
       }
     }
-    vertx.executeBlocking<Void>({
-      vertx.createHttpServer().requestHandler(router::accept).listen(28080){
-        logger.info("Listen at 28080")
-      }
-    }){}
+  }
+
+  /**
+   * 创建Restful服务
+   * @API 登录 GET /api/auth/login/{设备id}/{设备秘钥}
+   * @API 登出 GET /api/auth/logout/{token}
+   * @API 上传数据 POST /api/data/{token}
+   * @API 上传状态 POST /api/state/{token}
+   */
+  private fun initRouter(){
+    val router = Router.router(vertx)
+    router.route().handler(BodyHandler.create().setBodyLimit(MAX_BODY_SIZE))
+    router.route("/api/auth/login/:id/:secret").handler { handleAuthLogin(it) }
+    router.route("/api/auth/logout/:token").handler { handleAuthLogout(it, it.request().getParam("token")) }
+    router.route(HttpMethod.POST, "/api/data/:token").handler { handleData(it, it.request().getParam("token")) }
+    router.route(HttpMethod.POST,"/api/state/:token").handler{ handleState(it,it.request().getParam("token")) }
+    vertx.createHttpServer().requestHandler(router::accept).listen(28080){
+      logger.info("Listen at 28080")
+    }
   }
 
   private fun handleAuthLogin(context: RoutingContext) {

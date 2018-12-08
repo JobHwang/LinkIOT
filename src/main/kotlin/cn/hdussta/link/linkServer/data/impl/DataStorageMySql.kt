@@ -13,6 +13,11 @@ import io.vertx.ext.sql.SQLClient
 import io.vertx.kotlin.core.json.get
 import io.vertx.servicediscovery.ServiceDiscovery
 
+/**
+ * @name DataStorageMySqlService
+ * @description 存储设备上传数据至Mysql中
+ * @author Wooyme
+ */
 class DataStorageMySql(private val vertx:Vertx,override val discovery: ServiceDiscovery,private val sqlClient: SQLClient): AbstractDataHandleService() {
   override val ruleName: String = RULE_NAME
   override val logger = LoggerFactory.getLogger(DataStorageMySql::class.java)!!
