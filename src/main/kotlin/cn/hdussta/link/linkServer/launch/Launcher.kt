@@ -8,7 +8,6 @@ import io.vertx.kotlin.coroutines.awaitResult
 
 suspend fun main(args: Array<String>) {
   val vertx = Vertx.vertx()
-
   val managerVerticleId = awaitResult<String> {
     vertx.deployVerticle(ManagerVerticle(), it)
   }
@@ -21,4 +20,5 @@ suspend fun main(args: Array<String>) {
     vertx.deployVerticle(HTTPVerticle(), it)
   }
   println(httpVerticleId)
+
 }

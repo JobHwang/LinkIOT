@@ -1,7 +1,8 @@
 package cn.hdussta.link.linkServer.device
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
-import cn.hdussta.link.linkServer.manager.ManagerService
+import cn.hdussta.link.linkServer.service.DeviceInfoService
+import cn.hdussta.link.linkServer.service.ManagerService
 import io.vertx.core.eventbus.MessageConsumer
 import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.LoggerFactory
@@ -28,7 +29,7 @@ class DeviceInfoVerticle : BaseMicroserviceVerticle() {
     GlobalScope.launch(vertx.dispatcher()) {
       sqlClient = MySQLClient.createShared(vertx, configMySQLClient())
       val managerService = awaitResult<ManagerService> {
-        EventBusService.getProxy(discovery,ManagerService::class.java,it)
+        EventBusService.getProxy(discovery, ManagerService::class.java,it)
       }
       deviceInfoService = DeviceInfoService.createService(vertx, sqlClient, SessionStore.create(vertx),managerService)
       binder = ServiceBinder(vertx).setAddress(DeviceInfoService.SERVICE_ADDRESS)

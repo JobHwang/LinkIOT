@@ -14,7 +14,7 @@
 * under the License.
 */
 
-package cn.hdussta.link.linkServer.device;
+package cn.hdussta.link.linkServer.service;
 
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.Vertx;
@@ -33,10 +33,10 @@ import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.ProxyUtils;
 
-import cn.hdussta.link.linkServer.device.DeviceInfoService;
+import cn.hdussta.link.linkServer.service.ManagerService;
+import cn.hdussta.link.linkServer.service.DeviceInfoService;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.vertx.core.Vertx;
-import cn.hdussta.link.linkServer.manager.ManagerService;
 import cn.hdussta.link.linkServer.device.DeviceInfo;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;

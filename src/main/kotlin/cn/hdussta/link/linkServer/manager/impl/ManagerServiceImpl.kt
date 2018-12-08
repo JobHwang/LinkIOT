@@ -1,9 +1,9 @@
 package cn.hdussta.link.linkServer.manager.impl
 
 import cn.hdussta.link.linkServer.device.DeviceInfo
-import cn.hdussta.link.linkServer.device.DeviceInfoService
+import cn.hdussta.link.linkServer.service.DeviceInfoService
 import cn.hdussta.link.linkServer.manager.ManageableDeviceInfo
-import cn.hdussta.link.linkServer.manager.ManagerService
+import cn.hdussta.link.linkServer.service.ManagerService
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Handler
@@ -12,9 +12,10 @@ import io.vertx.core.eventbus.EventBus
 import io.vertx.core.json.JsonObject
 import io.vertx.core.shareddata.AsyncMap
 
-class ManagerServiceImpl(private val vertx: Vertx,private val eventBus:EventBus, private val deviceInfoService: DeviceInfoService,private val asyncDeviceMap:AsyncMap<String,ManageableDeviceInfo>):ManagerService {
+class ManagerServiceImpl(private val vertx: Vertx, private val eventBus:EventBus, private val deviceInfoService: DeviceInfoService, private val asyncDeviceMap:AsyncMap<String,ManageableDeviceInfo>): ManagerService {
   override fun setState(deviceId: String, desired: JsonObject, handler: Handler<AsyncResult<Void>>): ManagerService {
     val future = Future.future<Void>().setHandler(handler)
+    vertx.sharedData().getLocalMap<String,ManageableDeviceInfo>("")
     this.asyncDeviceMap.get(deviceId){
       if(it.failed()){
         future.fail(it.cause())
@@ -27,6 +28,7 @@ class ManagerServiceImpl(private val vertx: Vertx,private val eventBus:EventBus,
       }
       info.shadow.put("desired",desired)
       eventBus.publish(PUBLISH_DESIRED_STATE_ADDRESS,desired)
+      future.complete()
     }
     return this
   }

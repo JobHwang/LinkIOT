@@ -2,6 +2,7 @@ package cn.hdussta.link.linkServer.data
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
 import cn.hdussta.link.linkServer.data.impl.DataStorageMySql
+import cn.hdussta.link.linkServer.service.DataHandleService
 import io.vertx.core.eventbus.MessageConsumer
 import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.LoggerFactory

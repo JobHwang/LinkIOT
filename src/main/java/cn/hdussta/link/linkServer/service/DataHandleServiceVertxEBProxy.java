@@ -14,7 +14,7 @@
 * under the License.
 */
 
-package cn.hdussta.link.linkServer.data;
+package cn.hdussta.link.linkServer.service;
 
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.Vertx;
@@ -33,11 +33,11 @@ import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.ProxyUtils;
 
-import cn.hdussta.link.linkServer.data.DataHandleService;
 import cn.hdussta.link.linkServer.device.DeviceInfo;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import cn.hdussta.link.linkServer.service.DataHandleService;
 /*
   Generated Proxy code - DO NOT EDIT
   @author Roger the Robot

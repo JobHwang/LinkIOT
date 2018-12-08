@@ -1,9 +1,9 @@
 package cn.hdussta.link.linkServer.device.impl
 
 import cn.hdussta.link.linkServer.device.DeviceInfo
-import cn.hdussta.link.linkServer.device.DeviceInfoService
+import cn.hdussta.link.linkServer.service.DeviceInfoService
 import cn.hdussta.link.linkServer.device.DeviceStatus
-import cn.hdussta.link.linkServer.manager.ManagerService
+import cn.hdussta.link.linkServer.service.ManagerService
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Handler
@@ -26,8 +26,7 @@ import kotlinx.coroutines.launch
 class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient, private val sessionStore: SessionStore, private val managerService: ManagerService) : DeviceInfoService {
   private val logger = LoggerFactory.getLogger(DeviceInfoService::class.java)
   override fun login(id: String, secret: String, handler: Handler<AsyncResult<String>>): DeviceInfoService {
-    val future: Future<String> = Future.future()
-    future.setHandler(handler)
+    val future = Future.future<String>().setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
       val result = sqlClient.querySingleWithParamsAwait("SELECT deviceid,name,secret,state,config FROM sstalink_device WHERE deviceid=? and secret=? and state=${DeviceStatus.OFF.ordinal}"
         , JsonArray(listOf(id, secret)))
@@ -58,8 +57,7 @@ class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQL
   }
 
   override fun logout(token: String, handler: Handler<AsyncResult<Void>>): DeviceInfoService {
-    val future = Future.future<Void>()
-    future.setHandler(handler)
+    val future = Future.future<Void>().setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
       val deviceInfo = sessionStore.getAwait(token)?.get<DeviceInfo>("device")
       if (deviceInfo == null) {
@@ -119,7 +117,7 @@ class DeviceInfoServiceImpl(private val vertx: Vertx, private val sqlClient: SQL
   }
 
   override fun getDeviceState(token: String, handler: Handler<AsyncResult<JsonObject>>): DeviceInfoService {
-    val future = Future.future<JsonObject>()
+    val future = Future.future<JsonObject>().setHandler(handler)
     sessionStore.get(token) {
       if (it.failed() || it.result() == null) {
         future.fail(DEVICE_NOT_FOUND)

@@ -1,4 +1,4 @@
-package cn.hdussta.link.linkServer.data;
+package cn.hdussta.link.linkServer.service;
 
 
 import cn.hdussta.link.linkServer.device.DeviceInfo;

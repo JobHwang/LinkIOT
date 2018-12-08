@@ -1,9 +1,10 @@
 package cn.hdussta.link.linkServer.manager
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
-import cn.hdussta.link.linkServer.device.DeviceInfoService
+import cn.hdussta.link.linkServer.service.DeviceInfoService
 import cn.hdussta.link.linkServer.device.DeviceInfoVerticle
 import cn.hdussta.link.linkServer.manager.impl.ManagerServiceImpl
+import cn.hdussta.link.linkServer.service.ManagerService
 import cn.hdussta.link.linkServer.utils.message
 import io.vertx.core.eventbus.MessageConsumer
 import io.vertx.core.http.HttpMethod
@@ -24,7 +25,7 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(ManagerVerticle::class.java)
   lateinit var binder: ServiceBinder
   lateinit var consumer: MessageConsumer<JsonObject>
-  lateinit var managerService:ManagerService
+  lateinit var managerService: ManagerService
   override fun start() {
     super.start()
     publishEventBusService(DeviceInfoService.SERVICE_NAME, DeviceInfoService.SERVICE_ADDRESS, DeviceInfoService::class.java)
@@ -45,7 +46,7 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
   private suspend fun publishManagerService(){
     val eventBus = vertx.eventBus()
     val deviceInfoService = awaitResult<DeviceInfoService> {
-      EventBusService.getProxy(discovery,DeviceInfoService::class.java,it)
+      EventBusService.getProxy(discovery, DeviceInfoService::class.java,it)
     }
     val asyncMap = awaitResult<AsyncMap<String,ManageableDeviceInfo>> {
       vertx.sharedData().getAsyncMap(MANAGER_MAP_NAME,it)
@@ -65,7 +66,7 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
     router.route().handler(BodyHandler.create().setBodyLimit(100*1024))
     router.route(HttpMethod.POST,"/api/manage/state/:id").handler{ handlePostState(it,it.request().getParam("id")) }
     router.route(HttpMethod.GET,"/api/manage/state/:id").handler { handleGetState(it,it.request().getParam("id")) }
-    vertx.createHttpServer().requestHandler(router::accept).listen(28080)
+    vertx.createHttpServer().requestHandler(router::accept).listen(28081)
   }
 
   private fun handlePostState(context: RoutingContext, deviceId:String){

@@ -3,9 +3,10 @@ package cn.hdussta.link.linkServer.device
 import io.vertx.codegen.annotations.DataObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
+import java.io.Serializable
 
 @DataObject
-class DeviceInfo() {
+class DeviceInfo():Serializable {
   lateinit var id:String
   lateinit var name:String
   lateinit var secret:String

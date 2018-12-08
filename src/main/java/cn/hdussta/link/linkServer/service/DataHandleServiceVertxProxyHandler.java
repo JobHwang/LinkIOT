@@ -14,9 +14,9 @@
 * under the License.
 */
 
-package cn.hdussta.link.linkServer.device;
+package cn.hdussta.link.linkServer.service;
 
-import cn.hdussta.link.linkServer.device.DeviceInfoService;
+import cn.hdussta.link.linkServer.service.DataHandleService;
 import io.vertx.core.Vertx;
 import io.vertx.core.Handler;
 import io.vertx.core.AsyncResult;
@@ -41,39 +41,35 @@ import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.HelperUtils;
 
-import cn.hdussta.link.linkServer.device.DeviceInfoService;
-import io.vertx.ext.web.sstore.SessionStore;
-import io.vertx.core.Vertx;
-import cn.hdussta.link.linkServer.manager.ManagerService;
 import cn.hdussta.link.linkServer.device.DeviceInfo;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
-import io.vertx.ext.sql.SQLClient;
 import io.vertx.core.Handler;
+import cn.hdussta.link.linkServer.service.DataHandleService;
 /*
   Generated Proxy code - DO NOT EDIT
   @author Roger the Robot
 */
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class DeviceInfoServiceVertxProxyHandler extends ProxyHandler {
+public class DataHandleServiceVertxProxyHandler extends ProxyHandler {
 
   public static final long DEFAULT_CONNECTION_TIMEOUT = 5 * 60; // 5 minutes 
   private final Vertx vertx;
-  private final DeviceInfoService service;
+  private final DataHandleService service;
   private final long timerID;
   private long lastAccessed;
   private final long timeoutSeconds;
 
-  public DeviceInfoServiceVertxProxyHandler(Vertx vertx, DeviceInfoService service){
+  public DataHandleServiceVertxProxyHandler(Vertx vertx, DataHandleService service){
     this(vertx, service, DEFAULT_CONNECTION_TIMEOUT);
   }
 
-  public DeviceInfoServiceVertxProxyHandler(Vertx vertx, DeviceInfoService service, long timeoutInSecond){
+  public DataHandleServiceVertxProxyHandler(Vertx vertx, DataHandleService service, long timeoutInSecond){
     this(vertx, service, true, timeoutInSecond);
   }
 
-  public DeviceInfoServiceVertxProxyHandler(Vertx vertx, DeviceInfoService service, boolean topLevel, long timeoutSeconds) {
+  public DataHandleServiceVertxProxyHandler(Vertx vertx, DataHandleService service, boolean topLevel, long timeoutSeconds) {
       this.vertx = vertx;
       this.service = service;
       this.timeoutSeconds = timeoutSeconds;
@@ -120,40 +116,10 @@ public class DeviceInfoServiceVertxProxyHandler extends ProxyHandler {
       if (action == null) throw new IllegalStateException("action not specified");
       accessed();
       switch (action) {
-        case "getDeviceByToken": {
-          service.getDeviceByToken((java.lang.String)json.getValue("token"),
-                        res -> {
-                        if (res.failed()) {
-                          if (res.cause() instanceof ServiceException) {
-                            msg.reply(res.cause());
-                          } else {
-                            msg.reply(new ServiceException(-1, res.cause().getMessage()));
-                          }
-                        } else {
-                          msg.reply(res.result() == null ? null : res.result().toJson());
-                        }
-                     });
-          break;
-        }
-        case "login": {
-          service.login((java.lang.String)json.getValue("id"),
-                        (java.lang.String)json.getValue("secret"),
-                        HelperUtils.createHandler(msg));
-          break;
-        }
-        case "logout": {
-          service.logout((java.lang.String)json.getValue("token"),
-                        HelperUtils.createHandler(msg));
-          break;
-        }
-        case "setDeviceState": {
-          service.setDeviceState((java.lang.String)json.getValue("token"),
-                        (io.vertx.core.json.JsonObject)json.getValue("state"),
-                        HelperUtils.createHandler(msg));
-          break;
-        }
-        case "getDeviceState": {
-          service.getDeviceState((java.lang.String)json.getValue("token"),
+        case "handle": {
+          service.handle(json.getJsonObject("device") == null ? null : new cn.hdussta.link.linkServer.device.DeviceInfo(json.getJsonObject("device")),
+                        json.getValue("sensorId") == null ? null : (json.getLong("sensorId").intValue()),
+                        (io.vertx.core.json.JsonObject)json.getValue("data"),
                         HelperUtils.createHandler(msg));
           break;
         }
