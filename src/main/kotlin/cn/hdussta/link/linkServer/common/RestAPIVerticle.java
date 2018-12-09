@@ -103,7 +103,7 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
     } else {
       context.response()
         .setStatusCode(401)
-        .end(new JsonObject().put("message", "need_auth").encode());
+        .end(new JsonObject().put("messageToken", "need_auth").encode());
     }
   }
 
@@ -262,7 +262,7 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
    * This method generates handler for async methods in REST DELETE APIs.
    * Return format in JSON (successful status = 204):
    * <code>
-   * {"message": "delete_success"}
+   * {"messageToken": "delete_success"}
    * </code>
    *
    * @param context routing context instance
@@ -273,7 +273,7 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
       if (res.succeeded()) {
         context.response().setStatusCode(204)
           .putHeader("content-type", "application/json")
-          .end(new JsonObject().put("message", "delete_success").encodePrettily());
+          .end(new JsonObject().put("messageToken", "delete_success").encodePrettily());
       } else {
         internalError(context, res.cause());
         res.cause().printStackTrace();
@@ -292,7 +292,7 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
   protected void notFound(RoutingContext context) {
     context.response().setStatusCode(404)
       .putHeader("content-type", "application/json")
-      .end(new JsonObject().put("message", "not_found").encodePrettily());
+      .end(new JsonObject().put("messageToken", "not_found").encodePrettily());
   }
 
   protected void internalError(RoutingContext context, Throwable ex) {
@@ -304,7 +304,7 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
   protected void notImplemented(RoutingContext context) {
     context.response().setStatusCode(501)
       .putHeader("content-type", "application/json")
-      .end(new JsonObject().put("message", "not_implemented").encodePrettily());
+      .end(new JsonObject().put("messageToken", "not_implemented").encodePrettily());
   }
 
   protected void badGateway(Throwable ex, RoutingContext context) {
@@ -313,7 +313,7 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
       .setStatusCode(502)
       .putHeader("content-type", "application/json")
       .end(new JsonObject().put("error", "bad_gateway")
-        //.put("message", ex.getMessage())
+        //.put("messageToken", ex.getMessage())
         .encodePrettily());
   }
 

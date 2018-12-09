@@ -1,7 +1,7 @@
 package cn.hdussta.link.linkServer.service;
 
 
-import cn.hdussta.link.linkServer.device.DeviceInfo;
+import cn.hdussta.link.linkServer.manager.DeviceInfo;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;

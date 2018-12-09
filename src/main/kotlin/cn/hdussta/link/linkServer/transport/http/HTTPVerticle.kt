@@ -3,9 +3,11 @@ package cn.hdussta.link.linkServer.transport.http
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
 import cn.hdussta.link.linkServer.service.DataHandleService
 import cn.hdussta.link.linkServer.data.impl.DataStorageMySql
-import cn.hdussta.link.linkServer.device.DeviceInfo
-import cn.hdussta.link.linkServer.service.DeviceInfoService
+import cn.hdussta.link.linkServer.manager.DeviceInfo
+import cn.hdussta.link.linkServer.service.DeviceManagerService
 import cn.hdussta.link.linkServer.utils.message
+import cn.hdussta.link.linkServer.utils.messageState
+import cn.hdussta.link.linkServer.utils.messageToken
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.LoggerFactory
@@ -25,8 +27,8 @@ import kotlinx.coroutines.launch
  */
 class HTTPVerticle : BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(HTTPVerticle::class.java)
-  lateinit var deviceInfoService: DeviceInfoService
-  lateinit var basicHandleService: DataHandleService
+  private lateinit var deviceManagerService: DeviceManagerService
+  private lateinit var basicHandleService: DataHandleService
   override fun start() {
     super.start()
     initProxy()
@@ -38,12 +40,12 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
    * 暂时将DataStorageService作为BasicService
    */
   private fun initProxy(){
-    EventBusService.getProxy(discovery, DeviceInfoService::class.java) {
+    EventBusService.getProxy(discovery, DeviceManagerService::class.java) {
       if (it.failed()) {
         logger.error(it.cause().localizedMessage)
         this.stop()
       } else {
-        this.deviceInfoService = it.result()
+        this.deviceManagerService = it.result()
         logger.info(GET_DEVICEINFO_SERVICE)
       }
     }
@@ -61,35 +63,38 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
   /**
    * 创建Restful服务
    * @API 登录 GET /api/auth/login/{设备id}/{设备秘钥}
-   * @API 登出 GET /api/auth/logout/{token}
-   * @API 上传数据 POST /api/data/{token}
-   * @API 上传状态 POST /api/state/{token}
+   * @API 登出 GET /api/auth/logout/{messageToken}
+   * @API 上传数据 POST /api/data/{messageToken}
+   * @API 上传状态 POST /api/state/{messageToken}
    */
   private fun initRouter(){
     val router = Router.router(vertx)
     router.route().handler(BodyHandler.create().setBodyLimit(MAX_BODY_SIZE))
     router.route("/api/auth/login/:id/:secret").handler { handleAuthLogin(it) }
-    router.route("/api/auth/logout/:token").handler { handleAuthLogout(it, it.request().getParam("token")) }
-    router.route(HttpMethod.POST, "/api/data/:token").handler { handleData(it, it.request().getParam("token")) }
-    router.route(HttpMethod.POST,"/api/state/:token").handler{ handleState(it,it.request().getParam("token")) }
-    vertx.createHttpServer().requestHandler(router::accept).listen(28080){
-      logger.info("Listen at 28080")
-    }
+    router.route("/api/auth/logout/:messageToken").handler { handleAuthLogout(it, it.request().getParam("messageToken")) }
+    router.route(HttpMethod.POST, "/api/data/:messageToken").handler { handleData(it, it.request().getParam("messageToken")) }
+    router.route(HttpMethod.POST,"/api/state/:messageToken").handler{ handleState(it,it.request().getParam("messageToken")) }
+    vertx.executeBlocking<Void>({
+      vertx.createHttpServer().requestHandler(router::accept).listen(28080){
+        logger.info("Listen at 28080")
+      }
+    }){}
+
   }
 
   private fun handleAuthLogin(context: RoutingContext) {
     val id = context.request().getParam("id")
     val secret = context.request().getParam("secret")
-    deviceInfoService.login(id, secret) {
+    deviceManagerService.login(id, secret) {
       if (it.failed())
         context.response().end(message(-1, it.cause().localizedMessage))
       else
-        context.response().end(message(1, LOGIN_SUCCESS_MSG, it.result()))
+        context.response().end(messageToken(1, LOGIN_SUCCESS_MSG, it.result()))
     }
   }
 
   private fun handleAuthLogout(context: RoutingContext, token: String) {
-    deviceInfoService.logout(token) {
+    deviceManagerService.logout(token) {
       if (it.failed())
         context.response().end(message(-1, it.cause().localizedMessage))
       else
@@ -100,7 +105,7 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
   private fun handleData(context: RoutingContext, token: String) {
     GlobalScope.launch(vertx.dispatcher()) {
       val deviceInfo = awaitResult<DeviceInfo> {
-        deviceInfoService.getDeviceByToken(token, it)
+        deviceManagerService.getDeviceByToken(token, it)
       }
       val json = context.bodyAsJson
       if(json!=null){
@@ -119,11 +124,11 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
 
   private fun handleState(context: RoutingContext,token:String){
     val state = context.bodyAsJson
-    deviceInfoService.setDeviceState(token,state){
+    deviceManagerService.updateState(token,state.toString()){
       when {
           it.failed() -> context.response().end(message(-1,it.cause().localizedMessage))
           it.result()==null -> context.response().end(message(1, UPDATE_STATE_SUCCESS))
-          else -> context.response().end(message(2, NEED_UPDATE_STATE,it.result()))
+          else -> context.response().end(messageState(2, NEED_UPDATE_STATE,it.result()))
       }
     }
   }

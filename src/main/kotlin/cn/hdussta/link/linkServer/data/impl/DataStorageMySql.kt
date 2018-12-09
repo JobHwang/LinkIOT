@@ -1,8 +1,8 @@
 package cn.hdussta.link.linkServer.data.impl
 
 import cn.hdussta.link.linkServer.service.DataHandleService
-import cn.hdussta.link.linkServer.device.DataType
-import cn.hdussta.link.linkServer.device.DeviceInfo
+import cn.hdussta.link.linkServer.manager.DataType
+import cn.hdussta.link.linkServer.manager.DeviceInfo
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.Vertx

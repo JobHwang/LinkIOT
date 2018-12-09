@@ -2,7 +2,7 @@ package cn.hdussta.link.linkServer.data.impl
 
 import cn.hdussta.link.linkServer.service.DataHandleService
 import cn.hdussta.link.linkServer.service.DataHandleService.generated
-import cn.hdussta.link.linkServer.device.DeviceInfo
+import cn.hdussta.link.linkServer.manager.DeviceInfo
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Handler
@@ -40,20 +40,20 @@ abstract class AbstractDataHandleService: DataHandleService {
    * @param data
    * @param handler
    */
-  fun next(result:String,device: DeviceInfo, sensorId: Int, data: JsonObject, handler: Handler<AsyncResult<JsonObject>>){
+  fun next(result:String, device: DeviceInfo, sensorId: Int, data: JsonObject, handler: Handler<AsyncResult<JsonObject>>){
     if(!data.containsKey(generated)){
       data.put(generated, JsonObject())
     }
     data.getJsonObject(generated).put(ruleName,result)
-    val index = device.rules.indexOf(ruleName) + 1
-    if(index>=device.rules.size ){
+    val nextIndex = device.rules.indexOf(ruleName)+1
+    if(nextIndex>=device.rules.size || device.rules[nextIndex].isEmpty()){
       val future = Future.future<JsonObject>()
       val results = data.getJsonObject(DataHandleService.generated)
       future.setHandler(handler)
       future.complete(results)
       return
     }
-    val nextRule = device.rules[index + 1]
+    val nextRule = device.rules[nextIndex]
     EventBusService.getServiceProxyWithJsonFilter(discovery, JsonObject().put("rule",nextRule), DataHandleService::class.java){
       if(it.failed()){
         logger.warn(it.cause().localizedMessage)

@@ -33,7 +33,7 @@ import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.ProxyUtils;
 
-import cn.hdussta.link.linkServer.device.DeviceInfo;
+import cn.hdussta.link.linkServer.manager.DeviceInfo;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;

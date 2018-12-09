@@ -53,6 +53,7 @@ public abstract class BaseMicroserviceVerticle extends AbstractVerticle {
         .setFallbackOnFailure(true)
         .setResetTimeout(cbOptions.getLong("reset-timeout", 30000L))
     );
+
   }
 
   protected Future<Void> publishHttpEndpoint(String name, String host, int port) {
@@ -117,18 +118,18 @@ public abstract class BaseMicroserviceVerticle extends AbstractVerticle {
    * A helper method that simply publish logs on the event bus.
    *
    * @param type log type
-   * @param data log message data
+   * @param data log messageToken data
    */
   protected void publishLogEvent(String type, JsonObject data) {
     JsonObject msg = new JsonObject().put("type", type)
-      .put("message", data);
+      .put("messageToken", data);
     vertx.eventBus().publish(LOG_EVENT_ADDRESS, msg);
   }
 
   protected void publishLogEvent(String type, JsonObject data, boolean succeeded) {
     JsonObject msg = new JsonObject().put("type", type)
       .put("status", succeeded)
-      .put("message", data);
+      .put("messageToken", data);
     vertx.eventBus().publish(LOG_EVENT_ADDRESS, msg);
   }
 

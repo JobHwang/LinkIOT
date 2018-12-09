@@ -1,21 +1,21 @@
 package cn.hdussta.link.linkServer.manager
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
-import cn.hdussta.link.linkServer.service.DeviceInfoService
-import cn.hdussta.link.linkServer.device.DeviceInfoVerticle
-import cn.hdussta.link.linkServer.manager.impl.ManagerServiceImpl
-import cn.hdussta.link.linkServer.service.ManagerService
+import cn.hdussta.link.linkServer.manager.impl.DeviceManagerServiceImpl
+import cn.hdussta.link.linkServer.service.DeviceManagerService
 import cn.hdussta.link.linkServer.utils.message
+import cn.hdussta.link.linkServer.utils.messageState
 import io.vertx.core.eventbus.MessageConsumer
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.LoggerFactory
 import io.vertx.core.shareddata.AsyncMap
+import io.vertx.ext.asyncsql.MySQLClient
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
+import io.vertx.ext.web.sstore.SessionStore
 import io.vertx.kotlin.coroutines.awaitResult
-import io.vertx.servicediscovery.types.EventBusService
 import io.vertx.serviceproxy.ServiceBinder
 import io.vertx.serviceproxy.ServiceProxyBuilder
 import kotlinx.coroutines.GlobalScope
@@ -30,20 +30,12 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(ManagerVerticle::class.java)
   private lateinit var binder: ServiceBinder
   private lateinit var consumer: MessageConsumer<JsonObject>
-  private lateinit var managerService: ManagerService
+  private lateinit var managerService: DeviceManagerService
   override fun start() {
     super.start()
-    //发布DeviceInfoService
-    publishEventBusService(DeviceInfoService.SERVICE_NAME, DeviceInfoService.SERVICE_ADDRESS, DeviceInfoService::class.java)
-    //发布ManagerService
-    publishEventBusService(ManagerService.SERVICE_NAME, ManagerService.SERVICE_ADDRESS, ManagerService::class.java)
-
     GlobalScope.launch {
       publishManagerService()
       initRouter()
-      awaitResult<String> {
-        vertx.deployVerticle(DeviceInfoVerticle(),it)
-      }
     }.invokeOnCompletion {
       if(it!=null) logger.error(it.localizedMessage)
     }
@@ -53,21 +45,31 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
    */
   private suspend fun publishManagerService(){
     val eventBus = vertx.eventBus()
-    val deviceInfoService = awaitResult<DeviceInfoService> {
-      EventBusService.getProxy(discovery, DeviceInfoService::class.java,it)
-    }
-    val asyncMap = awaitResult<AsyncMap<String,ManageableDeviceInfo>> {
+    val sqlClient = MySQLClient.createShared(vertx,configMySQLClient())
+    val sessionStore = SessionStore.create(vertx)
+    val asyncMap = awaitResult<AsyncMap<String,String>> {
       vertx.sharedData().getAsyncMap(MANAGER_MAP_NAME,it)
     }
-    managerService = ManagerServiceImpl(vertx,eventBus,deviceInfoService,asyncMap)
-    binder = ServiceBinder(vertx).setAddress(ManagerService.SERVICE_ADDRESS)
-    consumer = binder.register(ManagerService::class.java, managerService)
+    managerService = DeviceManagerServiceImpl(vertx,eventBus,asyncMap,sqlClient,sessionStore)
+    binder = ServiceBinder(vertx).setAddress(DeviceManagerService.SERVICE_ADDRESS)
+    consumer = binder.register(DeviceManagerService::class.java, managerService)
 
-    val proxyBuilder = ServiceProxyBuilder(vertx).setAddress(ManagerService.SERVICE_ADDRESS)
-    proxyBuilder.build(DeviceInfoService::class.java)
+    val proxyBuilder = ServiceProxyBuilder(vertx).setAddress(DeviceManagerService.SERVICE_ADDRESS)
+    proxyBuilder.build(DeviceManagerService::class.java)
+
+    publishEventBusService(DeviceManagerService.SERVICE_NAME, DeviceManagerService.SERVICE_ADDRESS, DeviceManagerService::class.java)
 
     logger.info(PUBLISH_SUCCESS)
   }
+
+  private fun configMySQLClient(): JsonObject {
+    return JsonObject(mapOf(
+      "host" to "link.hdussta.cn",
+      "username" to "root",
+      "password" to "Admin88888",
+      "database" to "sstalink"))
+  }
+
   /**
    * 部署Restful服务
    * @API 下发设备状态 POST /api/manage/state/{设备id}
@@ -83,7 +85,7 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
 
   private fun handlePostState(context: RoutingContext, deviceId:String){
     val desired = context.bodyAsJson
-    managerService.setState(deviceId,desired){
+    managerService.setState(deviceId,desired.toString()){
       if(it.failed())
         context.response().end(message(-1,it.cause().localizedMessage))
       else{
@@ -97,7 +99,7 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
       if(it.failed()){
         context.response().end(message(-1,it.cause().localizedMessage))
       }else{
-        context.response().end(message(1, GET_STATE_SUCCESS,it.result()))
+        context.response().end(messageState(1, GET_STATE_SUCCESS,it.result()))
       }
     }
   }

@@ -41,7 +41,7 @@ import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.HelperUtils;
 
-import cn.hdussta.link.linkServer.device.DeviceInfo;
+import cn.hdussta.link.linkServer.manager.DeviceInfo;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -117,7 +117,7 @@ public class DataHandleServiceVertxProxyHandler extends ProxyHandler {
       accessed();
       switch (action) {
         case "handle": {
-          service.handle(json.getJsonObject("device") == null ? null : new cn.hdussta.link.linkServer.device.DeviceInfo(json.getJsonObject("device")),
+          service.handle(json.getJsonObject("device") == null ? null : new cn.hdussta.link.linkServer.manager.DeviceInfo(json.getJsonObject("device")),
                         json.getValue("sensorId") == null ? null : (json.getLong("sensorId").intValue()),
                         (io.vertx.core.json.JsonObject)json.getValue("data"),
                         HelperUtils.createHandler(msg));
