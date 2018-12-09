@@ -12,6 +12,10 @@ abstract class AbstractTransportVerticle: BaseMicroserviceVerticle() {
   abstract val logger:Logger
   lateinit var deviceManagerService: DeviceManagerService
   lateinit var basicDataHandleService: DataHandleService
+
+  /**
+   * 初始化Transport模块必要的Service
+   */
   protected fun initProxy(){
     EventBusService.getProxy(discovery, DeviceManagerService::class.java) {
       if (it.failed()) {

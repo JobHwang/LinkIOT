@@ -118,6 +118,7 @@ public class DeviceManagerServiceVertxProxyHandler extends ProxyHandler {
         case "login": {
           service.login((java.lang.String)json.getValue("id"),
                         (java.lang.String)json.getValue("secret"),
+                        (boolean)json.getValue("isLongConnection"),
                         HelperUtils.createHandler(msg));
           break;
         }

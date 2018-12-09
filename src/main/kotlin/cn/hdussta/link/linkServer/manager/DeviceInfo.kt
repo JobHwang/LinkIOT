@@ -32,6 +32,9 @@ class DeviceInfo():Serializable {
    */
   lateinit var rules:Array<String>
 
+  /**
+   * 设备登录后获得的token
+   */
   lateinit var token:String
 
   constructor(json:JsonObject):this(){

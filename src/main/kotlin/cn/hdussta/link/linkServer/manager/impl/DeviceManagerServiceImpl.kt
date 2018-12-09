@@ -29,7 +29,8 @@ import java.util.*
 
 class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: EventBus, private val asyncDeviceMap: AsyncMap<String, String>, private val sqlClient: SQLClient, private val sessionStore: SessionStore): DeviceManagerService {
   private val logger = LoggerFactory.getLogger(DeviceManagerService::class.java)
-  override fun login(id: String, secret: String, handler: Handler<AsyncResult<String>>): DeviceManagerService {
+
+  override fun login(id: String, secret: String, isLongConnection:Boolean,handler: Handler<AsyncResult<String>>): DeviceManagerService {
     val future = Future.future<String>().setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
       val result = sqlClient.querySingleWithParamsAwait("SELECT deviceid,name,secret,state,config FROM sstalink_device WHERE deviceid=? and secret=? and state=${DeviceStatus.OFF.ordinal}"
@@ -54,11 +55,14 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
       awaitResult<Void> { asyncDeviceMap.put(deviceInfo.id,session.id(),it) }
       future.complete(session.id())
 
-      vertx.setPeriodic(STATE_CHECK_DELAY){ timerId->
-        if(Date().time - session.lastAccessed() > STATE_CHECK_DELAY){
-          logout(session.id()){
-            logger.warn("Device $id lost connection")
-            vertx.cancelTimer(timerId)
+      if(!isLongConnection) {
+        //如果不是长连接，则需要检测设备状态更新情况。如果设备长时间不更新状态，则认为连接丢失
+        vertx.setPeriodic(STATE_CHECK_DELAY) { timerId ->
+          if (Date().time - session.lastAccessed() > STATE_CHECK_DELAY) {
+            logout(session.id()) {
+              logger.warn("Device $id lost connection")
+              vertx.cancelTimer(timerId)
+            }
           }
         }
       }
@@ -142,7 +146,10 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
         return@launch
       }
       session.put("desired",desired)
-      eventBus.publish(PUBLISH_DESIRED_STATE_ADDRESS,desired)
+      //向PUBLISH_DESIRED_STATE_ADDRESS发布期望状态
+      //如果设备已连接到某个TransportVerticle，则由该Verticle直接向设备发送期望状态
+      //如果没有连接，则等到下次设备更新状态时返回期望状态。
+      eventBus.publish(DeviceManagerService.PUBLISH_DESIRED_STATE_ADDRESS,JsonObject().put("desired",desired).put("token",token))
       future.complete()
     }
     return this
@@ -176,6 +183,6 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
     private const val UPDATE_DEVICE_INFO_FAIL = "更新数据失败"
     private const val SESSION_TIME_OUT = 7*24*60*1000L
     private const val STATE_CHECK_DELAY = 10*60*1000L
-    const val PUBLISH_DESIRED_STATE_ADDRESS = "publish.manager.state"
+
   }
 }

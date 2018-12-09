@@ -63,7 +63,7 @@ public class DeviceManagerServiceVertxEBProxy implements DeviceManagerService {
   }
 
   @Override
-  public  DeviceManagerService login(String id, String secret, Handler<AsyncResult<String>> handler){
+  public  DeviceManagerService login(String id, String secret, boolean isLongConnection, Handler<AsyncResult<String>> handler){
     if (closed) {
       handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -71,6 +71,7 @@ public class DeviceManagerServiceVertxEBProxy implements DeviceManagerService {
     JsonObject _json = new JsonObject();
     _json.put("id", id);
     _json.put("secret", secret);
+    _json.put("isLongConnection", isLongConnection);
 
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "login");

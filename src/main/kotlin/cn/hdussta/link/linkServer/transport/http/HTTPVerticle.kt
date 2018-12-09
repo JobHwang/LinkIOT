@@ -59,7 +59,7 @@ class HTTPVerticle : AbstractTransportVerticle() {
   private fun handleAuthLogin(context: RoutingContext) {
     val id = context.request().getParam("id")
     val secret = context.request().getParam("secret")
-    deviceManagerService.login(id, secret) {
+    deviceManagerService.login(id, secret,false) {
       if (it.failed())
         context.response().end(message(-1, it.cause().localizedMessage))
       else

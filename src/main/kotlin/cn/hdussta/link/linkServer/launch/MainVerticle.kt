@@ -3,6 +3,7 @@ package cn.hdussta.link.linkServer.launch
 import cn.hdussta.link.linkServer.data.DataStorageVerticle
 import cn.hdussta.link.linkServer.manager.ManagerVerticle
 import cn.hdussta.link.linkServer.transport.http.HTTPVerticle
+import cn.hdussta.link.linkServer.transport.mqtt.MQTTVerticle
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.kotlin.coroutines.awaitResult
@@ -31,6 +32,12 @@ class MainVerticle : AbstractVerticle() {
         vertx.deployVerticle(HTTPVerticle(), it)
       }
       println(httpVerticleId)
+
+      val mqttVerticleId = awaitResult<String> {
+        vertx.deployVerticle(MQTTVerticle(),it)
+      }
+      println(mqttVerticleId)
+
       startFuture.complete()
     }
   }

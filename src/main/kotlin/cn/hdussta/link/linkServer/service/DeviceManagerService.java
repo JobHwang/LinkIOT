@@ -7,21 +7,26 @@ import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 
+/**
+ * 设备管理服务
+ */
 @ProxyGen
 @VertxGen
 public interface DeviceManagerService {
 
   String SERVICE_NAME = "device-manager-service";
   String SERVICE_ADDRESS = "service.device.manager";
+  String PUBLISH_DESIRED_STATE_ADDRESS = "publish.manager.state";
   /**
    * 设备登录
-   * @param id
-   * @param secret
-   * @param handler
+   * @param id 设备ID
+   * @param secret 秘钥
+   * @param isLongConnection  是否为长连接。HTTP，COAP为短连接，MQTT为长连接
+   * @param handler 返回token
    * @return
    */
   @Fluent
-  DeviceManagerService login(String id, String secret, Handler<AsyncResult<String>> handler);
+  DeviceManagerService login(String id, String secret, boolean isLongConnection,Handler<AsyncResult<String>> handler);
 
   /**
    * 设备登出
