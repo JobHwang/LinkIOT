@@ -118,7 +118,6 @@ public class DataHandleServiceVertxProxyHandler extends ProxyHandler {
       switch (action) {
         case "handle": {
           service.handle(json.getJsonObject("device") == null ? null : new cn.hdussta.link.linkServer.manager.DeviceInfo(json.getJsonObject("device")),
-                        json.getValue("sensorId") == null ? null : (json.getLong("sensorId").intValue()),
                         (io.vertx.core.json.JsonObject)json.getValue("data"),
                         HelperUtils.createHandler(msg));
           break;

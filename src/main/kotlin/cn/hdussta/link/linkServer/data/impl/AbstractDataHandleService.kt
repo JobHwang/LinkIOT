@@ -1,7 +1,6 @@
 package cn.hdussta.link.linkServer.data.impl
 
 import cn.hdussta.link.linkServer.service.DataHandleService
-import cn.hdussta.link.linkServer.service.DataHandleService.generated
 import cn.hdussta.link.linkServer.manager.DeviceInfo
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
@@ -25,9 +24,8 @@ abstract class AbstractDataHandleService: DataHandleService {
    * @param handler
    */
   fun fail(cause:String,data: JsonObject,handler: Handler<AsyncResult<JsonObject>>){
-    val future = Future.future<JsonObject>()
-    val results = data.getJsonObject(DataHandleService.generated).put(ruleName,cause)
-    future.setHandler(handler)
+    val future = Future.future<JsonObject>().setHandler(handler)
+    val results = (data.getJsonObject(GENERATED)?:JsonObject()).put(ruleName,cause)
     future.complete(results)
   }
 
@@ -40,15 +38,15 @@ abstract class AbstractDataHandleService: DataHandleService {
    * @param data
    * @param handler
    */
-  fun next(result:String, device: DeviceInfo, sensorId: Int, data: JsonObject, handler: Handler<AsyncResult<JsonObject>>){
-    if(!data.containsKey(generated)){
-      data.put(generated, JsonObject())
+  fun next(result:String, device: DeviceInfo, data: JsonObject, handler: Handler<AsyncResult<JsonObject>>){
+    if(!data.containsKey(GENERATED)){
+      data.put(GENERATED, JsonObject())
     }
-    data.getJsonObject(generated).put(ruleName,result)
+    data.getJsonObject(GENERATED).put(ruleName,result)
     val nextIndex = device.rules.indexOf(ruleName)+1
     if(nextIndex>=device.rules.size || device.rules[nextIndex].isEmpty()){
       val future = Future.future<JsonObject>()
-      val results = data.getJsonObject(DataHandleService.generated)
+      val results = data.getJsonObject(GENERATED)
       future.setHandler(handler)
       future.complete(results)
       return
@@ -58,14 +56,18 @@ abstract class AbstractDataHandleService: DataHandleService {
       if(it.failed()){
         logger.warn(it.cause().localizedMessage)
         val future = Future.future<JsonObject>()
-        val results = data.getJsonObject(DataHandleService.generated).put(nextRule,it.cause().localizedMessage)
+        val results = data.getJsonObject(GENERATED).put(nextRule,it.cause().localizedMessage)
         future.setHandler(handler)
         future.complete(results)
         return@getServiceProxyWithJsonFilter
       }else{
-        it.result().handle(device,sensorId,data,handler)
+        it.result().handle(device,data,handler)
       }
     }
+  }
+
+  companion object {
+    const val GENERATED = "GENERATED"
   }
 
 }

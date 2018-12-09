@@ -5,6 +5,7 @@ import cn.hdussta.link.linkServer.service.DataHandleService
 import cn.hdussta.link.linkServer.data.impl.DataStorageMySql
 import cn.hdussta.link.linkServer.manager.DeviceInfo
 import cn.hdussta.link.linkServer.service.DeviceManagerService
+import cn.hdussta.link.linkServer.transport.AbstractTransportVerticle
 import cn.hdussta.link.linkServer.utils.message
 import cn.hdussta.link.linkServer.utils.messageState
 import cn.hdussta.link.linkServer.utils.messageToken
@@ -25,39 +26,12 @@ import kotlinx.coroutines.launch
  * @description 部署Http服务端
  * @author Wooyme
  */
-class HTTPVerticle : BaseMicroserviceVerticle() {
-  private val logger = LoggerFactory.getLogger(HTTPVerticle::class.java)
-  private lateinit var deviceManagerService: DeviceManagerService
-  private lateinit var basicHandleService: DataHandleService
+class HTTPVerticle : AbstractTransportVerticle() {
+  override val logger = LoggerFactory.getLogger(HTTPVerticle::class.java)
   override fun start() {
     super.start()
     initProxy()
     initRouter()
-  }
-
-  /**
-   * 获取DeviceInfoService和BasicService
-   * 暂时将DataStorageService作为BasicService
-   */
-  private fun initProxy(){
-    EventBusService.getProxy(discovery, DeviceManagerService::class.java) {
-      if (it.failed()) {
-        logger.error(it.cause().localizedMessage)
-        this.stop()
-      } else {
-        this.deviceManagerService = it.result()
-        logger.info(GET_DEVICEINFO_SERVICE)
-      }
-    }
-    EventBusService.getServiceProxyWithJsonFilter(discovery, JsonObject().put("name", BASIC_SERVICE_NAME), DataHandleService::class.java) {
-      if (it.failed()) {
-        logger.error(it.cause().localizedMessage)
-        this.stop()
-      } else {
-        this.basicHandleService = it.result()
-        logger.info(GET_BASIC_SERVICE)
-      }
-    }
   }
 
   /**
@@ -109,15 +83,14 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
       }
       val json = context.bodyAsJson
       if(json!=null){
-        val sensorId = json.getInteger("sensorid")
         val result = awaitResult<JsonObject> {
-          basicHandleService.handle(deviceInfo,sensorId,json,it)
+          basicDataHandleService.handle(deviceInfo,json,it)
         }
         context.response().end(message(1,"OK",result))
       }
     }.invokeOnCompletion {
       if (it != null) {
-        context.response().end(message(-1, it.localizedMessage))
+        context.response().end(message(-1, it.localizedMessage?: UNKNOWN_EXCEPTION))
       }
     }
   }
@@ -137,10 +110,8 @@ class HTTPVerticle : BaseMicroserviceVerticle() {
     private const val MAX_BODY_SIZE = 100 * 1024L
     private const val LOGIN_SUCCESS_MSG = "登录成功"
     private const val LOGOUT_SUCCESS_MSG = "登出成功"
-    private const val GET_DEVICEINFO_SERVICE = "成功获取设备信息服务"
-    private const val GET_BASIC_SERVICE = "成功获取基础处理服务"
     private const val UPDATE_STATE_SUCCESS = "更新状态成功"
     private const val NEED_UPDATE_STATE = "需要更新状态"
-    const val BASIC_SERVICE_NAME = DataStorageMySql.SERVICE_NAME
+    private const val UNKNOWN_EXCEPTION = "未知的错误"
   }
 }

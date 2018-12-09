@@ -9,13 +9,13 @@ class SensorInfo(){
   /**
    * 传感器ID
    */
-  var id:Int = 0
+  lateinit var id:String
   /**
    * 传感器数据类型
    */
   lateinit var type: DataType
   constructor(jsonArray: JsonArray):this(){
-    id = jsonArray.getInteger(0)
+    id = jsonArray.getInteger(0).toString()
     type = when(jsonArray.getInteger(1)){
       DataType.NUMBER.ordinal-> DataType.NUMBER
       DataType.TEXT.ordinal-> DataType.TEXT
@@ -28,7 +28,7 @@ class SensorInfo(){
   }
 
   constructor(json:JsonObject):this(){
-    id = json.getInteger("id")
+    id = json.getString("id")
     type = when(json.getInteger("type")){
       DataType.NUMBER.ordinal-> DataType.NUMBER
       DataType.TEXT.ordinal-> DataType.TEXT

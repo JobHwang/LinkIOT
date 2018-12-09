@@ -12,7 +12,15 @@ import io.vertx.core.json.JsonObject;
 @ProxyGen
 @VertxGen
 public interface DataHandleService {
-  String generated = "generated";
+
+
+  /**
+   * 处理设备上传的数据
+   * @param device
+   * @param data 设备上传格式{"data":{"传感器ID":值}}
+   * @param handler
+   * @return
+   */
   @Fluent
-  DataHandleService handle(DeviceInfo device, int sensorId, JsonObject data, Handler<AsyncResult<JsonObject>> handler);
+  DataHandleService handle(DeviceInfo device, JsonObject data, Handler<AsyncResult<JsonObject>> handler);
 }

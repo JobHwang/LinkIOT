@@ -10,7 +10,7 @@ fun message(status:Int,msg:String,data:JsonObject):Buffer = JsonObject(
   "status" to status,"msg" to msg,"data" to data
 ).toBuffer()
 
-fun messageToken(status:Int, msg: String, token:String):Buffer = JsonObject("status" to status,"msg" to msg,"data" to JsonObject("messageToken" to token)).toBuffer()
+fun messageToken(status:Int, msg: String, token:String):Buffer = JsonObject("status" to status,"msg" to msg,"data" to JsonObject("token" to token)).toBuffer()
 
 fun messageState(status: Int,msg:String,state:String):Buffer = JsonObject(
   "status" to status,"msg" to msg,"state" to JsonObject(state)).toBuffer()

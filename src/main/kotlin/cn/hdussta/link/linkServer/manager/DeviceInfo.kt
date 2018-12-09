@@ -26,7 +26,7 @@ class DeviceInfo():Serializable {
   /**
    * 设备下所有传感器
    */
-  lateinit var sensors:Map<Int, SensorInfo>
+  lateinit var sensors:Map<String, SensorInfo>
   /**
    * 设备对应规则链
    */

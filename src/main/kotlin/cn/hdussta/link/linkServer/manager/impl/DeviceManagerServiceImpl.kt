@@ -175,7 +175,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
     private const val SENSOR_NOT_FOUND = "没有传感器"
     private const val UPDATE_DEVICE_INFO_FAIL = "更新数据失败"
     private const val SESSION_TIME_OUT = 7*24*60*1000L
-    private const val STATE_CHECK_DELAY = 10*1000L
+    private const val STATE_CHECK_DELAY = 10*60*1000L
     const val PUBLISH_DESIRED_STATE_ADDRESS = "publish.manager.state"
   }
 }

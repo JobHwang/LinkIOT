@@ -64,14 +64,13 @@ public class DataHandleServiceVertxEBProxy implements DataHandleService {
   }
 
   @Override
-  public  DataHandleService handle(DeviceInfo device, int sensorId, JsonObject data, Handler<AsyncResult<JsonObject>> handler){
+  public  DataHandleService handle(DeviceInfo device, JsonObject data, Handler<AsyncResult<JsonObject>> handler){
     if (closed) {
       handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
     }
     JsonObject _json = new JsonObject();
     _json.put("device", device == null ? null : device.toJson());
-    _json.put("sensorId", sensorId);
     _json.put("data", data);
 
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
