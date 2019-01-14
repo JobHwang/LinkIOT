@@ -106,6 +106,7 @@ class HTTPVerticle : AbstractTransportVerticle() {
     }
   }
 
+
   companion object {
     private const val MAX_BODY_SIZE = 100 * 1024L
     private const val LOGIN_SUCCESS_MSG = "登录成功"

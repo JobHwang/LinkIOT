@@ -1,5 +1,6 @@
 package cn.hdussta.link.linkServer.manager
 
+import cn.hdussta.link.linkServer.common.DeviceStatus
 import io.vertx.codegen.annotations.DataObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject

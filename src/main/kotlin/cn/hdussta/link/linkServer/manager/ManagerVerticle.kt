@@ -35,7 +35,6 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
     super.start()
     GlobalScope.launch {
       publishManagerService()
-      initRouter()
     }.invokeOnCompletion {
       if(it!=null) logger.error(it.localizedMessage)
     }
@@ -70,44 +69,9 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
       "database" to "sstalink"))
   }
 
-  /**
-   * 部署Restful服务
-   * @API 下发设备状态 POST /api/manage/state/{设备id}
-   * @API 查询设备状态 GET /api/manage/state/{设备id}
-   */
-  private fun initRouter(){
-    val router = Router.router(vertx)
-    router.route().handler(BodyHandler.create().setBodyLimit(100*1024))
-    router.route(HttpMethod.POST,"/api/manage/state/:id").handler{ handlePostState(it,it.request().getParam("id")) }
-    router.route(HttpMethod.GET,"/api/manage/state/:id").handler { handleGetState(it,it.request().getParam("id")) }
-    vertx.createHttpServer().requestHandler(router::accept).listen(28081)
-  }
-
-  private fun handlePostState(context: RoutingContext, deviceId:String){
-    val desired = context.bodyAsJson
-    managerService.setState(deviceId,desired.toString()){
-      if(it.failed())
-        context.response().end(message(-1,it.cause().localizedMessage))
-      else{
-        context.response().end(message(1, SET_STATE_SUCCESS))
-      }
-    }
-  }
-
-  private fun handleGetState(context: RoutingContext,deviceId: String){
-    managerService.getState(deviceId){
-      if(it.failed()){
-        context.response().end(message(-1,it.cause().localizedMessage))
-      }else{
-        context.response().end(messageState(1, GET_STATE_SUCCESS,it.result()))
-      }
-    }
-  }
 
   companion object {
     private const val MANAGER_MAP_NAME = "async-manager-map"
     private const val PUBLISH_SUCCESS = "设备管理服务发布成功"
-    private const val SET_STATE_SUCCESS = "状态设置成功"
-    private const val GET_STATE_SUCCESS = "获取状态成功"
   }
 }

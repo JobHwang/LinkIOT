@@ -1,7 +1,7 @@
 package cn.hdussta.link.linkServer.manager.impl
 
 import cn.hdussta.link.linkServer.manager.DeviceInfo
-import cn.hdussta.link.linkServer.manager.DeviceStatus
+import cn.hdussta.link.linkServer.common.DeviceStatus
 import cn.hdussta.link.linkServer.service.DeviceManagerService
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
@@ -29,6 +29,10 @@ import java.util.*
 
 class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: EventBus, private val asyncDeviceMap: AsyncMap<String, String>, private val sqlClient: SQLClient, private val sessionStore: SessionStore): DeviceManagerService {
   private val logger = LoggerFactory.getLogger(DeviceManagerService::class.java)
+
+  private fun publishCommand(action:String,body:JsonObject){
+    eventBus.publish(DeviceManagerService.PUBLISH_MANAGE_COMMAND,JsonObject().put("action",action).put("body",body))
+  }
 
   override fun login(id: String, secret: String, isLongConnection:Boolean,handler: Handler<AsyncResult<String>>): DeviceManagerService {
     val future = Future.future<String>().setHandler(handler)
@@ -132,6 +136,20 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
     return this
   }
 
+  override fun forceClose(deviceId: String, handler: Handler<AsyncResult<Void>>): DeviceManagerService {
+    GlobalScope.launch(vertx.dispatcher()) {
+      val token = asyncDeviceMap.getAwait(deviceId)
+      if(token==null){
+        val future = Future.future<Void>().setHandler(handler)
+        future.fail(DEVICE_NOT_FOUND)
+      }else {
+        logout(token, handler)
+        publishCommand("forceClose",JsonObject().put("token",token))
+      }
+    }
+    return this
+  }
+
   override fun setState(deviceId: String, desired: String, handler: Handler<AsyncResult<Void>>):DeviceManagerService {
     val future = Future.future<Void>().setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
@@ -149,7 +167,9 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
       //向PUBLISH_DESIRED_STATE_ADDRESS发布期望状态
       //如果设备已连接到某个TransportVerticle，则由该Verticle直接向设备发送期望状态
       //如果没有连接，则等到下次设备更新状态时返回期望状态。
-      eventBus.publish(DeviceManagerService.PUBLISH_DESIRED_STATE_ADDRESS,JsonObject().put("desired",desired).put("token",token))
+      val cmdBody = JsonObject().put("desired",desired).put("token",token)
+      eventBus.publish(DeviceManagerService.PUBLISH_MANAGE_COMMAND
+        ,JsonObject().put("action","setState").put("body",cmdBody))
       future.complete()
     }
     return this
@@ -183,6 +203,5 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
     private const val UPDATE_DEVICE_INFO_FAIL = "更新数据失败"
     private const val SESSION_TIME_OUT = 7*24*60*1000L
     private const val STATE_CHECK_DELAY = 10*60*1000L
-
   }
 }

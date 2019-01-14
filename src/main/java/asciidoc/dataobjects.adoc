@@ -1,0 +1,71 @@
+= Cheatsheets
+
+[[PostDeviceBody]]
+== PostDeviceBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[description]]`@description`|`String`|-
+|[[deviceId]]`@deviceId`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[script]]`@script`|`String`|-
+|===
+
+[[PostRegisterBody]]
+== PostRegisterBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[nickname]]`@nickname`|`String`|-
+|[[password]]`@password`|`String`|-
+|[[username]]`@username`|`String`|-
+|===
+
+[[PostSensorBody]]
+== PostSensorBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[dataType]]`@dataType`|`Number (Integer)`|-
+|[[description]]`@description`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[sensorId]]`@sensorId`|`Number (Integer)`|-
+|[[showType]]`@showType`|`String`|-
+|===
+
+[[PutDeviceBody]]
+== PutDeviceBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[description]]`@description`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[script]]`@script`|`String`|-
+|===
+
+[[PutSensorBody]]
+== PutSensorBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[dataType]]`@dataType`|`Number (Integer)`|-
+|[[description]]`@description`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[showType]]`@showType`|`String`|-
+|===
+

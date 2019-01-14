@@ -159,6 +159,11 @@ public class DeviceManagerServiceVertxProxyHandler extends ProxyHandler {
                         HelperUtils.createHandler(msg));
           break;
         }
+        case "forceClose": {
+          service.forceClose((java.lang.String)json.getValue("deviceId"),
+                        HelperUtils.createHandler(msg));
+          break;
+        }
         default: throw new IllegalStateException("Invalid action: " + action);
       }
     } catch (Throwable t) {

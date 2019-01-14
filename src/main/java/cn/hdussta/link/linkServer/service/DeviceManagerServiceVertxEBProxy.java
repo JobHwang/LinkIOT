@@ -186,4 +186,24 @@ public class DeviceManagerServiceVertxEBProxy implements DeviceManagerService {
     });
     return this;
   }
+  @Override
+  public  DeviceManagerService forceClose(String deviceId, Handler<AsyncResult<Void>> handler){
+    if (closed) {
+      handler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
+      return this;
+    }
+    JsonObject _json = new JsonObject();
+    _json.put("deviceId", deviceId);
+
+    DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
+    _deliveryOptions.addHeader("action", "forceClose");
+    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+      if (res.failed()) {
+        handler.handle(Future.failedFuture(res.cause()));
+      } else {
+        handler.handle(Future.succeededFuture(res.result().body()));
+      }
+    });
+    return this;
+  }
 }
