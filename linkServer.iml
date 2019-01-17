@@ -142,6 +142,7 @@
     <orderEntry type="library" name="Maven: com.github.mauricio:mysql-async_2.12:0.2.21" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-config:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-web-api-service:3.6.0" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-web-client:3.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-launcher:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.2.0" level="project" />

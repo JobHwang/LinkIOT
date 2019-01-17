@@ -12,7 +12,7 @@ import io.vertx.serviceproxy.ServiceProxyBuilder
 
 class DataStorageVerticle:BaseMicroserviceVerticle() {
   private val logger = LoggerFactory.getLogger(DataStorageVerticle::class.java)
-  lateinit var consumer: MessageConsumer<JsonObject>
+  private lateinit var consumer: MessageConsumer<JsonObject>
   override fun start() {
     super.start()
     val sqlClient = MySQLClient.createShared(vertx, configMySQLClient())

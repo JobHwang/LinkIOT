@@ -14,19 +14,6 @@
 |[[script]]`@script`|`String`|-
 |===
 
-[[PostRegisterBody]]
-== PostRegisterBody
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[nickname]]`@nickname`|`String`|-
-|[[password]]`@password`|`String`|-
-|[[username]]`@username`|`String`|-
-|===
-
 [[PostSensorBody]]
 == PostSensorBody
 
@@ -40,6 +27,20 @@
 |[[name]]`@name`|`String`|-
 |[[sensorId]]`@sensorId`|`Number (Integer)`|-
 |[[showType]]`@showType`|`String`|-
+|===
+
+[[PostUserBody]]
+== PostUserBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[avatar]]`@avatar`|`String`|-
+|[[nickname]]`@nickname`|`String`|-
+|[[password]]`@password`|`String`|-
+|[[username]]`@username`|`String`|-
 |===
 
 [[PutDeviceBody]]
@@ -67,5 +68,18 @@
 |[[description]]`@description`|`String`|-
 |[[name]]`@name`|`String`|-
 |[[showType]]`@showType`|`String`|-
+|===
+
+[[RegisterBody]]
+== RegisterBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[nickname]]`@nickname`|`String`|-
+|[[password]]`@password`|`String`|-
+|[[username]]`@username`|`String`|-
 |===
 

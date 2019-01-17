@@ -144,7 +144,8 @@ class MQTTVerticle : AbstractTransportVerticle() {
         endpoint?.publish("device-state", Buffer.buffer(desired), MqttQoS.AT_LEAST_ONCE, false, false)
       }
       "forceClose"-> {
-
+        val token = body.getString("token")
+        localMap[token]?.close()
       }
     }
   }

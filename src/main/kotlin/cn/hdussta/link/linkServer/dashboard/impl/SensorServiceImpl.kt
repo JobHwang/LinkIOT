@@ -31,17 +31,17 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
       }
-      val sql = "SELECT id,name,deviceid,dataType,showType,description,updatetime,createtime FROM $SENSOR_TABLE WHERE deviceid=? limit ?,?"
+      val sql = "SELECT id,name,deviceid,dataType,showType,description,updatetime,createtime FROM $SENSOR_TABLE WHERE deviceid=? ORDER BY id DESC LIMIT ?,?"
       val result = sqlClient.queryWithParamsAwait(sql, JsonArray(listOf(deviceId,offset,limit)))
       result.results.map { 
         JsonObject().put("id",it.getInteger(0))
           .put("name",it.getString(1))
-          .put("device_id",it.getString(2))
-          .put("data_type",it.getInteger(3))
-          .put("show_type",it.getString(4))
+          .put("deviceId",it.getString(2))
+          .put("dataType",it.getInteger(3))
+          .put("showType",it.getString(4))
           .put("description",it.getString(5))
-          .put("update_time",it.getString(6))
-          .put("create_time",it.getString(7))
+          .put("updateTime",it.getString(6))
+          .put("createTime",it.getString(7))
       }.let { 
         resultHandler.handleJson(JsonArray(it))
       }
@@ -155,5 +155,4 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
     private const val DELETE_SENSOR_FAILURE = "删除传感器失败"
     private const val SENSOR_NOT_FOUND = "没有找到传感器"
   }
-
 }

@@ -41,11 +41,12 @@ import io.vertx.serviceproxy.ServiceException;
 import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.HelperUtils;
 
+import cn.hdussta.link.linkServer.dashboard.bean.PostUserBody;
+import cn.hdussta.link.linkServer.dashboard.bean.RegisterBody;
 import io.vertx.ext.web.api.OperationRequest;
 import io.vertx.core.AsyncResult;
 import io.vertx.ext.web.api.OperationResponse;
 import io.vertx.core.Handler;
-import cn.hdussta.link.linkServer.dashboard.bean.PostRegisterBody;
 import io.vertx.ext.web.api.OperationRequest;
 import io.vertx.ext.web.api.generator.ApiHandlerUtils;
 /*
@@ -118,14 +119,65 @@ public class UserServiceVertxProxyHandler extends ProxyHandler {
       if (action == null) throw new IllegalStateException("action not specified");
       accessed();
       switch (action) {
-        case "postRegister": {
+        case "register": {
           JsonObject contextSerialized = json.getJsonObject("context");
           if (contextSerialized == null)
             throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
           OperationRequest context = new OperationRequest(contextSerialized);
           JsonObject params = context.getParams();
           try {
-            service.postRegister(ApiHandlerUtils.searchOptionalJsonObjectInJson(params, "body").map(j -> new cn.hdussta.link.linkServer.dashboard.bean.PostRegisterBody(j)).orElse(null),
+            service.register(ApiHandlerUtils.searchOptionalJsonObjectInJson(params, "body").map(j -> new cn.hdussta.link.linkServer.dashboard.bean.RegisterBody(j)).orElse(null),
+                            context,
+                            res -> {
+                            if (res.failed()) {
+                              if (res.cause() instanceof ServiceException) {
+                                msg.reply(res.cause());
+                              } else {
+                                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+                              }
+                            } else {
+                              msg.reply(res.result() == null ? null : res.result().toJson());
+                            }
+                          }
+            );
+          } catch (Exception e) {
+            msg.reply(new ServiceException(-1, e.getMessage()));
+          }
+          break;
+        }
+        case "getUser": {
+          JsonObject contextSerialized = json.getJsonObject("context");
+          if (contextSerialized == null)
+            throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
+          OperationRequest context = new OperationRequest(contextSerialized);
+          JsonObject params = context.getParams();
+          try {
+            service.getUser(context,
+                            res -> {
+                            if (res.failed()) {
+                              if (res.cause() instanceof ServiceException) {
+                                msg.reply(res.cause());
+                              } else {
+                                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+                              }
+                            } else {
+                              msg.reply(res.result() == null ? null : res.result().toJson());
+                            }
+                          }
+            );
+          } catch (Exception e) {
+            msg.reply(new ServiceException(-1, e.getMessage()));
+          }
+          break;
+        }
+        case "postUser": {
+          JsonObject contextSerialized = json.getJsonObject("context");
+          if (contextSerialized == null)
+            throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
+          OperationRequest context = new OperationRequest(contextSerialized);
+          JsonObject params = context.getParams();
+          try {
+            service.postUser(ApiHandlerUtils.searchOptionalJsonObjectInJson(params, "body").map(j -> new cn.hdussta.link.linkServer.dashboard.bean.PostUserBody(j)).orElse(null),
                             context,
                             res -> {
                             if (res.failed()) {

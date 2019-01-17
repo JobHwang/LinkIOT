@@ -28,7 +28,7 @@ class DeviceServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun listDevices(offset:Int,limit:Int,context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     val sql = "SELECT name,deviceid,secret,description,state,last_login_time FROM $DEVICE_TABLE " +
-      "WHERE ownerid=? LIMIT ?,?"
+      "WHERE ownerid=? ORDER BY id DESC LIMIT ?,?"
     val id = context.extra.getInteger("id")
     sqlClient.queryWithParams(sql, JsonArray(listOf(id,offset,limit))){
       if(it.failed()){
@@ -36,11 +36,11 @@ class DeviceServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
       }else{
         it.result().results.map {array->
           JsonObject().put("name",array.getString(0))
-            .put("device_id",array.getString(1))
+            .put("deviceId",array.getString(1))
             .put("secret",array.getString(2))
             .put("description",array.getString(3))
             .put("state",array.getInteger(4))
-            .put("last_login_time",array.getString(5))
+            .put("lastLoginTime",array.getString(5))
         }.let { list ->
           resultHandler.handleJson(JsonArray(list))
         }

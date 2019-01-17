@@ -54,7 +54,6 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
         stop()
         return@create
       }
-
       val deviceServiceImpl = DeviceServiceImpl(vertx,sqlClient,managerService)
       ServiceBinder(vertx)
         .setAddress("dashboard-device-service")
@@ -81,7 +80,8 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
       it.result().mountServiceInterface(DeviceService::class.java,"dashboard-device-service")
       it.result().mountServiceInterface(SensorService::class.java,"dashboard-sensor-service")
       it.result().mountServiceInterface(UserService::class.java,"dashboard-user-service")
-      vertx.createHttpServer().requestHandler(it.result().router).listen(28081){
+      val router = Router.router(vertx).mountSubRouter("/v1",it.result().router)
+      vertx.createHttpServer().requestHandler(router).listen(28081){
         logger.info("Listen at 28081")
       }
     }
