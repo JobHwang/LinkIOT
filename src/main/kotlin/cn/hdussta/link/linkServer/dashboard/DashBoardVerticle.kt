@@ -70,13 +70,18 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
         .register(UserService::class.java,userServiceImpl)
 
       it.result().setExtraOperationContextPayloadMapper {
-        JsonObject().put("id",it.session().get<Int>("id"))
+        JsonObject()
+          .put("id",it.session().get<Int>("id"))
+          .put("level",it.session().get<Int>("level"))
+          .put("admin",it.session().get<Int>("admin"))
       }
       it.result().addGlobalHandler(CookieHandler.create())
       it.result().addGlobalHandler(SessionHandler.create(LocalSessionStore.create(vertx)))
       it.result().addHandlerByOperationId("getLogin",::login)
       it.result().addHandlerByOperationId("getLogout",::logout)
-      it.result().addSecurityHandler("user",::authenticate)
+      it.result().addSecurityHandler("user",::normalUser)
+      it.result().addSecurityHandler("admin",::normalAdmin)
+      it.result().addSecurityHandler("super",::superAdmin)
       it.result().mountServiceInterface(DeviceService::class.java,"dashboard-device-service")
       it.result().mountServiceInterface(SensorService::class.java,"dashboard-sensor-service")
       it.result().mountServiceInterface(UserService::class.java,"dashboard-user-service")
@@ -90,12 +95,19 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
   private fun login(context: RoutingContext){
     val user = context.request().getParam("user")
     val pass = context.request().getParam("pass")
-    val sql = "SELECT id FROM $USER_TABLE WHERE email=? AND password=?"
+    val sql = "SELECT id,level,admin_id FROM $USER_TABLE WHERE email=? AND password=?"
     sqlClient.querySingleWithParams(sql, JsonArray().add(user).add(pass)){
       if(it.failed() || it.result()==null){
         context.response().end(JsonObject().put("status",-1).put("message", LOGIN_FAILURE).toBuffer())
       }else{
-        context.session().put("id",it.result().getInteger(0))
+        val id = it.result().getInteger(0)
+        val level = it.result().getInteger(1)
+        val admin = it.result().getInteger(2)
+        context.session()
+          .put("id",id)
+          .put("level",level)
+          //管理员没有没有admin_id，将自身用户ID设为管理员ID
+          .put("admin",if(level<2) id else admin)
         context.response().end(JsonObject().put("status",1).put("message", LOGIN_SUCCESS).toBuffer())
       }
     }
@@ -108,8 +120,25 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
     }
   }
 
-  private fun authenticate(context: RoutingContext){
-    if(context.session().get<Int>("id")!=null){
+
+  private fun superAdmin(context: RoutingContext){
+    if(context.session().get<Int>("level")==1){
+      context.next()
+    }else{
+      context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())
+    }
+  }
+
+  private fun normalAdmin(context: RoutingContext){
+    if(context.session().get<Int>("level")<=2){
+      context.next()
+    }else{
+      context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())
+    }
+  }
+
+  private fun normalUser(context: RoutingContext){
+    if(context.session().get<Int>("level")<=3){
       context.next()
     }else{
       context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())
@@ -121,7 +150,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
     private const val LOGIN_FAILURE = "登录失败"
     private const val LOGOUT_SUCCESS = "登出成功"
     private const val LOGOUT_FAILURE = "登出失败"
-    private const val AUTH_FAILURE = "需要登录"
+    private const val AUTH_FAILURE = "没有权限"
     private const val USER_TABLE = "sstalink_user"
   }
 }

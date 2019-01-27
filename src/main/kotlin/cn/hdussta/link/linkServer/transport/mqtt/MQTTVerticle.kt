@@ -123,7 +123,7 @@ class MQTTVerticle : AbstractTransportVerticle() {
         deviceManagerService.getDeviceByToken(token, it)
       }
       val result = awaitResult<JsonObject> {
-        basicDataHandleService.handle(device, data, it)
+        scriptService.handle(device, data, it)
       }
       endpoint.publish("device-data", result.toBuffer(), MqttQoS.AT_LEAST_ONCE, false, false)
 

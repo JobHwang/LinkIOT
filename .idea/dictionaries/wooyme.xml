@@ -4,6 +4,7 @@
       <w>createtime</w>
       <w>datatype</w>
       <w>deviceid</w>
+      <w>hdussta</w>
       <w>ownerid</w>
       <w>sensorid</w>
       <w>showtype</w>

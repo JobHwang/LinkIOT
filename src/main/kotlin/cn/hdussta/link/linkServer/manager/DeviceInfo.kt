@@ -28,15 +28,12 @@ class DeviceInfo():Serializable {
    * 设备下所有传感器
    */
   lateinit var sensors:Map<String, SensorInfo>
-  /**
-   * 设备对应规则链
-   */
-  lateinit var rules:Array<String>
 
   /**
    * 设备登录后获得的token
    */
   lateinit var token:String
+
 
   constructor(json:JsonObject):this(){
     id = json.getString("id")
@@ -54,7 +51,6 @@ class DeviceInfo():Serializable {
       val sensorInfo = SensorInfo(it)
       sensorInfo.id to sensorInfo
     }.toMap()
-    rules = json.getString("rules").split("|").toTypedArray()
     token = json.getString("messageToken")
   }
 
@@ -73,7 +69,6 @@ class DeviceInfo():Serializable {
       val sensorInfo = SensorInfo(it)
       sensorInfo.id to sensorInfo
     }.toMap()
-    rules = jsonArray.getString(4).split("|").toTypedArray()
   }
 
   fun toJson():JsonObject{
@@ -82,7 +77,6 @@ class DeviceInfo():Serializable {
       ,"secret" to secret
       ,"status" to status.ordinal
       ,"sensors" to JsonArray(sensors.map { it.value.toJson() })
-      ,"rules" to rules.joinToString("|") { it }
       ,"messageToken" to token))
   }
 }

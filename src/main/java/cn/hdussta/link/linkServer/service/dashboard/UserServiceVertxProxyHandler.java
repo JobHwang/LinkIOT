@@ -42,7 +42,7 @@ import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.serviceproxy.HelperUtils;
 
 import cn.hdussta.link.linkServer.dashboard.bean.PostUserBody;
-import cn.hdussta.link.linkServer.dashboard.bean.RegisterBody;
+import cn.hdussta.link.linkServer.dashboard.bean.PutUserBody;
 import io.vertx.ext.web.api.OperationRequest;
 import io.vertx.core.AsyncResult;
 import io.vertx.ext.web.api.OperationResponse;
@@ -119,14 +119,14 @@ public class UserServiceVertxProxyHandler extends ProxyHandler {
       if (action == null) throw new IllegalStateException("action not specified");
       accessed();
       switch (action) {
-        case "register": {
+        case "putUser": {
           JsonObject contextSerialized = json.getJsonObject("context");
           if (contextSerialized == null)
             throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
           OperationRequest context = new OperationRequest(contextSerialized);
           JsonObject params = context.getParams();
           try {
-            service.register(ApiHandlerUtils.searchOptionalJsonObjectInJson(params, "body").map(j -> new cn.hdussta.link.linkServer.dashboard.bean.RegisterBody(j)).orElse(null),
+            service.putUser(ApiHandlerUtils.searchOptionalJsonObjectInJson(params, "body").map(j -> new cn.hdussta.link.linkServer.dashboard.bean.PutUserBody(j)).orElse(null),
                             context,
                             res -> {
                             if (res.failed()) {
@@ -178,6 +178,32 @@ public class UserServiceVertxProxyHandler extends ProxyHandler {
           JsonObject params = context.getParams();
           try {
             service.postUser(ApiHandlerUtils.searchOptionalJsonObjectInJson(params, "body").map(j -> new cn.hdussta.link.linkServer.dashboard.bean.PostUserBody(j)).orElse(null),
+                            context,
+                            res -> {
+                            if (res.failed()) {
+                              if (res.cause() instanceof ServiceException) {
+                                msg.reply(res.cause());
+                              } else {
+                                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+                              }
+                            } else {
+                              msg.reply(res.result() == null ? null : res.result().toJson());
+                            }
+                          }
+            );
+          } catch (Exception e) {
+            msg.reply(new ServiceException(-1, e.getMessage()));
+          }
+          break;
+        }
+        case "delUser": {
+          JsonObject contextSerialized = json.getJsonObject("context");
+          if (contextSerialized == null)
+            throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
+          OperationRequest context = new OperationRequest(contextSerialized);
+          JsonObject params = context.getParams();
+          try {
+            service.delUser((java.lang.String)ApiHandlerUtils.searchInJson(params, "username"),
                             context,
                             res -> {
                             if (res.failed()) {

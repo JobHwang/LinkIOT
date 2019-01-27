@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClient):SensorService {
   override fun getSensors(deviceId: String, offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("id")
+      val ownerId = context.extra.getInteger("admin")
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -54,7 +54,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun putSensor(deviceId: String, body:PutSensorBody, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("id")
+      val ownerId = context.extra.getInteger("admin")
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -73,16 +73,17 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun postSensor(deviceId: String, body:PostSensorBody, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("id")
+      val ownerId = context.extra.getInteger("admin")
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
       }
-      val sql = ("UPDATE $SENSOR_TABLE SET ${body.name?.let { "name=?," }?:""}" +
-        " ${body.dataType?.let { "datatype=?," }?:""}" +
-        " ${body.showType?.let { "showtype=?," }?:""}" +
-        " ${body.description?.let { "description=?," }?:""} ").removeSuffix(",") +
-        "WHERE deviceid=? AND sensorid=?"
+      val sql = ("UPDATE $SENSOR_TABLE SET " +
+        (body.name?.let { "name=?," }?:"") +
+        (body.dataType?.let { "datatype=?," }?:"") +
+        (body.showType?.let { "showtype=?," }?:"") +
+        (body.description?.let { "description=?," }?:"")).removeSuffix(",") +
+        " WHERE deviceid=? AND sensorid=?"
       val result = sqlClient.updateWithParamsAwait(sql,JsonArray().apply {
         body.name?.let(::add)
         body.dataType?.let(::add)
@@ -104,7 +105,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun deleteSensor(deviceId: String, sensorId: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("id")
+      val ownerId = context.extra.getInteger("admin")
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -124,7 +125,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun getData(deviceId: String, sensorId: Int, offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("id")
+      val ownerId = context.extra.getInteger("admin")
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch

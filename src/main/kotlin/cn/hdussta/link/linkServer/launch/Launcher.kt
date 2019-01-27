@@ -1,16 +1,13 @@
 package cn.hdussta.link.linkServer.launch
 
 import cn.hdussta.link.linkServer.dashboard.DashBoardVerticle
-import cn.hdussta.link.linkServer.data.DataRedirectVerticle
-import cn.hdussta.link.linkServer.data.DataStorageVerticle
+import cn.hdussta.link.linkServer.data.ScriptVerticle
 import cn.hdussta.link.linkServer.manager.ManagerVerticle
 import cn.hdussta.link.linkServer.transport.http.HTTPVerticle
 import cn.hdussta.link.linkServer.transport.mqtt.MQTTVerticle
 import io.vertx.core.Vertx
-import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory
-import io.vertx.kotlin.coroutines.awaitResult
 import io.vertx.core.VertxOptions
-
+import io.vertx.kotlin.coroutines.awaitResult
 
 
 /**
@@ -26,11 +23,7 @@ suspend fun main(args: Array<String>) {
   }.let(::println)
 
   awaitResult<String> {
-    vertx.deployVerticle(DataStorageVerticle(), it)
-  }.let(::println)
-
-  awaitResult<String> {
-    vertx.deployVerticle(DataRedirectVerticle(), it)
+    vertx.deployVerticle(ScriptVerticle(), it)
   }.let(::println)
 
   awaitResult<String> {

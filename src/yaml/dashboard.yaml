@@ -66,7 +66,7 @@ paths:
                     type: integer
                     format: int32
     put:
-      operationId: register
+      operationId: putUser
       summary: 用户注册
       requestBody:
         content:
@@ -117,6 +117,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: delUser
+      summary: 删除用户
+      security:
+        - admin: []
+      parameters:
+        - name: username
+          in: query
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
   /db/devices:
     get:
       operationId: listDevices
@@ -149,7 +167,7 @@ paths:
       operationId: putDevice
       summary: 创建新的设备
       security:
-        - user: []
+        - admin: []
       requestBody:
         content:
           application/json:
@@ -178,7 +196,7 @@ paths:
       operationId: postDevice
       summary: 更新设备
       security:
-        - user: []
+        - admin: []
       requestBody:
         content:
           application/json:
@@ -188,6 +206,9 @@ paths:
                 - deviceId
               properties:
                 deviceId:
+                  type: string
+                  description: 设备ID
+                name:
                   type: string
                   description: 新的设备名称
                 description:
@@ -207,7 +228,7 @@ paths:
       operationId: deleteDevice
       summary: 删除设备
       security:
-        - user: []
+        - admin: []
       parameters:
         - name: deviceId
           in: query
@@ -315,7 +336,6 @@ paths:
           schema:
             type: integer
             format: int32
-
       responses:
         200:
           description: 传感器列表
@@ -329,7 +349,7 @@ paths:
       operationId: putSensor
       summary: 创建传感器
       security:
-        - user: []
+        - admin: []
       parameters:
         - name: deviceId
           in: path
@@ -371,7 +391,7 @@ paths:
       operationId: postSensor
       summary: 更新传感器信息
       security:
-        - user: []
+        - admin: []
       parameters:
         - name: deviceId
           in: path
@@ -415,7 +435,7 @@ paths:
       operationId: deleteSensor
       summary: 删除传感器
       security:
-        - user: []
+        - admin: []
       parameters:
         - name: deviceId
           in: path

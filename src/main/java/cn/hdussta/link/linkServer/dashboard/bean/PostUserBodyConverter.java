@@ -19,6 +19,11 @@ public class PostUserBodyConverter {
             obj.setAvatar((String)member.getValue());
           }
           break;
+        case "level":
+          if (member.getValue() instanceof Number) {
+            obj.setLevel(((Number)member.getValue()).intValue());
+          }
+          break;
         case "nickname":
           if (member.getValue() instanceof String) {
             obj.setNickname((String)member.getValue());
@@ -45,6 +50,9 @@ public class PostUserBodyConverter {
   public static void toJson(PostUserBody obj, java.util.Map<String, Object> json) {
     if (obj.getAvatar() != null) {
       json.put("avatar", obj.getAvatar());
+    }
+    if (obj.getLevel() != null) {
+      json.put("level", obj.getLevel());
     }
     if (obj.getNickname() != null) {
       json.put("nickname", obj.getNickname());

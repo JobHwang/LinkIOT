@@ -1,10 +1,6 @@
 package cn.hdussta.link.linkServer.transport.http
 
-import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
-import cn.hdussta.link.linkServer.service.DataHandleService
-import cn.hdussta.link.linkServer.data.impl.DataStorageMySql
 import cn.hdussta.link.linkServer.manager.DeviceInfo
-import cn.hdussta.link.linkServer.service.DeviceManagerService
 import cn.hdussta.link.linkServer.transport.AbstractTransportVerticle
 import cn.hdussta.link.linkServer.utils.message
 import cn.hdussta.link.linkServer.utils.messageState
@@ -17,7 +13,6 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.kotlin.coroutines.awaitResult
 import io.vertx.kotlin.coroutines.dispatcher
-import io.vertx.servicediscovery.types.EventBusService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -84,7 +79,7 @@ class HTTPVerticle : AbstractTransportVerticle() {
       val json = context.bodyAsJson
       if(json!=null){
         val result = awaitResult<JsonObject> {
-          basicDataHandleService.handle(deviceInfo,json,it)
+          scriptService.handle(deviceInfo,json,it)
         }
         context.response().end(message(1,"OK",result))
       }

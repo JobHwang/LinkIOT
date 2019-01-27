@@ -3,6 +3,7 @@ package cn.hdussta.link.linkServer.manager.impl
 import cn.hdussta.link.linkServer.manager.DeviceInfo
 import cn.hdussta.link.linkServer.common.DeviceStatus
 import cn.hdussta.link.linkServer.service.DeviceManagerService
+import cn.hdussta.link.linkServer.service.ScriptService
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Handler
@@ -27,7 +28,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: EventBus, private val asyncDeviceMap: AsyncMap<String, String>, private val sqlClient: SQLClient, private val sessionStore: SessionStore): DeviceManagerService {
+class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: EventBus, private val asyncDeviceMap: AsyncMap<String, String>, private val sqlClient: SQLClient, private val sessionStore: SessionStore,private val scriptService: ScriptService): DeviceManagerService {
   private val logger = LoggerFactory.getLogger(DeviceManagerService::class.java)
 
   private fun publishCommand(action:String,body:JsonObject){
@@ -37,7 +38,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
   override fun login(id: String, secret: String, isLongConnection:Boolean,handler: Handler<AsyncResult<String>>): DeviceManagerService {
     val future = Future.future<String>().setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
-      val result = sqlClient.querySingleWithParamsAwait("SELECT deviceid,name,secret,state,config FROM sstalink_device WHERE deviceid=? and secret=? and state=${DeviceStatus.OFF.ordinal}"
+      val result = sqlClient.querySingleWithParamsAwait("SELECT deviceid,name,secret,state FROM sstalink_device WHERE deviceid=? and secret=? and state=${DeviceStatus.OFF.ordinal}"
         , JsonArray(listOf(id, secret)))
       if (result == null) {
         future.fail(DEVICE_NOT_FOUND)
@@ -93,6 +94,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
       }
       asyncDeviceMap.removeAwait(deviceInfo.id)
       sessionStore.deleteAwait(token)
+      scriptService.withdrawScript(deviceInfo.id){}
       future.complete()
     }.invokeOnCompletion {
       if (it != null)

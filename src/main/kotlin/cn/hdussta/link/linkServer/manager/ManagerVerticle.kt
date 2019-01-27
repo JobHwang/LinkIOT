@@ -3,6 +3,7 @@ package cn.hdussta.link.linkServer.manager
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
 import cn.hdussta.link.linkServer.manager.impl.DeviceManagerServiceImpl
 import cn.hdussta.link.linkServer.service.DeviceManagerService
+import cn.hdussta.link.linkServer.service.ScriptService
 import cn.hdussta.link.linkServer.utils.message
 import cn.hdussta.link.linkServer.utils.messageState
 import io.vertx.core.eventbus.MessageConsumer
@@ -16,6 +17,7 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.ext.web.sstore.SessionStore
 import io.vertx.kotlin.coroutines.awaitResult
+import io.vertx.servicediscovery.types.EventBusService
 import io.vertx.serviceproxy.ServiceBinder
 import io.vertx.serviceproxy.ServiceProxyBuilder
 import kotlinx.coroutines.GlobalScope
@@ -49,7 +51,17 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
     val asyncMap = awaitResult<AsyncMap<String,String>> {
       vertx.sharedData().getAsyncMap(MANAGER_MAP_NAME,it)
     }
-    managerService = DeviceManagerServiceImpl(vertx,eventBus,asyncMap,sqlClient,sessionStore)
+    val scriptService = awaitResult<ScriptService> { handler->
+      EventBusService.getProxy(discovery, ScriptService::class.java) {
+        if (it.failed()) {
+          logger.error(it.cause().localizedMessage)
+          this.stop()
+        } else {
+          handler.handle(it)
+        }
+      }
+    }
+    managerService = DeviceManagerServiceImpl(vertx,eventBus,asyncMap,sqlClient,sessionStore,scriptService)
     binder = ServiceBinder(vertx).setAddress(DeviceManagerService.SERVICE_ADDRESS)
     consumer = binder.register(DeviceManagerService::class.java, managerService)
 

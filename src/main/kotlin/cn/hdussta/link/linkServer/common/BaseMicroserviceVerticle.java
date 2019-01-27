@@ -84,6 +84,12 @@ public abstract class BaseMicroserviceVerticle extends AbstractVerticle {
     return publish(record);
   }
 
+  protected Future<Void> publishEventBusService(String name, String address,JsonObject meta, Class serviceClass) {
+    Record record = EventBusService.createRecord(name, address, serviceClass);
+    record.setMetadata(meta);
+    return publish(record);
+  }
+
   /**
    * Publish a service with record.
    *
