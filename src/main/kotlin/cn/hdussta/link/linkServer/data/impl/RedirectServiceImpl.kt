@@ -1,11 +1,9 @@
 package cn.hdussta.link.linkServer.data.impl
 
-import cn.hdussta.link.linkServer.common.REDIRECT_TABLE
 import cn.hdussta.link.linkServer.data.AbstractDataHandleService
 import cn.hdussta.link.linkServer.manager.DeviceInfo
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.client.WebClient
-import io.vertx.kotlin.ext.sql.queryAwait
 import io.vertx.kotlin.ext.web.client.sendJsonObjectAwait
 
 class RedirectServiceImpl(private val webClient: WebClient) : AbstractDataHandleService() {

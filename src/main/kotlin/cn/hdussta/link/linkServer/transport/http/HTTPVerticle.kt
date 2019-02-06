@@ -44,7 +44,7 @@ class HTTPVerticle : AbstractTransportVerticle() {
     router.route(HttpMethod.POST, "/api/data/:messageToken").handler { handleData(it, it.request().getParam("messageToken")) }
     router.route(HttpMethod.POST,"/api/state/:messageToken").handler{ handleState(it,it.request().getParam("messageToken")) }
     vertx.executeBlocking<Void>({
-      vertx.createHttpServer().requestHandler(router::accept).listen(28080){
+      vertx.createHttpServer().requestHandler(router).listen(28080){
         logger.info("Listen at 28080")
       }
     }){}

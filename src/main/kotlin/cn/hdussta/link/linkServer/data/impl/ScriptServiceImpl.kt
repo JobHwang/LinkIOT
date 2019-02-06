@@ -1,7 +1,6 @@
 package cn.hdussta.link.linkServer.data.impl
 
 import cn.hdussta.link.linkServer.common.DEVICE_TABLE
-import cn.hdussta.link.linkServer.common.SCRIPT_TABLE
 import cn.hdussta.link.linkServer.manager.DeviceInfo
 import cn.hdussta.link.linkServer.service.ScriptService
 import io.vertx.core.AsyncResult
@@ -19,7 +18,8 @@ import javax.script.Compilable
 import javax.script.CompiledScript
 import javax.script.ScriptEngine
 
-class ScriptServiceImpl(private val vertx: Vertx, private val localMap:LocalMap<String,CompiledScript>, private val sqlClient:SQLClient, private val engine: ScriptEngine): ScriptService {
+class ScriptServiceImpl(private val vertx: Vertx, private val sqlClient:SQLClient, private val engine: ScriptEngine): ScriptService {
+  private val localMap = LinkedHashMap<String,CompiledScript>()
   override fun updateScript(deviceId: String, handler: Handler<AsyncResult<Void>>): ScriptService {
     val future = Future.future<Void>().setHandler(handler)
     sqlClient.querySingle("SELECT script FROM $DEVICE_TABLE WHERE deviceid='$deviceId'"){
@@ -47,8 +47,10 @@ class ScriptServiceImpl(private val vertx: Vertx, private val localMap:LocalMap<
     val future = Future.future<JsonObject>()
     future.setHandler(handler)
     GlobalScope.launch(vertx.dispatcher()) {
-      val script = localMap[device.id]?: sqlClient.querySingleAwait("SELECT script FROM $SCRIPT_TABLE WHERE deviceid='${device.id}'")?.let{
-        (engine as Compilable).compile(it.getString(0))
+      val script = localMap[device.id]?: sqlClient.querySingleAwait("SELECT script FROM $DEVICE_TABLE WHERE deviceid='${device.id}'")?.let{
+        (engine as Compilable).compile(it.getString(0)).also {compiled->
+          localMap[device.id] = compiled
+        }
       }?:return@launch
       val tempBindings = engine.createBindings()
       tempBindings["things"] = mapOf("info" to device.toJson().map,"data" to data.map)

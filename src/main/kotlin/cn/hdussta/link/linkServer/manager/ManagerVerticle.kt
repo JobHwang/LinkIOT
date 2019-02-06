@@ -1,20 +1,18 @@
 package cn.hdussta.link.linkServer.manager
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
+import cn.hdussta.link.linkServer.common.DEVICE_TABLE
 import cn.hdussta.link.linkServer.manager.impl.DeviceManagerServiceImpl
 import cn.hdussta.link.linkServer.service.DeviceManagerService
 import cn.hdussta.link.linkServer.service.ScriptService
-import cn.hdussta.link.linkServer.utils.message
-import cn.hdussta.link.linkServer.utils.messageState
+import cn.hdussta.link.linkServer.utils.jsonArray
+import io.vertx.core.Future
 import io.vertx.core.eventbus.MessageConsumer
-import io.vertx.core.http.HttpMethod
 import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.LoggerFactory
 import io.vertx.core.shareddata.AsyncMap
+import io.vertx.ext.asyncsql.AsyncSQLClient
 import io.vertx.ext.asyncsql.MySQLClient
-import io.vertx.ext.web.Router
-import io.vertx.ext.web.RoutingContext
-import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.ext.web.sstore.SessionStore
 import io.vertx.kotlin.coroutines.awaitResult
 import io.vertx.servicediscovery.types.EventBusService
@@ -33,12 +31,14 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
   private lateinit var binder: ServiceBinder
   private lateinit var consumer: MessageConsumer<JsonObject>
   private lateinit var managerService: DeviceManagerService
-  override fun start() {
+
+  override fun start(startFuture: Future<Void>) {
     super.start()
     GlobalScope.launch {
       publishManagerService()
     }.invokeOnCompletion {
       if(it!=null) logger.error(it.localizedMessage)
+      startFuture.complete()
     }
   }
   /**
@@ -71,6 +71,11 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
     publishEventBusService(DeviceManagerService.SERVICE_NAME, DeviceManagerService.SERVICE_ADDRESS, DeviceManagerService::class.java)
 
     logger.info(PUBLISH_SUCCESS)
+    refreshAllDevices(sqlClient)
+  }
+
+  private fun refreshAllDevices(sqlClient: AsyncSQLClient){
+    sqlClient.update("UPDATE $DEVICE_TABLE SET state=0 WHERE state=1"){}
   }
 
   private fun configMySQLClient(): JsonObject {

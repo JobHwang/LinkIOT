@@ -1,7 +1,9 @@
 package cn.hdussta.link.linkServer.utils
 
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
+import io.vertx.kotlin.core.json.Json
 import io.vertx.kotlin.core.json.JsonObject
 
 fun message(status:Int,msg:String):Buffer = JsonObject("status" to status,"msg" to msg).toBuffer()
@@ -15,4 +17,5 @@ fun messageToken(status:Int, msg: String, token:String):Buffer = JsonObject("sta
 fun messageState(status: Int,msg:String,state:String):Buffer = JsonObject(
   "status" to status,"msg" to msg,"state" to JsonObject(state)).toBuffer()
 
+inline fun jsonArray(vararg values: Any?): JsonArray = io.vertx.core.json.JsonArray(arrayListOf(*values))
 

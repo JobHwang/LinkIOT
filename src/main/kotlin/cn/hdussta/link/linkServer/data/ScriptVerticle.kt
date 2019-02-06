@@ -1,9 +1,11 @@
 package cn.hdussta.link.linkServer.data
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
+import cn.hdussta.link.linkServer.data.impl.AlarmServiceImpl
 import cn.hdussta.link.linkServer.data.impl.RedirectServiceImpl
 import cn.hdussta.link.linkServer.data.impl.MySqlStorageServiceImpl
 import cn.hdussta.link.linkServer.data.impl.ScriptServiceImpl
+import io.vertx.core.Future
 import io.vertx.core.eventbus.EventBus
 import io.vertx.core.eventbus.MessageConsumer
 import io.vertx.core.json.JsonObject
@@ -28,10 +30,10 @@ class ScriptVerticle:BaseMicroserviceVerticle() {
     "username" to "root",
     "password" to "Admin88888",
     "database" to "sstalink"))
-  override fun start() {
+  override fun start(startFuture: Future<Void>) {
     super.start()
     val sqlClient = MySQLClient.createShared(vertx, sqlConfig)
-    val scriptService = ScriptServiceImpl(vertx,vertx.sharedData().getLocalMap("script-map"),sqlClient,engine)
+    val scriptService = ScriptServiceImpl(vertx,sqlClient,engine)
     val binder = ServiceBinder(vertx).setAddress(ScriptServiceImpl.SERVICE_ADDRESS)
     consumer = binder.register(cn.hdussta.link.linkServer.service.ScriptService::class.java, scriptService)
     val proxyBuilder = ServiceProxyBuilder(vertx).setAddress(ScriptServiceImpl.SERVICE_ADDRESS)
@@ -50,6 +52,8 @@ class ScriptVerticle:BaseMicroserviceVerticle() {
     }
     vertx.deployVerticle(MySqlStorageServiceImpl())
     vertx.deployVerticle(RedirectServiceImpl(WebClient.create(vertx)))
+    vertx.deployVerticle(AlarmServiceImpl())
+    startFuture.complete()
   }
 
   companion object {

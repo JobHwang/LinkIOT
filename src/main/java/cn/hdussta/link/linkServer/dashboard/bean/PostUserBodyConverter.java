@@ -34,9 +34,9 @@ public class PostUserBodyConverter {
             obj.setPassword((String)member.getValue());
           }
           break;
-        case "username":
-          if (member.getValue() instanceof String) {
-            obj.setUsername((String)member.getValue());
+        case "uid":
+          if (member.getValue() instanceof Number) {
+            obj.setUid(((Number)member.getValue()).intValue());
           }
           break;
       }
@@ -60,8 +60,8 @@ public class PostUserBodyConverter {
     if (obj.getPassword() != null) {
       json.put("password", obj.getPassword());
     }
-    if (obj.getUsername() != null) {
-      json.put("username", obj.getUsername());
+    if (obj.getUid() != null) {
+      json.put("uid", obj.getUid());
     }
   }
 }

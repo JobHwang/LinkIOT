@@ -1,11 +1,9 @@
 package cn.hdussta.link.linkServer.dashboard.impl
 
 import cn.hdussta.link.linkServer.common.DEVICE_TABLE
+import cn.hdussta.link.linkServer.dashboard.*
 import cn.hdussta.link.linkServer.dashboard.bean.PostDeviceBody
 import cn.hdussta.link.linkServer.dashboard.bean.PutDeviceBody
-import cn.hdussta.link.linkServer.dashboard.handleError
-import cn.hdussta.link.linkServer.dashboard.handleJson
-import cn.hdussta.link.linkServer.dashboard.handleMessage
 import cn.hdussta.link.linkServer.service.DeviceManagerService
 import cn.hdussta.link.linkServer.service.dashboard.DeviceService
 import io.vertx.core.AsyncResult
@@ -85,21 +83,22 @@ class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClie
   }
 
   override fun putDevice(body: PutDeviceBody, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
+    val ownerId = context.getAdmin()
+    val uid = context.getUid()
     GlobalScope.launch(vertx.dispatcher()) {
       val sql = "INSERT INTO $DEVICE_TABLE (deviceid,name,ownerid,secret,description,script) VALUES (?,?,?,?,?,?)"
       var deviceId = RandomStringUtils.randomAlphanumeric(9)
       while (sqlClient.querySingleAwait("SELECT id FROM $DEVICE_TABLE WHERE deviceid='$deviceId'") != null) {
         deviceId = RandomStringUtils.randomAlphanumeric(9).toLowerCase()
       }
-      val ownerId = context.extra.getInteger("admin")
+
       val secret = RandomStringUtils.randomAlphanumeric(64).toLowerCase()
       sqlClient.updateWithParamsAwait(sql, JsonArray(listOf(deviceId, body.name!!, ownerId, secret, body.description
         ?: "", body.script ?: "")))
       resultHandler.handleMessage(1, PUT_DEVICE_SUCCESS)
     }.invokeOnCompletion {
-      if (it != null) {
-        resultHandler.handleError(-1, it.localizedMessage)
-      }
+      if (it != null) resultHandler.handleError(-1, it.localizedMessage)
+      else sqlClient.userLog(uid,UserAction.DEVICE,"创建设备:${body.toJson()}")
     }
   }
 
@@ -122,9 +121,8 @@ class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClie
       else
         resultHandler.handleMessage(1, POST_DEVICE_SUCCESS)
     }.invokeOnCompletion {
-      if (it != null) {
-        resultHandler.handleError(-1, it.localizedMessage)
-      }
+      if (it != null) resultHandler.handleError(-1, it.localizedMessage)
+      else sqlClient.userLog(context.getUid(),UserAction.DEVICE,"修改设备:${body.toJson()}")
     }
   }
 
@@ -139,9 +137,8 @@ class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClie
         resultHandler.handleMessage(1, DELETE_DEVICE_SUCCESS)
       }
     }.invokeOnCompletion {
-      if (it != null) {
-        resultHandler.handleError(-1, it.localizedMessage)
-      }
+      if (it != null) resultHandler.handleError(-1, it.localizedMessage)
+      else sqlClient.userLog(context.getUid(),UserAction.DEVICE,"删除设备:$deviceId")
     }
   }
 
@@ -157,9 +154,7 @@ class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClie
 
   companion object {
     private const val SET_STATE_SUCCESS = "状态设置成功"
-    private const val SET_STATE_FAILURE = "状态设置失败"
     private const val GET_STATE_SUCCESS = "获取状态成功"
-    private const val GET_STATE_FAILURE = "获取状态失败"
     private const val FORCE_CLOSE_SUCCESS = "下线成功"
     private const val PUT_DEVICE_SUCCESS = "创建设备成功"
     private const val POST_DEVICE_SUCCESS = "更新设备成功"

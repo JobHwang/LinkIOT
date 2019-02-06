@@ -2,6 +2,8 @@ package cn.hdussta.link.linkServer.service.dashboard;
 
 import cn.hdussta.link.linkServer.dashboard.bean.PostUserBody;
 import cn.hdussta.link.linkServer.dashboard.bean.PutUserBody;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import io.vertx.codegen.annotations.Nullable;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.api.OperationRequest;
@@ -14,4 +16,5 @@ public interface UserService {
   void getUser(OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
   void postUser(PostUserBody body,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
   void delUser(String username,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
+  void listUser(@Nullable Integer adminId, Integer offset, Integer limit, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 }

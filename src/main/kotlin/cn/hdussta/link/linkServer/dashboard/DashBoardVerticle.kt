@@ -8,6 +8,7 @@ import cn.hdussta.link.linkServer.service.DeviceManagerService
 import cn.hdussta.link.linkServer.service.dashboard.DeviceService
 import cn.hdussta.link.linkServer.service.dashboard.SensorService
 import cn.hdussta.link.linkServer.service.dashboard.UserService
+import cn.hdussta.link.linkServer.utils.jsonArray
 import cn.hdussta.link.linkServer.utils.message
 import cn.hdussta.link.linkServer.utils.messageState
 import io.vertx.core.http.HttpMethod
@@ -98,7 +99,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
     val sql = "SELECT id,level,admin_id FROM $USER_TABLE WHERE email=? AND password=?"
     sqlClient.querySingleWithParams(sql, JsonArray().add(user).add(pass)){
       if(it.failed() || it.result()==null){
-        context.response().end(JsonObject().put("status",-1).put("message", LOGIN_FAILURE).toBuffer())
+        context.response().end(JsonObject().put("status",-1).put("message", if(it.failed()) it.cause() else LOGIN_FAILURE).toBuffer())
       }else{
         val id = it.result().getInteger(0)
         val level = it.result().getInteger(1)
@@ -109,6 +110,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
           //管理员没有没有admin_id，将自身用户ID设为管理员ID
           .put("admin",if(level<2) id else admin)
         context.response().end(JsonObject().put("status",1).put("message", LOGIN_SUCCESS).toBuffer())
+        sqlClient.userLog(id,UserAction.AUTH,"登录")
       }
     }
   }
@@ -120,9 +122,8 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
     }
   }
 
-
   private fun superAdmin(context: RoutingContext){
-    if(context.session().get<Int>("level")==1){
+    if(context.session()!=null && context.session().get<Int>("level")!=null && context.session().get<Int>("level")==UserLevel.SUPER.ordinal){
       context.next()
     }else{
       context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())
@@ -130,7 +131,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
   }
 
   private fun normalAdmin(context: RoutingContext){
-    if(context.session().get<Int>("level")<=2){
+    if(context.session()!=null && context.session().get<Int>("level")!=null && context.session().get<Int>("level")<=UserLevel.ADMIN.ordinal){
       context.next()
     }else{
       context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())
@@ -138,7 +139,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
   }
 
   private fun normalUser(context: RoutingContext){
-    if(context.session().get<Int>("level")<=3){
+    if(context.session()!=null && context.session().get<Int>("level")!=null && context.session().get<Int>("level")<=UserLevel.ADMIN.ordinal){
       context.next()
     }else{
       context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())

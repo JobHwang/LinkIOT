@@ -18,20 +18,19 @@ class MySqlStorageServiceImpl : AbstractDataHandleService() {
   override val name: String
     get() = "Storage"
   override suspend fun handle(info: DeviceInfo, data: JsonObject,param:JsonObject) {
-    val rawData = data.getJsonObject("data")
 
-    if (!rawData.all { info.sensors.containsKey(it.key) }) {
+    if (!data.all { info.sensors.containsKey(it.key) }) {
       fail(info, SENSOR_NOT_FOUND)
       return
     }
 
-    val checkResult = typeCheck(info, rawData)
+    val checkResult = typeCheck(info, data)
     if (checkResult != null) {
       fail(info,"Sensor $checkResult data type is wrong")
       return
     }
 
-    rawData.forEach {
+    data.forEach {
       val sensor = info.sensors[it.key]!!
       val table = sensor.type.name.toLowerCase()
       val input = it.value
@@ -39,7 +38,6 @@ class MySqlStorageServiceImpl : AbstractDataHandleService() {
         , JsonArray(listOf(info.id, sensor.id, input)))
     }
   }
-
 
   private fun typeCheck(device: DeviceInfo, data: JsonObject): String? {
     data.forEach {
@@ -86,7 +84,6 @@ class MySqlStorageServiceImpl : AbstractDataHandleService() {
   }
 
   companion object {
-    private const val UPDATE_SUCCESS = "上传成功"
     private const val SENSOR_NOT_FOUND = "没有找到对应传感器"
   }
 }

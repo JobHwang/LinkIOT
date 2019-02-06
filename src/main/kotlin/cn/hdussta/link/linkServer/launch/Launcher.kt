@@ -19,12 +19,14 @@ suspend fun main(args: Array<String>) {
   val vertx = Vertx.vertx(options)
 
   awaitResult<String> {
+    vertx.deployVerticle(ScriptVerticle(), it)
+  }.let(::println)
+
+
+  awaitResult<String> {
     vertx.deployVerticle(ManagerVerticle(), it)
   }.let(::println)
 
-  awaitResult<String> {
-    vertx.deployVerticle(ScriptVerticle(), it)
-  }.let(::println)
 
   awaitResult<String> {
     vertx.deployVerticle(HTTPVerticle(), it)

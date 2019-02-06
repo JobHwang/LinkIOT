@@ -83,7 +83,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
         (body.dataType?.let { "datatype=?," }?:"") +
         (body.showType?.let { "showtype=?," }?:"") +
         (body.description?.let { "description=?," }?:"")).removeSuffix(",") +
-        " WHERE deviceid=? AND sensorid=?"
+        " WHERE deviceid=? AND id=?"
       val result = sqlClient.updateWithParamsAwait(sql,JsonArray().apply {
         body.name?.let(::add)
         body.dataType?.let(::add)
@@ -110,7 +110,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
       }
-      val sql = "DELETE FROM $SENSOR_TABLE WHERE deviceid=? AND sensorid=?"
+      val sql = "DELETE FROM $SENSOR_TABLE WHERE deviceid=? AND id=?"
       val result = sqlClient.updateWithParamsAwait(sql, JsonArray(listOf(deviceId,sensorId)))
       if(result.updated==1){
         resultHandler.handleMessage(1, DELETE_SENSOR_SUCCESS)
@@ -130,10 +130,10 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
       }
-      val sensorInfo = sqlClient.querySingleWithParamsAwait("SELECT datatype,showtype FROM $SENSOR_TABLE WHERE deviceid=? AND sensorid=?", JsonArray(listOf(deviceId,sensorId)))
+      val sensorInfo = sqlClient.querySingleWithParamsAwait("SELECT datatype,showtype FROM $SENSOR_TABLE WHERE deviceid=? AND id=?", JsonArray(listOf(deviceId,sensorId)))
         ?: throw Exception(SENSOR_NOT_FOUND)
       val dataType = DataType.values()[sensorInfo.getInteger(0)].name
-      val sql = "SELECT data,updatetime FROM ${DATA_TABLE(dataType)} WHERE deviceid=? AND sensorid=? LIMIT ?,?"
+      val sql = "SELECT data,updatetime FROM ${DATA_TABLE(dataType)} WHERE deviceid=? AND id=? LIMIT ?,?"
       val result = sqlClient.queryWithParamsAwait(sql, JsonArray(listOf(deviceId,sensorId,offset,limit)))
       result.results.map {
         JsonObject().put("data",it.getValue(0)).put("update_time",it.getString(1))

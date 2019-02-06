@@ -40,34 +40,58 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimpleStatus"
+  /admin/user:
+    get:
+      operationId: listUser
+      summary: 管理员列表用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 列表结果
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
   /user:
     get:
       operationId: getUser
       summary: 查询用户信息
       security:
-      - user: []
+        - user: []
       responses:
         200:
           description: 查询结果
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  username:
-                    type: string
-                  nickname:
-                    type: string
-                  avatar:
-                    type: string
-                  createTime:
-                    type: string
-                  createdDeviceNumber:
-                    type: integer
-                    format: int32
+                $ref: "#/components/schemas/User"
     put:
       operationId: putUser
       summary: 用户注册
+      security:
+        - admin: []
       requestBody:
         content:
           application/json:
@@ -77,6 +101,7 @@ paths:
                 - username
                 - password
                 - nickname
+                - level
               properties:
                 username:
                   type: string
@@ -84,6 +109,12 @@ paths:
                   type: string
                 nickname:
                   type: string
+                level:
+                  type: integer
+                  format: int32
+                adminId:
+                  type: integer
+                  format: int32
       responses:
         200:
           description: 注册结果
@@ -144,12 +175,14 @@ paths:
       parameters:
         - name: offset
           in: query
+          required: true
           description: 起始列表位置
           schema:
             type: integer
             format: int32
         - name: limit
           in: query
+          required: true
           description: 本次列表数量
           schema:
             type: integer
@@ -501,6 +534,20 @@ paths:
                   $ref: "#/components/schemas/Data"
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        username:
+           type: string
+        nickname:
+          type: string
+        avatar:
+          type: string
+        createTime:
+          type: string
+        createdDeviceNumber:
+          type: integer
+          format: int32
     SimpleStatus:
       type: object
       required:
