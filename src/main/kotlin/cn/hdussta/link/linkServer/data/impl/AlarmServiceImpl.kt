@@ -22,10 +22,19 @@ class AlarmServiceImpl:AbstractDataHandleService(){
     get() = "service.data.alarm"
   override val name: String
     get() = "Alarm"
+  private val mailConfig by lazy {
+    val json = config().getJsonObject("email")
+    MailConfig()
+      .setHostname(json.getString("host"))
+      .setPort(json.getInteger("port"))
+      .setUsername(json.getString("username"))
+      .setPassword(json.getString("password"))
+      .setSsl(json.getBoolean("ssl"))
+  }
   private val mailClient by lazy { MailClient.createShared(vertx
-    , MailConfig().setHostname(HOST).setUsername(username).setPassword(password)) }
+    , mailConfig) }
   override suspend fun handle(info: DeviceInfo, data: JsonObject,param:JsonObject) {
-    val level = param.getInteger("level")
+    val level = param.getInteger("level")?:0
     param.getString("email")?.let{ email->
       val message = MailMessage()
       message.from = "867653608@qq.com"
@@ -43,11 +52,5 @@ class AlarmServiceImpl:AbstractDataHandleService(){
     val result = sqlClient.updateWithParamsAwait("INSERT INTO $ALARM_LOG_TABLE (device_id,data,level) VALUES (?,?,?)"
       , jsonArray(info.id,data.toString(),level))
     if(result.updated!=1) throw Exception("未知原因，插入报警历史失败")
-  }
-
-  companion object {
-    private const val HOST = "smtp.qq.com"
-    private const val username = "867653608@qq.com"
-    private const val password = "bhqdlzovtapdbbhb"
   }
 }

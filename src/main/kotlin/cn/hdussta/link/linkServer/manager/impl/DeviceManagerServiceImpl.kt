@@ -51,7 +51,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
         future.fail(SENSOR_NOT_FOUND)
         return@launch
       }
-      sqlClient.updateWithParamsAwait("UPDATE sstalink_device SET state=? WHERE deviceid=?", JsonArray(listOf(DeviceStatus.ON.ordinal, id)))
+      sqlClient.updateWithParamsAwait("UPDATE sstalink_device SET state=?,last_login_time=now() WHERE deviceid=?", JsonArray(listOf(DeviceStatus.ON.ordinal, id)))
       val session = sessionStore.createSession(SESSION_TIME_OUT)
       val deviceInfo = DeviceInfo(result, sensorResult.results)
       session.put("device", deviceInfo)
@@ -109,6 +109,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
       if (it.failed() || it.result() == null) {
         future.fail(DEVICE_NOT_FOUND)
       } else {
+        it.result().setAccessed()
         future.complete(it.result().get("device"))
       }
     }
@@ -123,6 +124,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
         future.fail(DEVICE_NOT_FOUND)
         return@launch
       }
+      session.setAccessed()
       val desired = session.get<String>("desired")
       if(desired ==null || desired == state){
         session.remove<String>("desired")
@@ -192,8 +194,7 @@ class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: E
       }
       future.complete(session.get<String>("state"))
     }.invokeOnCompletion {
-      if(it!=null)
-        future.fail(it)
+      if(it!=null) future.fail(it)
     }
     return this
   }

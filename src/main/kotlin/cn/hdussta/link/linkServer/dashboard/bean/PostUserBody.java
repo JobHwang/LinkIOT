@@ -5,11 +5,11 @@ import io.vertx.core.json.JsonObject;
 
 @DataObject(generateConverter = true)
 public class PostUserBody {
-  private Integer uid;
   private String password;
-  private Integer level;
   private String avatar;
   private String nickname;
+  private String phone;
+  private String username;
 
   public PostUserBody(JsonObject json){
     PostUserBodyConverter.fromJson(json,this);
@@ -49,19 +49,20 @@ public class PostUserBody {
     this.nickname = nickname;
   }
 
-  public Integer getLevel() {
-    return level;
+
+  public String getPhone() {
+    return phone;
   }
 
-  public void setLevel(Integer level) {
-    this.level = level;
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
-  public Integer getUid() {
-    return uid;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUid(Integer uid) {
-    this.uid = uid;
+  public void setUsername(String username) {
+    this.username = username;
   }
 }

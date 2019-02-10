@@ -5,6 +5,7 @@ import cn.hdussta.link.linkServer.data.impl.AlarmServiceImpl
 import cn.hdussta.link.linkServer.data.impl.RedirectServiceImpl
 import cn.hdussta.link.linkServer.data.impl.MySqlStorageServiceImpl
 import cn.hdussta.link.linkServer.data.impl.ScriptServiceImpl
+import io.vertx.core.DeploymentOptions
 import io.vertx.core.Future
 import io.vertx.core.eventbus.EventBus
 import io.vertx.core.eventbus.MessageConsumer
@@ -25,11 +26,9 @@ class ScriptVerticle:BaseMicroserviceVerticle() {
   private val bindings = engine.createBindings()
   private val eventBus:EventBus by lazy { this.vertx.eventBus() }
   private lateinit var consumer: MessageConsumer<JsonObject>
-  private val sqlConfig = JsonObject(mapOf(
-    "host" to "link.hdussta.cn",
-    "username" to "root",
-    "password" to "Admin88888",
-    "database" to "sstalink"))
+  private val sqlConfig by lazy {
+    config().getJsonObject("mysql")
+  }
   override fun start(startFuture: Future<Void>) {
     super.start()
     val sqlClient = MySQLClient.createShared(vertx, sqlConfig)
@@ -44,15 +43,15 @@ class ScriptVerticle:BaseMicroserviceVerticle() {
     eventBus.consumer<JsonObject>(AbstractDataHandleService.DATA_HANDLE_SERVICE_PUBLISH_ADDRESS){
       val funcName = "func${it.body().getString("name")}"
       val address = it.body().getString("address")
-      val consumer = Consumer<Map<String,Map<String,Any>>> {map->
-        eventBus.send(address,JsonObject(map))
+      val jsFunction = JsFunction { things, params ->
+        eventBus.send(address,JsonObject(things).put("param",params))
       }
-      bindings[funcName] = consumer
+      bindings[funcName] = jsFunction
       this.engine.setBindings(bindings,ScriptContext.GLOBAL_SCOPE)
     }
-    vertx.deployVerticle(MySqlStorageServiceImpl())
-    vertx.deployVerticle(RedirectServiceImpl(WebClient.create(vertx)))
-    vertx.deployVerticle(AlarmServiceImpl())
+    vertx.deployVerticle(MySqlStorageServiceImpl(),DeploymentOptions().setConfig(config()))
+    vertx.deployVerticle(RedirectServiceImpl(WebClient.create(vertx)), DeploymentOptions().setConfig(config()))
+    vertx.deployVerticle(AlarmServiceImpl(), DeploymentOptions().setConfig(config()))
     startFuture.complete()
   }
 

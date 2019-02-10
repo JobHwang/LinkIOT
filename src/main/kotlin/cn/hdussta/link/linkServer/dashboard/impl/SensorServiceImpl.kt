@@ -8,6 +8,7 @@ import cn.hdussta.link.linkServer.dashboard.*
 import cn.hdussta.link.linkServer.dashboard.bean.PostSensorBody
 import cn.hdussta.link.linkServer.dashboard.bean.PutSensorBody
 import cn.hdussta.link.linkServer.service.dashboard.SensorService
+import cn.hdussta.link.linkServer.utils.jsonArray
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.Vertx
@@ -24,9 +25,21 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClient):SensorService {
+  override fun countSensors(deviceId: String, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
+    val ownerId = context.getAdmin()
+    val sql = "SELECT COUNT(id) FROM $SENSOR_TABLE WHERE deviceid=?"
+    sqlClient.querySingleWithParams(sql, jsonArray(deviceId)){
+      when {
+        it.failed() -> resultHandler.handleError(-1,it.cause().localizedMessage)
+        it.result()==null -> resultHandler.handleError(-1,"未知错误")
+        else -> resultHandler.handleJson(JsonObject().put("count",it.result().getInteger(0)))
+      }
+    }
+  }
+
   override fun getSensors(deviceId: String, offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("admin")
+      val ownerId = context.getAdmin()
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -54,7 +67,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun putSensor(deviceId: String, body:PutSensorBody, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("admin")
+      val ownerId = context.getAdmin()
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -73,7 +86,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun postSensor(deviceId: String, body:PostSensorBody, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("admin")
+      val ownerId = context.getAdmin()
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -105,7 +118,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun deleteSensor(deviceId: String, sensorId: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("admin")
+      val ownerId = context.getAdmin()
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch
@@ -125,7 +138,7 @@ class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClien
 
   override fun getData(deviceId: String, sensorId: Int, offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     GlobalScope.launch(vertx.dispatcher()) {
-      val ownerId = context.extra.getInteger("admin")
+      val ownerId = context.getAdmin()
       if(sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE ownerid=? AND deviceid=?", JsonArray(listOf(ownerId,deviceId)))==null){
         resultHandler.handleError(-2, NOT_OWNER_OF_DEVICE)
         return@launch

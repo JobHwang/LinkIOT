@@ -1,5 +1,17 @@
 = Cheatsheets
 
+[[PostAlarmLogBody]]
+== PostAlarmLogBody
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[handle]]`@handle`|`String`|-
+|[[logId]]`@logId`|`Number (Integer)`|-
+|===
+
 [[PostDeviceBody]]
 == PostDeviceBody
 
@@ -38,10 +50,10 @@
 |===
 ^|Name | Type ^| Description
 |[[avatar]]`@avatar`|`String`|-
-|[[level]]`@level`|`Number (Integer)`|-
 |[[nickname]]`@nickname`|`String`|-
 |[[password]]`@password`|`String`|-
-|[[uid]]`@uid`|`Number (Integer)`|-
+|[[phone]]`@phone`|`String`|-
+|[[username]]`@username`|`String`|-
 |===
 
 [[PutDeviceBody]]

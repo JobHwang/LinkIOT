@@ -40,6 +40,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimpleStatus"
+  /admin/user/count:
+    get:
+      operationId: countUser
+      summary: 统计用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
   /admin/user:
     get:
       operationId: listUser
@@ -141,6 +161,8 @@ paths:
                   type: string
                 avator:
                   type: string
+                phone:
+                  type: string
       responses:
         200:
           description: 修改用户
@@ -166,6 +188,38 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimpleStatus"
+  /db/device/{deviceId}:
+    get:
+      operationId: getDeviceDetail
+      summary: 获取设备详细信息
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备详细信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceDetail"
+  /db/devices/count:
+    get:
+      operationId: countDevices
+      summary: 统计设备
+      security:
+        - user: []
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
   /db/devices:
     get:
       operationId: listDevices
@@ -342,6 +396,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimpleStatus"
+  /db/sensors/count/{deviceId}:
+    get:
+      operationId: countSensors
+      summary: 统计传感器
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
   /db/sensors/{deviceId}:
     get:
       operationId: getSensors
@@ -490,9 +563,34 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimpleStatus"
+  /db/sensor/data/count/{deviceId}/{sensorId}:
+    get:
+      operationId: countData
+      summary: 统计传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
   /db/sensor/data/{deviceId}/{sensorId}:
     get:
-      operationId: getData
+      operationId: listData
       summary: 获取传感器数据
       security:
         - user: []
@@ -507,7 +605,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
+            format: int32
           description: 传感器ID
         - name: offset
           in: query
@@ -532,6 +631,180 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Data"
+  /log/user/count:
+    get:
+      operationId: countUserLogs
+      summary: 统计用户日志
+      security:
+        - user: []
+      parameters:
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/user:
+    get:
+      operationId: getUserLogs
+      summary: 获取用户日志
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: 日志类型
+      responses:
+        200:
+          description: 用户日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserLog"
+  /log/alarm/count:
+    get:
+      operationId: countAlarmLogs
+      summary: 统计报警历史
+      security:
+        - user: []
+      parameters:
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/alarm:
+    get:
+      operationId: getAlarmLogs
+      summary: 获取报警历史
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 报警日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlarmLog"
+    post:
+      operationId: postAlarmLog
+      summary: 提交解决结果
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - logId
+                - handle
+              properties:
+                logId:
+                  type: integer
+                  format: int32
+                handle:
+                  type: string
+      responses:
+        200:
+          description: 是否成功修改报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteAlarmLog
+      summary: 删除报警日志
+      security:
+        - admin: []
+      parameters:
+        - name: logId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 是否成功删除报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
 components:
   schemas:
     User:
@@ -548,6 +821,13 @@ components:
         createdDeviceNumber:
           type: integer
           format: int32
+        password:
+          type: string
+        level:
+          type: integer
+          format: int32
+        phone:
+          type: string
     SimpleStatus:
       type: object
       required:
@@ -581,6 +861,16 @@ components:
           type: integer
           format: int32
         lastLoginTime:
+          type: string
+    DeviceDetail:
+      type: object
+      required:
+        - detail
+        - script
+      properties:
+        detail:
+          type: string
+        script:
           type: string
     DeviceState:
       type: object
@@ -636,4 +926,55 @@ components:
           type: string
         updateTime:
           type: string
+    UserLog:
+      type: object
+      required:
+        - id
+        - username
+        - action
+        - createTime
+        - type
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          format: int32
+        action:
+          type: string
+        createTime:
+          type: string
+        type:
+          type: integer
+    AlarmLog:
+      type: object
+      required:
+        - id
+        - deviceId
+        - data
+        - createTime
+        - level
+        - handle
+      properties:
+        id:
+          type: integer
+          format: int32
+        deviceId:
+          type: string
+        data:
+          type: string
+        createTime:
+          type: string
+        level:
+          type: integer
+          format: int32
+        handle:
+          type: string
+    Count:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
 

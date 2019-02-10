@@ -48,7 +48,6 @@ class HTTPVerticle : AbstractTransportVerticle() {
         logger.info("Listen at 28080")
       }
     }){}
-
   }
 
   private fun handleAuthLogin(context: RoutingContext) {

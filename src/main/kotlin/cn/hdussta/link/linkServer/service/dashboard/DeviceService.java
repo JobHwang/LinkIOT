@@ -14,6 +14,10 @@ import io.vertx.ext.web.api.generator.WebApiServiceGen;
 public interface DeviceService {
   void listDevices(int offset, int limit, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 
+  void countDevices(OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
+
+  void getDeviceDetail(String deviceId,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
+
   void putDevice(PutDeviceBody body, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 
   void postDevice(PostDeviceBody body, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);

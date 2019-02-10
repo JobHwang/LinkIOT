@@ -250,6 +250,32 @@ public class UserServiceVertxProxyHandler extends ProxyHandler {
           }
           break;
         }
+        case "countUser": {
+          JsonObject contextSerialized = json.getJsonObject("context");
+          if (contextSerialized == null)
+            throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
+          OperationRequest context = new OperationRequest(contextSerialized);
+          JsonObject params = context.getParams();
+          try {
+            service.countUser(ApiHandlerUtils.searchOptionalLongInJson(params, "adminId").map(Long::intValue).orElse(null),
+                            context,
+                            res -> {
+                            if (res.failed()) {
+                              if (res.cause() instanceof ServiceException) {
+                                msg.reply(res.cause());
+                              } else {
+                                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+                              }
+                            } else {
+                              msg.reply(res.result() == null ? null : res.result().toJson());
+                            }
+                          }
+            );
+          } catch (Exception e) {
+            msg.reply(new ServiceException(-1, e.getMessage()));
+          }
+          break;
+        }
         default: throw new IllegalStateException("Invalid action: " + action);
       }
     } catch (Throwable t) {

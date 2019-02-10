@@ -17,4 +17,5 @@ public interface UserService {
   void postUser(PostUserBody body,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
   void delUser(String username,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
   void listUser(@Nullable Integer adminId, Integer offset, Integer limit, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
+  void countUser(@Nullable Integer adminId,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 }

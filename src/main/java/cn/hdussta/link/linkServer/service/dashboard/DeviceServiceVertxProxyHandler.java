@@ -147,6 +147,57 @@ public class DeviceServiceVertxProxyHandler extends ProxyHandler {
           }
           break;
         }
+        case "countDevices": {
+          JsonObject contextSerialized = json.getJsonObject("context");
+          if (contextSerialized == null)
+            throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
+          OperationRequest context = new OperationRequest(contextSerialized);
+          JsonObject params = context.getParams();
+          try {
+            service.countDevices(context,
+                            res -> {
+                            if (res.failed()) {
+                              if (res.cause() instanceof ServiceException) {
+                                msg.reply(res.cause());
+                              } else {
+                                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+                              }
+                            } else {
+                              msg.reply(res.result() == null ? null : res.result().toJson());
+                            }
+                          }
+            );
+          } catch (Exception e) {
+            msg.reply(new ServiceException(-1, e.getMessage()));
+          }
+          break;
+        }
+        case "getDeviceDetail": {
+          JsonObject contextSerialized = json.getJsonObject("context");
+          if (contextSerialized == null)
+            throw new IllegalStateException("Received action " + action + " without OperationRequest \"context\"");
+          OperationRequest context = new OperationRequest(contextSerialized);
+          JsonObject params = context.getParams();
+          try {
+            service.getDeviceDetail((java.lang.String)ApiHandlerUtils.searchInJson(params, "deviceId"),
+                            context,
+                            res -> {
+                            if (res.failed()) {
+                              if (res.cause() instanceof ServiceException) {
+                                msg.reply(res.cause());
+                              } else {
+                                msg.reply(new ServiceException(-1, res.cause().getMessage()));
+                              }
+                            } else {
+                              msg.reply(res.result() == null ? null : res.result().toJson());
+                            }
+                          }
+            );
+          } catch (Exception e) {
+            msg.reply(new ServiceException(-1, e.getMessage()));
+          }
+          break;
+        }
         case "putDevice": {
           JsonObject contextSerialized = json.getJsonObject("context");
           if (contextSerialized == null)

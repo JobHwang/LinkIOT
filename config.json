@@ -1,0 +1,15 @@
+{
+  "mysql":{
+    "host": "link.hdussta.cn",
+    "username": "root",
+    "password": "Admin88888",
+    "database": "sstalink"
+  },
+  "email":{
+    "host": "smtp.qq.com",
+    "port": 465,
+    "ssl": true,
+    "username": "867653608@qq.com",
+    "password": "bhqdlzovtapdbbhb"
+  }
+}

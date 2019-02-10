@@ -31,7 +31,9 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
   private lateinit var binder: ServiceBinder
   private lateinit var consumer: MessageConsumer<JsonObject>
   private lateinit var managerService: DeviceManagerService
-
+  private val sqlClient by lazy {
+    MySQLClient.createShared(vertx,config().getJsonObject("mysql"))
+  }
   override fun start(startFuture: Future<Void>) {
     super.start()
     GlobalScope.launch {
@@ -46,7 +48,7 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
    */
   private suspend fun publishManagerService(){
     val eventBus = vertx.eventBus()
-    val sqlClient = MySQLClient.createShared(vertx,configMySQLClient())
+
     val sessionStore = SessionStore.create(vertx)
     val asyncMap = awaitResult<AsyncMap<String,String>> {
       vertx.sharedData().getAsyncMap(MANAGER_MAP_NAME,it)
@@ -76,14 +78,6 @@ class ManagerVerticle:BaseMicroserviceVerticle() {
 
   private fun refreshAllDevices(sqlClient: AsyncSQLClient){
     sqlClient.update("UPDATE $DEVICE_TABLE SET state=0 WHERE state=1"){}
-  }
-
-  private fun configMySQLClient(): JsonObject {
-    return JsonObject(mapOf(
-      "host" to "link.hdussta.cn",
-      "username" to "root",
-      "password" to "Admin88888",
-      "database" to "sstalink"))
   }
 
 

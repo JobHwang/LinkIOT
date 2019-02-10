@@ -1,13 +1,9 @@
 package cn.hdussta.link.linkServer.dashboard
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
-import cn.hdussta.link.linkServer.dashboard.impl.DeviceServiceImpl
-import cn.hdussta.link.linkServer.dashboard.impl.SensorServiceImpl
-import cn.hdussta.link.linkServer.dashboard.impl.UserServiceImpl
+import cn.hdussta.link.linkServer.dashboard.impl.*
 import cn.hdussta.link.linkServer.service.DeviceManagerService
-import cn.hdussta.link.linkServer.service.dashboard.DeviceService
-import cn.hdussta.link.linkServer.service.dashboard.SensorService
-import cn.hdussta.link.linkServer.service.dashboard.UserService
+import cn.hdussta.link.linkServer.service.dashboard.*
 import cn.hdussta.link.linkServer.utils.jsonArray
 import cn.hdussta.link.linkServer.utils.message
 import cn.hdussta.link.linkServer.utils.messageState
@@ -28,11 +24,9 @@ import io.vertx.serviceproxy.ServiceBinder
 
 class DashBoardVerticle: BaseMicroserviceVerticle() {
   private val logger: Logger = LoggerFactory.getLogger(DashBoardVerticle::class.java)
-  private val sqlConfig = JsonObject(mapOf(
-    "host" to "link.hdussta.cn",
-    "username" to "root",
-    "password" to "Admin88888",
-    "database" to "sstalink"))
+  private val sqlConfig by lazy {
+    config().getJsonObject("mysql")
+  }
   private val sqlClient by lazy { MySQLClient.createShared(vertx,sqlConfig) }
   private lateinit var managerService: DeviceManagerService
   override fun start() {
@@ -70,11 +64,27 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
         .setAddress("dashboard-user-service")
         .register(UserService::class.java,userServiceImpl)
 
+      val alarmLogServiceImpl = AlarmLogServiceImpl(vertx,sqlClient)
+      ServiceBinder(vertx)
+        .setAddress("dashboard-alarm-log-service")
+        .register(AlarmLogService::class.java,alarmLogServiceImpl)
+
+      val userLogServiceImpl = UserLogServiceImpl(vertx,sqlClient)
+      ServiceBinder(vertx)
+        .setAddress("dashboard-user-log-service")
+        .register(UserLogService::class.java,userLogServiceImpl)
+
+      val dataServiceImpl = DataServiceImpl(vertx,sqlClient)
+      ServiceBinder(vertx)
+        .setAddress("dashboard-data-service")
+        .register(DataService::class.java,dataServiceImpl)
+
       it.result().setExtraOperationContextPayloadMapper {
         JsonObject()
           .put("id",it.session().get<Int>("id"))
           .put("level",it.session().get<Int>("level"))
           .put("admin",it.session().get<Int>("admin"))
+          .put("username",it.session().get<String>("username"))
       }
       it.result().addGlobalHandler(CookieHandler.create())
       it.result().addGlobalHandler(SessionHandler.create(LocalSessionStore.create(vertx)))
@@ -86,6 +96,9 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
       it.result().mountServiceInterface(DeviceService::class.java,"dashboard-device-service")
       it.result().mountServiceInterface(SensorService::class.java,"dashboard-sensor-service")
       it.result().mountServiceInterface(UserService::class.java,"dashboard-user-service")
+      it.result().mountServiceInterface(AlarmLogService::class.java,"dashboard-alarm-log-service")
+      it.result().mountServiceInterface(UserLogService::class.java,"dashboard-user-log-service")
+      it.result().mountServiceInterface(DataService::class.java,"dashboard-data-service")
       val router = Router.router(vertx).mountSubRouter("/v1",it.result().router)
       vertx.createHttpServer().requestHandler(router).listen(28081){
         logger.info("Listen at 28081")
@@ -96,7 +109,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
   private fun login(context: RoutingContext){
     val user = context.request().getParam("user")
     val pass = context.request().getParam("pass")
-    val sql = "SELECT id,level,admin_id FROM $USER_TABLE WHERE email=? AND password=?"
+    val sql = "SELECT id,level,admin_id,email FROM $USER_TABLE WHERE email=? AND password=?"
     sqlClient.querySingleWithParams(sql, JsonArray().add(user).add(pass)){
       if(it.failed() || it.result()==null){
         context.response().end(JsonObject().put("status",-1).put("message", if(it.failed()) it.cause() else LOGIN_FAILURE).toBuffer())
@@ -104,11 +117,13 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
         val id = it.result().getInteger(0)
         val level = it.result().getInteger(1)
         val admin = it.result().getInteger(2)
+        val username = it.result().getString(3)
         context.session()
           .put("id",id)
           .put("level",level)
           //管理员没有没有admin_id，将自身用户ID设为管理员ID
           .put("admin",if(level<2) id else admin)
+          .put("username",username)
         context.response().end(JsonObject().put("status",1).put("message", LOGIN_SUCCESS).toBuffer())
         sqlClient.userLog(id,UserAction.AUTH,"登录")
       }
@@ -139,7 +154,7 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
   }
 
   private fun normalUser(context: RoutingContext){
-    if(context.session()!=null && context.session().get<Int>("level")!=null && context.session().get<Int>("level")<=UserLevel.ADMIN.ordinal){
+    if(context.session()!=null && context.session().get<Int>("level")!=null && context.session().get<Int>("level")<=UserLevel.USER.ordinal){
       context.next()
     }else{
       context.response().end(JsonObject().put("status",-1).put("message", AUTH_FAILURE).toBuffer())

@@ -26,6 +26,7 @@ inline fun Handler<AsyncResult<OperationResponse>>.handleError(status:Int, messa
 inline fun OperationRequest.getUid() = this.extra.getInteger("id")!!
 inline fun OperationRequest.getAdmin() = this.extra.getInteger("admin")!!
 inline fun OperationRequest.getULevel() = this.extra.getInteger("level")!!
+inline fun OperationRequest.getUsername() = this.extra.getString("username")!!
 
 inline fun SQLClient.userLog(uid:Int,type:UserAction,action:String)
   = this.updateWithParams("INSERT INTO $USER_LOG_TABLE (user_id,type,action) VALUES (?,?,?)", jsonArray(uid,type.ordinal,action)){}

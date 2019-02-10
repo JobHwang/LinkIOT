@@ -20,14 +20,29 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient) : UserService {
+  override fun countUser(adminId: Int?, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
+    val uLevel = context.getULevel()
+    if(uLevel==UserLevel.USER.ordinal) return resultHandler.handleError(-1, NO_AUTH)
+    val uid = context.getUid()
+    GlobalScope.launch(vertx.dispatcher()) {
+      val sql = "SELECT COUNT(id) FROM $USER_TABLE WHERE " +
+        (if(uLevel==UserLevel.SUPER.ordinal) if(adminId!=null) "admin_id=$adminId" else "1=1" else "admin_id=$uid")
+      val result = sqlClient.querySingleAwait(sql)?.let { JsonObject().put("count",it.getInteger(0)) }
+        ?:throw Exception("未知错误")
+      resultHandler.handleJson(result)
+    }.invokeOnCompletion {
+      if(it!=null) resultHandler.handleError(-1,it.localizedMessage)
+    }
+  }
+
   override fun listUser(adminId:Int?,offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     val uLevel = context.getULevel()
     if(uLevel==UserLevel.USER.ordinal) return resultHandler.handleError(-1, NO_AUTH)
     val uid = context.getUid()
     GlobalScope.launch(vertx.dispatcher()) {
-      val sql = "SELECT email,password,nickname,avatar,createtime FROM $USER_TABLE WHERE " +
+      val sql = "SELECT email,password,nickname,avatar,createtime,level,phone FROM $USER_TABLE WHERE " +
         (if(uLevel==UserLevel.SUPER.ordinal) if(adminId!=null) "admin_id=$adminId" else "1=1" else "admin_id=$uid") +
-        " LIMIT $offset,$limit"
+        " ORDER BY id DESC LIMIT $offset,$limit"
       val result = sqlClient.queryAwait(sql)
       resultHandler.handleJson(JsonArray(result.results.map { user->
         JsonObject()
@@ -36,6 +51,8 @@ class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient
           .put("nickname", user.getString(2))
           .put("avatar", user.getString(3))
           .put("createTime", user.getString(4))
+          .put("level",user.getInteger(5))
+          .put("phone",user.getString(6))
       }))
     }.invokeOnCompletion {
       if(it!=null) resultHandler.handleError(-1,it.localizedMessage)
@@ -44,8 +61,10 @@ class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient
 
   override fun delUser(username: String, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     val uLevel = context.getULevel()
+    val uid = context.getUid()
     GlobalScope.launch(vertx.dispatcher()) {
-      val result = sqlClient.updateWithParamsAwait("DELETE FROM $USER_TABLE WHERE email=? AND level<?"
+      val result = sqlClient.updateWithParamsAwait("DELETE FROM $USER_TABLE WHERE email=? AND level>?" +
+        (if(uLevel==UserLevel.ADMIN.ordinal) " AND admin_id=$uid" else "")
         , JsonArray().add(username).add(uLevel))
       if (result.updated > 0) {
         resultHandler.handleMessage(1, DEL_USER_SUCCESS)
@@ -62,7 +81,7 @@ class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient
     val uid = context.getUid()
     val admin = context.getAdmin()
     GlobalScope.launch(vertx.dispatcher()) {
-      val user = sqlClient.querySingleAwait("SELECT email,nickname,avatar,createtime FROM $USER_TABLE WHERE id=$uid")
+      val user = sqlClient.querySingleAwait("SELECT email,nickname,avatar,createtime,level,phone FROM $USER_TABLE WHERE id=$uid")
         ?: throw Exception(GET_USER_FAILURE)
       val deviceNumber = sqlClient.querySingleAwait("SELECT COUNT(id) FROM $DEVICE_TABLE WHERE ownerid=$admin")?.getInteger(0)
         ?: throw Exception(GET_USER_FAILURE)
@@ -71,6 +90,8 @@ class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient
         .put("nickname", user.getString(1))
         .put("avatar", user.getString(2))
         .put("createTime", user.getString(3))
+        .put("level",user.getInteger(4))
+        .put("phone",user.getString(5))
         .put("createdDeviceNumber", deviceNumber))
     }.invokeOnCompletion {
       if (it != null) resultHandler.handleError(-1, it.localizedMessage)
@@ -84,27 +105,31 @@ class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient
     val uLevel = context.getULevel()
     GlobalScope.launch(vertx.dispatcher()) {
       //请求中包含用户ID或是该用户为普通用户时只能修改自身
-      val sql = if (body.uid == null || uLevel==UserLevel.USER.ordinal) {
+      val sql = if (body.username == null || uLevel==UserLevel.USER.ordinal) {
         //所有等级用户修改自己时都采用这个逻辑
-        "UPDATE $USER_TABLE SET" +
+        "UPDATE $USER_TABLE SET " +
           ((body.password?.let { "password=?," } ?: "") +
             (body.nickname?.let { "nickname=?," } ?: "") +
+            (body.phone?.let { "phone=?," } ?: "") +
             (body.avatar?.let { "avatar=?," } ?: "")).removeSuffix(",") +
           " WHERE id=$uid"
       } else {
         //管理员和超级管理员修改其他用户的逻辑
-        "UPDATE $USER_TABLE SET" +
+        "UPDATE $USER_TABLE SET " +
           ((body.password?.let { "password=?," } ?: "") +
             (body.nickname?.let { "nickname=?," } ?: "") +
+            (body.phone?.let { "phone=?," } ?: "") +
             (body.avatar?.let { "avatar=?," } ?: "")).removeSuffix(",") +
-          " WHERE id=${body.uid} AND level>=$uLevel " +
+          " WHERE email=? AND level>$uLevel " +
           //如果是普通管理员，则只能修改属于自己的用户，超级管理员没有限制
-          (if(uLevel==UserLevel.ADMIN.ordinal) "AND admin=$uid" else "")
+          (if(uLevel==UserLevel.ADMIN.ordinal) "AND admin_id=$uid" else "")
       }
       val result = sqlClient.updateWithParamsAwait(sql, JsonArray().apply {
         body.password?.let(::add)
         body.nickname?.let(::add)
+        body.phone?.let(::add)
         body.avatar?.let(::add)
+        body.username?.let(::add)
       })
       if (result.updated != 1)
         throw Exception(POST_USER_FAILURE)
@@ -115,7 +140,7 @@ class UserServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient
       if (it != null) resultHandler.handleError(-1, it.localizedMessage)
       else {
         sqlClient.userLog(context.getUid(), UserAction.USER,
-          "修改用户" + (if (body.uid == null) uid else body.uid))
+          "修改用户" + (body.username?:""))
       }
     }
   }

@@ -13,6 +13,8 @@ public interface SensorService {
 
   void getSensors(String deviceId, Integer offset, Integer limit, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 
+  void countSensors(String deviceId,OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
+
   void putSensor(String deviceId, PutSensorBody body, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 
   void postSensor(String deviceId, PostSensorBody body, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);

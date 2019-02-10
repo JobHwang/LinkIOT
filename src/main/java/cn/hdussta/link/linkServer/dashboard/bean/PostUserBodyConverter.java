@@ -19,11 +19,6 @@ public class PostUserBodyConverter {
             obj.setAvatar((String)member.getValue());
           }
           break;
-        case "level":
-          if (member.getValue() instanceof Number) {
-            obj.setLevel(((Number)member.getValue()).intValue());
-          }
-          break;
         case "nickname":
           if (member.getValue() instanceof String) {
             obj.setNickname((String)member.getValue());
@@ -34,9 +29,14 @@ public class PostUserBodyConverter {
             obj.setPassword((String)member.getValue());
           }
           break;
-        case "uid":
-          if (member.getValue() instanceof Number) {
-            obj.setUid(((Number)member.getValue()).intValue());
+        case "phone":
+          if (member.getValue() instanceof String) {
+            obj.setPhone((String)member.getValue());
+          }
+          break;
+        case "username":
+          if (member.getValue() instanceof String) {
+            obj.setUsername((String)member.getValue());
           }
           break;
       }
@@ -51,17 +51,17 @@ public class PostUserBodyConverter {
     if (obj.getAvatar() != null) {
       json.put("avatar", obj.getAvatar());
     }
-    if (obj.getLevel() != null) {
-      json.put("level", obj.getLevel());
-    }
     if (obj.getNickname() != null) {
       json.put("nickname", obj.getNickname());
     }
     if (obj.getPassword() != null) {
       json.put("password", obj.getPassword());
     }
-    if (obj.getUid() != null) {
-      json.put("uid", obj.getUid());
+    if (obj.getPhone() != null) {
+      json.put("phone", obj.getPhone());
+    }
+    if (obj.getUsername() != null) {
+      json.put("username", obj.getUsername());
     }
   }
 }

@@ -8,7 +8,6 @@ import io.vertx.core.Future
 import io.vertx.core.Handler
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
-import io.vertx.core.shareddata.LocalMap
 import io.vertx.ext.sql.SQLClient
 import io.vertx.kotlin.coroutines.dispatcher
 import io.vertx.kotlin.ext.sql.querySingleAwait

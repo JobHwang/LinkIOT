@@ -18,11 +18,9 @@ abstract class AbstractDataHandleService:AbstractVerticle() {
   abstract val name:String
   abstract suspend fun handle(info:DeviceInfo,data:JsonObject,param:JsonObject)
   private val logger = LoggerFactory.getLogger(this::class.java)
-  private val sqlConfig = JsonObject(mapOf(
-    "host" to "link.hdussta.cn",
-    "username" to "root",
-    "password" to "Admin88888",
-    "database" to "sstalink"))
+  private val sqlConfig  by lazy {
+    config().getJsonObject("mysql")
+  }
   protected val sqlClient by lazy { MySQLClient.createShared(vertx, sqlConfig) }
 
   override fun start() {
