@@ -213,6 +213,17 @@ paths:
       summary: 统计设备
       security:
         - user: []
+      parameters:
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: 统计结果
@@ -241,6 +252,16 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: 设备列表

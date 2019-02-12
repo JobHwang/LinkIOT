@@ -1,10 +1,7 @@
 package cn.hdussta.link.linkServer.data
 
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
-import cn.hdussta.link.linkServer.data.impl.AlarmServiceImpl
-import cn.hdussta.link.linkServer.data.impl.RedirectServiceImpl
-import cn.hdussta.link.linkServer.data.impl.MySqlStorageServiceImpl
-import cn.hdussta.link.linkServer.data.impl.ScriptServiceImpl
+import cn.hdussta.link.linkServer.data.impl.*
 import io.vertx.core.DeploymentOptions
 import io.vertx.core.Future
 import io.vertx.core.eventbus.EventBus
@@ -51,7 +48,8 @@ class ScriptVerticle:BaseMicroserviceVerticle() {
     }
     vertx.deployVerticle(MySqlStorageServiceImpl(),DeploymentOptions().setConfig(config()))
     vertx.deployVerticle(RedirectServiceImpl(WebClient.create(vertx)), DeploymentOptions().setConfig(config()))
-    vertx.deployVerticle(AlarmServiceImpl(), DeploymentOptions().setConfig(config()))
+    vertx.deployVerticle(AlarmServiceImpl(discovery), DeploymentOptions().setConfig(config()))
+    vertx.deployVerticle(MessageServiceImpl(discovery), DeploymentOptions().setConfig(config()))
     startFuture.complete()
   }
 

@@ -3,11 +3,9 @@ package cn.hdussta.link.linkServer.dashboard
 import cn.hdussta.link.linkServer.common.BaseMicroserviceVerticle
 import cn.hdussta.link.linkServer.dashboard.impl.*
 import cn.hdussta.link.linkServer.service.DeviceManagerService
+import cn.hdussta.link.linkServer.service.MessageService
 import cn.hdussta.link.linkServer.service.dashboard.*
-import cn.hdussta.link.linkServer.utils.jsonArray
-import cn.hdussta.link.linkServer.utils.message
-import cn.hdussta.link.linkServer.utils.messageState
-import io.vertx.core.http.HttpMethod
+import io.vertx.core.Future
 import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
 import io.vertx.core.logging.Logger
@@ -16,28 +14,35 @@ import io.vertx.ext.asyncsql.MySQLClient
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory
-import io.vertx.ext.web.handler.*
+import io.vertx.ext.web.handler.CookieHandler
+import io.vertx.ext.web.handler.SessionHandler
+import io.vertx.ext.web.handler.sockjs.SockJSHandler
+import io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
+import io.vertx.ext.web.handler.sockjs.SockJSSocket
 import io.vertx.ext.web.sstore.LocalSessionStore
-import io.vertx.kotlin.ext.consul.Service
 import io.vertx.servicediscovery.types.EventBusService
 import io.vertx.serviceproxy.ServiceBinder
+import io.vertx.serviceproxy.ServiceProxyBuilder
+
 
 class DashBoardVerticle: BaseMicroserviceVerticle() {
   private val logger: Logger = LoggerFactory.getLogger(DashBoardVerticle::class.java)
+  private val sockMap = HashMap<String,SockJSSocket>()
   private val sqlConfig by lazy {
     config().getJsonObject("mysql")
   }
   private val sqlClient by lazy { MySQLClient.createShared(vertx,sqlConfig) }
   private lateinit var managerService: DeviceManagerService
-  override fun start() {
+  override fun start(startFuture:Future<Void>) {
     super.start()
     EventBusService.getProxy(discovery, DeviceManagerService::class.java) {
       if (it.failed()) {
         logger.error(it.cause().localizedMessage)
-        this.stop()
+        startFuture.fail(it.cause().localizedMessage)
       } else {
         this.managerService = it.result()
         init()
+        startFuture.complete()
       }
     }
   }
@@ -99,11 +104,42 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
       it.result().mountServiceInterface(AlarmLogService::class.java,"dashboard-alarm-log-service")
       it.result().mountServiceInterface(UserLogService::class.java,"dashboard-user-log-service")
       it.result().mountServiceInterface(DataService::class.java,"dashboard-data-service")
-      val router = Router.router(vertx).mountSubRouter("/v1",it.result().router)
+      val subRouter = it.result().router
+      initMessageService(subRouter)
+      val router = Router.router(vertx).mountSubRouter("/v1",subRouter)
       vertx.createHttpServer().requestHandler(router).listen(28081){
         logger.info("Listen at 28081")
       }
     }
+  }
+
+  private fun initMessageService(router: Router){
+    val options = SockJSHandlerOptions().setHeartbeatInterval(2000)
+
+    val sockJSHandler = SockJSHandler.create(vertx, options)
+
+    sockJSHandler.socketHandler { socket ->
+      if(socket.webSession().get<Int>("id")==null){
+        socket.close(-1,"没有权限")
+      }else{
+        socket.write("OK")
+        this.sockMap[socket.webSession()["username"]] = socket
+        socket.endHandler {
+          this.sockMap.remove(socket.webSession()["username"])
+        }.exceptionHandler {
+          this.sockMap.remove(socket.webSession()["username"])
+        }
+      }
+    }
+    router.route("/sock/*").handler(sockJSHandler)
+
+    val messageService = MessageServiceImpl(sockMap)
+    val binder = ServiceBinder(vertx).setAddress(MessageService.SERVICE_ADDRESS)
+    binder.register(MessageService::class.java, messageService)
+
+    val proxyBuilder = ServiceProxyBuilder(vertx).setAddress(MessageService.SERVICE_ADDRESS)
+    proxyBuilder.build(MessageService::class.java)
+    publishEventBusService(MessageService.SERVICE_NAME, MessageService.SERVICE_ADDRESS, MessageService::class.java)
   }
 
   private fun login(context: RoutingContext){
@@ -131,6 +167,9 @@ class DashBoardVerticle: BaseMicroserviceVerticle() {
   }
   private fun logout(context: RoutingContext){
     if(context.session().remove<Int>("id")!=null){
+      context.session().remove<Int>("level")
+      context.session().remove<Int>("admin")
+      context.session().remove<String>("username")
       context.response().end(JsonObject().put("status",1).put("message", LOGOUT_SUCCESS).toBuffer())
     }else{
       context.response().end(JsonObject().put("status",-1).put("message", LOGOUT_FAILURE).toBuffer())

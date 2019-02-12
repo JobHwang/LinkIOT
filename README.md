@@ -46,7 +46,7 @@ HTTP
   状态为任意JSON
   ```
   **如果没有预期状态或预期状态与上传状态相同，则返回更新成功**  
-  **如果预期状态与上传状态不服，则更新失败并返回预期状态**
+  **如果预期状态与上传状态不符，则更新失败并返回预期状态**
 * 上传数据
   ```
   POST http://host:28080/api/data/{token}
@@ -88,15 +88,8 @@ MQTT
 
 设备管理
 ----
-* 状态控制
-  ```
-  POST http://host:28081/api/manage/state/{设备ID}
-  状态为任意JSON
-  ```
-* 状态查询
-  ```
-  GET http://host:28081/api/manage/state/{设备ID}
-  ```
+见LinkIOT-Dashboard
+> https://github.com/Wooyme/linkiot-dashboard
 
 Help
 ==

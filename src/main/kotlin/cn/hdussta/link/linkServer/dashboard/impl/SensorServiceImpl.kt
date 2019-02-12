@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 
 class SensorServiceImpl(private val vertx: Vertx,private val sqlClient: SQLClient):SensorService {
   override fun countSensors(deviceId: String, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
-    val ownerId = context.getAdmin()
     val sql = "SELECT COUNT(id) FROM $SENSOR_TABLE WHERE deviceid=?"
     sqlClient.querySingleWithParams(sql, jsonArray(deviceId)){
       when {

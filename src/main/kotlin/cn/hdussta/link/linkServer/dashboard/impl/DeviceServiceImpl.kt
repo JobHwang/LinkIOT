@@ -26,9 +26,15 @@ import kotlinx.coroutines.launch
 import org.apache.commons.lang3.RandomStringUtils
 
 class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClient, private val managerService: DeviceManagerService) : DeviceService {
-  override fun countDevices(context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
-    val sql = "SELECT COUNT(id) FROM $DEVICE_TABLE WHERE ownerid=${context.getAdmin()}"
-    sqlClient.querySingle(sql){
+  override fun countDevices(deviceId: String?,name: String?,context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
+    val sql = "SELECT COUNT(id) FROM $DEVICE_TABLE WHERE ownerid=?"+
+      (if(deviceId!=null) " AND deviceid LIKE ?" else "") +
+      (if(name!=null) " AND name LIKE ?" else "")
+    sqlClient.querySingleWithParams(sql,JsonArray().apply {
+      add(context.getAdmin())
+      deviceId?.let(::add)
+      name?.let(::add)
+    }){
       when {
         it.failed() -> resultHandler.handleError(-1,it.cause().localizedMessage)
         it.result()==null -> resultHandler.handleError(-1,"未知错误")
@@ -37,11 +43,18 @@ class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClie
     }
   }
 
-  override fun listDevices(offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
+  override fun listDevices(deviceId: String?,name: String?,offset: Int, limit: Int, context: OperationRequest, resultHandler: Handler<AsyncResult<OperationResponse>>) {
     val sql = "SELECT name,deviceid,secret,description,state,last_login_time FROM $DEVICE_TABLE " +
-      "WHERE ownerid=? ORDER BY id DESC LIMIT ?,?"
+      "WHERE ownerid=?" +
+      (if(deviceId!=null) " AND deviceid LIKE ?" else "") +
+      (if(name!=null) " AND name LIKE ?" else "") +
+      " ORDER BY id DESC LIMIT $offset,$limit"
     val admin = context.getAdmin()
-    sqlClient.queryWithParams(sql, JsonArray(listOf(admin, offset, limit))) {
+    sqlClient.queryWithParams(sql, JsonArray().apply {
+      add(admin)
+      deviceId?.let(::add)
+      name?.let(::add)
+    }){
       if (it.failed()) {
         resultHandler.handleError(-1, it.cause().localizedMessage)
       } else {

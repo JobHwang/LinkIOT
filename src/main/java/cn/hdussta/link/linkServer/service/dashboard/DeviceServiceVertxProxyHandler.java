@@ -127,7 +127,9 @@ public class DeviceServiceVertxProxyHandler extends ProxyHandler {
           OperationRequest context = new OperationRequest(contextSerialized);
           JsonObject params = context.getParams();
           try {
-            service.listDevices(ApiHandlerUtils.searchOptionalLongInJson(params, "offset").map(Long::intValue).orElse(null),
+            service.listDevices((java.lang.String)ApiHandlerUtils.searchInJson(params, "deviceId"),
+                            (java.lang.String)ApiHandlerUtils.searchInJson(params, "name"),
+                            ApiHandlerUtils.searchOptionalLongInJson(params, "offset").map(Long::intValue).orElse(null),
                             ApiHandlerUtils.searchOptionalLongInJson(params, "limit").map(Long::intValue).orElse(null),
                             context,
                             res -> {
@@ -154,7 +156,9 @@ public class DeviceServiceVertxProxyHandler extends ProxyHandler {
           OperationRequest context = new OperationRequest(contextSerialized);
           JsonObject params = context.getParams();
           try {
-            service.countDevices(context,
+            service.countDevices((java.lang.String)ApiHandlerUtils.searchInJson(params, "deviceId"),
+                            (java.lang.String)ApiHandlerUtils.searchInJson(params, "name"),
+                            context,
                             res -> {
                             if (res.failed()) {
                               if (res.cause() instanceof ServiceException) {

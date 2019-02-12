@@ -1,0 +1,4271 @@
+2019-02-11 12:00:07 [DEBUG] Using SLF4J as the default logging framework
+2019-02-11 12:00:07 [DEBUG] -D{}: {}
+2019-02-11 12:00:07 [DEBUG] -D{}: {}
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.eventLoopThreads: {}
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.noKeySetOptimization: {}
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.selectorAutoRebuildThreshold: {}
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.noUnsafe: {}
+2019-02-11 12:00:07 [DEBUG] Java version: {}
+2019-02-11 12:00:07 [DEBUG] sun.misc.Unsafe.theUnsafe: available
+2019-02-11 12:00:07 [DEBUG] sun.misc.Unsafe.copyMemory: available
+2019-02-11 12:00:07 [DEBUG] java.nio.Buffer.address: available
+2019-02-11 12:00:07 [DEBUG] direct buffer constructor: available
+2019-02-11 12:00:07 [DEBUG] java.nio.Bits.unaligned: available, {}
+2019-02-11 12:00:07 [DEBUG] jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+2019-02-11 12:00:07 [DEBUG] java.nio.DirectByteBuffer.<init>(long, int): {}
+2019-02-11 12:00:07 [DEBUG] sun.misc.Unsafe: {}
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.tmpdir: {} (java.io.tmpdir)
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.bitMode: {} (sun.arch.data.model)
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.maxDirectMemory: {} bytes
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.uninitializedArrayAllocationThreshold: {}
+2019-02-11 12:00:07 [DEBUG] java.nio.ByteBuffer.cleaner(): available
+2019-02-11 12:00:07 [DEBUG] -Dio.netty.noPreferDirect: {}
+2019-02-11 12:00:07 [DEBUG] org.jctools-core.MpscChunkedArrayQueue: available
+2019-02-11 12:00:07 [DEBUG] Default DNS servers: {} (sun.net.dns.ResolverConfiguration)
+2019-02-11 12:00:07 [DEBUG] -Djava.net.preferIPv4Stack: {}
+2019-02-11 12:00:07 [DEBUG] -Djava.net.preferIPv6Addresses: {}
+2019-02-11 12:00:07 [DEBUG] Loopback interface: {} ({}, {})
+2019-02-11 12:00:07 [DEBUG] {}: {}
+2019-02-11 12:00:08 [DEBUG] -Dio.netty.buffer.checkAccessible: true
+2019-02-11 12:00:08 [DEBUG] -Dio.netty.buffer.checkBounds: true
+2019-02-11 12:00:08 [DEBUG] Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@24516fbe
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.numHeapArenas: 8
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.numDirectArenas: 8
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.pageSize: 8192
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.maxOrder: 11
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.chunkSize: 16777216
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.tinyCacheSize: 512
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.smallCacheSize: 256
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.normalCacheSize: 64
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.cacheTrimInterval: 8192
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.allocator.useCacheForAllThreads: true
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+2019-02-11 12:00:10 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+2019-02-11 12:00:26 [DEBUG] -Dio.netty.processId: 6058 (auto-detected)
+2019-02-11 12:00:26 [DEBUG] -Dio.netty.machineId: 1c:39:47:ff:fe:c3:ba:81 (auto-detected)
+2019-02-11 12:00:26 [DEBUG] -Dio.netty.allocator.type: pooled
+2019-02-11 12:00:26 [DEBUG] -Dio.netty.threadLocalDirectBufferSize: 0
+2019-02-11 12:00:26 [DEBUG] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+2019-02-11 12:00:26 [DEBUG] Channel became active
+2019-02-11 12:00:26 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:00:26 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:00:26 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212660,[B@583d58a0,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:00:27 [DEBUG] -Dio.netty.recycler.maxCapacityPerThread: 4096
+2019-02-11 12:00:27 [DEBUG] -Dio.netty.recycler.maxSharedCapacityFactor: 2
+2019-02-11 12:00:27 [DEBUG] -Dio.netty.recycler.linkCapacity: 16
+2019-02-11 12:00:27 [DEBUG] -Dio.netty.recycler.ratio: 8
+2019-02-11 12:00:27 [DEBUG] Loaded raw data: openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: LinkIOT Dashboard
+servers:
+  - url: /v1
+paths:
+  /auth/login:
+    get:
+      operationId: getLogin
+      summary: 用户登录
+      parameters:
+        - name: user
+          in: query
+          description: 用户名
+          required: true
+          schema:
+            type: string
+        - name: pass
+          in: query
+          description: 密码
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 登录结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /auth/logout:
+    get:
+      operationId: getLogout
+      summary: 用户登出
+      responses:
+        200:
+          description: 登出结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /admin/user/count:
+    get:
+      operationId: countUser
+      summary: 统计用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /admin/user:
+    get:
+      operationId: listUser
+      summary: 管理员列表用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 列表结果
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /user:
+    get:
+      operationId: getUser
+      summary: 查询用户信息
+      security:
+        - user: []
+      responses:
+        200:
+          description: 查询结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      operationId: putUser
+      summary: 用户注册
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+                - nickname
+                - level
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                nickname:
+                  type: string
+                level:
+                  type: integer
+                  format: int32
+                adminId:
+                  type: integer
+                  format: int32
+      responses:
+        200:
+          description: 注册结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postUser
+      summary: 修改用户信息
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                nickname:
+                  type: string
+                password:
+                  type: string
+                avator:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: 修改用户
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: delUser
+      summary: 删除用户
+      security:
+        - admin: []
+      parameters:
+        - name: username
+          in: query
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/device/{deviceId}:
+    get:
+      operationId: getDeviceDetail
+      summary: 获取设备详细信息
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备详细信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceDetail"
+  /db/devices/count:
+    get:
+      operationId: countDevices
+      summary: 统计设备
+      security:
+        - user: []
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/devices:
+    get:
+      operationId: listDevices
+      summary: 获取用户创建的所有设备
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          description: 起始列表位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 本次列表数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 设备列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+    put:
+      operationId: putDevice
+      summary: 创建新的设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: 设备名称
+                description:
+                  type: string
+                  description: 设备描述
+                script:
+                  type: string
+                  description: 设备绑定脚本
+      responses:
+        200:
+          description: 是否成功创建设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postDevice
+      summary: 更新设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceId
+              properties:
+                deviceId:
+                  type: string
+                  description: 设备ID
+                name:
+                  type: string
+                  description: 新的设备名称
+                description:
+                  type: string
+                  description: 新的设备描述
+                script:
+                  type: string
+                  description: 新的设备脚本
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteDevice
+      summary: 删除设备
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: query
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/state/{deviceId}:
+    get:
+      operationId: getState
+      summary: 获取当前设备状态
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceState"
+    post:
+      operationId: postState
+      summary: 用户设置新的设备状态
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 用户设置的新状态
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/close/{deviceId}:
+    get:
+      operationId: forceClose
+      summary: 强制下线设备
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否成功下线设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensors/count/{deviceId}:
+    get:
+      operationId: countSensors
+      summary: 统计传感器
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensors/{deviceId}:
+    get:
+      operationId: getSensors
+      summary: 某一个设备的传感器列表
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: 设备ID
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: true
+          description: 列表起始位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 记录数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 传感器列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sensor"
+    put:
+      operationId: putSensor
+      summary: 创建传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - dataType
+                - showType
+              properties:
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postSensor
+      summary: 更新传感器信息
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sensorId
+              properties:
+                sensorId:
+                  type: integer
+                  format: int32
+                  description: 传感器ID
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否成功更新传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteSensor
+      summary: 删除传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+      responses:
+        200:
+          description: 是否成功删除传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensor/data/count/{deviceId}/{sensorId}:
+    get:
+      operationId: countData
+      summary: 统计传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensor/data/{deviceId}/{sensorId}:
+    get:
+      operationId: listData
+      summary: 获取传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+          description: 数据列表起始位置
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 数据列表记录数
+      responses:
+        200:
+          description: 数据列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Data"
+  /log/user/count:
+    get:
+      operationId: countUserLogs
+      summary: 统计用户日志
+      security:
+        - user: []
+      parameters:
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/user:
+    get:
+      operationId: getUserLogs
+      summary: 获取用户日志
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: 日志类型
+      responses:
+        200:
+          description: 用户日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserLog"
+  /log/alarm/count:
+    get:
+      operationId: countAlarmLogs
+      summary: 统计报警历史
+      security:
+        - user: []
+      parameters:
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/alarm:
+    get:
+      operationId: getAlarmLogs
+      summary: 获取报警历史
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 报警日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlarmLog"
+    post:
+      operationId: postAlarmLog
+      summary: 提交解决结果
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - logId
+                - handle
+              properties:
+                logId:
+                  type: integer
+                  format: int32
+                handle:
+                  type: string
+      responses:
+        200:
+          description: 是否成功修改报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteAlarmLog
+      summary: 删除报警日志
+      security:
+        - admin: []
+      parameters:
+        - name: logId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 是否成功删除报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+           type: string
+        nickname:
+          type: string
+        avatar:
+          type: string
+        createTime:
+          type: string
+        createdDeviceNumber:
+          type: integer
+          format: int32
+        password:
+          type: string
+        level:
+          type: integer
+          format: int32
+        phone:
+          type: string
+    SimpleStatus:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          format: int64
+        message:
+          type: string
+    Device:
+      type: object
+      required:
+        - name
+        - deviceId
+        - secret
+        - description
+        - state
+        - lastLoginTime
+      properties:
+        name:
+          type: string
+        deviceId:
+          type: string
+        secret:
+          type: string
+        description:
+          type: string
+        state:
+          type: integer
+          format: int32
+        lastLoginTime:
+          type: string
+    DeviceDetail:
+      type: object
+      required:
+        - detail
+        - script
+      properties:
+        detail:
+          type: string
+        script:
+          type: string
+    DeviceState:
+      type: object
+      required:
+        - status
+        - message
+        - state
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        state:
+          type: object
+    Sensor:
+      type: object
+      required:
+        - id
+        - name
+        - deviceId
+        - dataType
+        - showType
+        - description
+        - updateTime
+        - createTime
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        deviceId:
+          type: string
+        dataType:
+          type: integer
+          format: int32
+        showType:
+          type: string
+        description:
+          type: string
+        updateTime:
+          type: string
+        createTime:
+          type: string
+    Data:
+      type: object
+      required:
+        - data
+        - updateTime
+      properties:
+        data:
+          type: string
+        updateTime:
+          type: string
+    UserLog:
+      type: object
+      required:
+        - id
+        - username
+        - action
+        - createTime
+        - type
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          format: int32
+        action:
+          type: string
+        createTime:
+          type: string
+        type:
+          type: integer
+    AlarmLog:
+      type: object
+      required:
+        - id
+        - deviceId
+        - data
+        - createTime
+        - level
+        - handle
+      properties:
+        id:
+          type: integer
+          format: int32
+        deviceId:
+          type: string
+        data:
+          type: string
+        createTime:
+          type: string
+        level:
+          type: integer
+          format: int32
+        handle:
+          type: string
+    Count:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+
+
+2019-02-11 12:00:27 [DEBUG] Connected to database
+2019-02-11 12:00:27 [DEBUG] Parsed rootNode: {"openapi":"3.0.0","info":{"version":"1.0.0","title":"LinkIOT Dashboard"},"servers":[{"url":"/v1"}],"paths":{"/auth/login":{"get":{"operationId":"getLogin","summary":"用户登录","parameters":[{"name":"user","in":"query","description":"用户名","required":true,"schema":{"type":"string"}},{"name":"pass","in":"query","description":"密码","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"登录结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/auth/logout":{"get":{"operationId":"getLogout","summary":"用户登出","responses":{"200":{"description":"登出结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/admin/user/count":{"get":{"operationId":"countUser","summary":"统计用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/admin/user":{"get":{"operationId":"listUser","summary":"管理员列表用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"列表结果","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/User"}}}}}}}},"/user":{"get":{"operationId":"getUser","summary":"查询用户信息","security":[{"user":[]}],"responses":{"200":{"description":"查询结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}},"put":{"operationId":"putUser","summary":"用户注册","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["username","password","nickname","level"],"properties":{"username":{"type":"string"},"password":{"type":"string"},"nickname":{"type":"string"},"level":{"type":"integer","format":"int32"},"adminId":{"type":"integer","format":"int32"}}}}}},"responses":{"200":{"description":"注册结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postUser","summary":"修改用户信息","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"password":{"type":"string"},"avator":{"type":"string"},"phone":{"type":"string"}}}}}},"responses":{"200":{"description":"修改用户","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"delUser","summary":"删除用户","security":[{"admin":[]}],"parameters":[{"name":"username","in":"query","description":"用户名","schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/{deviceId}":{"get":{"operationId":"getDeviceDetail","summary":"获取设备详细信息","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备详细信息","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceDetail"}}}}}}},"/db/devices/count":{"get":{"operationId":"countDevices","summary":"统计设备","security":[{"user":[]}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/devices":{"get":{"operationId":"listDevices","summary":"获取用户创建的所有设备","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"description":"起始列表位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"本次列表数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"设备列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}}}},"put":{"operationId":"putDevice","summary":"创建新的设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name"],"properties":{"name":{"type":"string","description":"设备名称"},"description":{"type":"string","description":"设备描述"},"script":{"type":"string","description":"设备绑定脚本"}}}}}},"responses":{"200":{"description":"是否成功创建设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postDevice","summary":"更新设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["deviceId"],"properties":{"deviceId":{"type":"string","description":"设备ID"},"name":{"type":"string","description":"新的设备名称"},"description":{"type":"string","description":"新的设备描述"},"script":{"type":"string","description":"新的设备脚本"}}}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteDevice","summary":"删除设备","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"query","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/state/{deviceId}":{"get":{"operationId":"getState","summary":"获取当前设备状态","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备状态","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceState"}}}}}},"post":{"operationId":"postState","summary":"用户设置新的设备状态","parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"requestBody":{"description":"用户设置的新状态","required":true,"content":{"application/json":{"schema":{"type":"object"}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/close/{deviceId}":{"get":{"operationId":"forceClose","summary":"强制下线设备","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否成功下线设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensors/count/{deviceId}":{"get":{"operationId":"countSensors","summary":"统计传感器","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensors/{deviceId}":{"get":{"operationId":"getSensors","summary":"某一个设备的传感器列表","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"description":"设备ID","schema":{"type":"string"}},{"name":"offset","in":"query","required":true,"description":"列表起始位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"记录数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"传感器列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Sensor"}}}}}}},"put":{"operationId":"putSensor","summary":"创建传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name","dataType","showType"],"properties":{"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否创建成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postSensor","summary":"更新传感器信息","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["sensorId"],"properties":{"sensorId":{"type":"integer","format":"int32","description":"传感器ID"},"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否成功更新传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteSensor","summary":"删除传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"}],"responses":{"200":{"description":"是否成功删除传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensor/data/count/{deviceId}/{sensorId}":{"get":{"operationId":"countData","summary":"统计传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensor/data/{deviceId}/{sensorId}":{"get":{"operationId":"listData","summary":"获取传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"in32"},"description":"数据列表起始位置"},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"数据列表记录数"}],"responses":{"200":{"description":"数据列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Data"}}}}}}}},"/log/user/count":{"get":{"operationId":"countUserLogs","summary":"统计用户日志","security":[{"user":[]}],"parameters":[{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/user":{"get":{"operationId":"getUserLogs","summary":"获取用户日志","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"in32"}},{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"},"description":"日志类型"}],"responses":{"200":{"description":"用户日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/UserLog"}}}}}}}},"/log/alarm/count":{"get":{"operationId":"countAlarmLogs","summary":"统计报警历史","security":[{"user":[]}],"parameters":[{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/alarm":{"get":{"operationId":"getAlarmLogs","summary":"获取报警历史","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"报警日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/AlarmLog"}}}}}}},"post":{"operationId":"postAlarmLog","summary":"提交解决结果","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["logId","handle"],"properties":{"logId":{"type":"integer","format":"int32"},"handle":{"type":"string"}}}}}},"responses":{"200":{"description":"是否成功修改报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteAlarmLog","summary":"删除报警日志","security":[{"admin":[]}],"parameters":[{"name":"logId","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"是否成功删除报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}}},"components":{"schemas":{"User":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"avatar":{"type":"string"},"createTime":{"type":"string"},"createdDeviceNumber":{"type":"integer","format":"int32"},"password":{"type":"string"},"level":{"type":"integer","format":"int32"},"phone":{"type":"string"}}},"SimpleStatus":{"type":"object","required":["status","message"],"properties":{"status":{"type":"integer","format":"int64"},"message":{"type":"string"}}},"Device":{"type":"object","required":["name","deviceId","secret","description","state","lastLoginTime"],"properties":{"name":{"type":"string"},"deviceId":{"type":"string"},"secret":{"type":"string"},"description":{"type":"string"},"state":{"type":"integer","format":"int32"},"lastLoginTime":{"type":"string"}}},"DeviceDetail":{"type":"object","required":["detail","script"],"properties":{"detail":{"type":"string"},"script":{"type":"string"}}},"DeviceState":{"type":"object","required":["status","message","state"],"properties":{"status":{"type":"integer","format":"int32"},"message":{"type":"string"},"state":{"type":"object"}}},"Sensor":{"type":"object","required":["id","name","deviceId","dataType","showType","description","updateTime","createTime"],"properties":{"id":{"type":"integer","format":"int32"},"name":{"type":"string"},"deviceId":{"type":"string"},"dataType":{"type":"integer","format":"int32"},"showType":{"type":"string"},"description":{"type":"string"},"updateTime":{"type":"string"},"createTime":{"type":"string"}}},"Data":{"type":"object","required":["data","updateTime"],"properties":{"data":{"type":"string"},"updateTime":{"type":"string"}}},"UserLog":{"type":"object","required":["id","username","action","createTime","type"],"properties":{"id":{"type":"integer","format":"int32"},"username":{"type":"string","format":"int32"},"action":{"type":"string"},"createTime":{"type":"string"},"type":{"type":"integer"}}},"AlarmLog":{"type":"object","required":["id","deviceId","data","createTime","level","handle"],"properties":{"id":{"type":"integer","format":"int32"},"deviceId":{"type":"string"},"data":{"type":"string"},"createTime":{"type":"string"},"level":{"type":"integer","format":"int32"},"handle":{"type":"string"}}},"Count":{"type":"object","properties":{"count":{"type":"integer","format":"int32"}}}}}}
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:00:27 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:33 [DEBUG] Using SLF4J as the default logging framework
+2019-02-11 12:31:33 [DEBUG] -D{}: {}
+2019-02-11 12:31:33 [DEBUG] -D{}: {}
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.eventLoopThreads: {}
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.noKeySetOptimization: {}
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.selectorAutoRebuildThreshold: {}
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.noUnsafe: {}
+2019-02-11 12:31:33 [DEBUG] Java version: {}
+2019-02-11 12:31:33 [DEBUG] sun.misc.Unsafe.theUnsafe: available
+2019-02-11 12:31:33 [DEBUG] sun.misc.Unsafe.copyMemory: available
+2019-02-11 12:31:33 [DEBUG] java.nio.Buffer.address: available
+2019-02-11 12:31:33 [DEBUG] direct buffer constructor: available
+2019-02-11 12:31:33 [DEBUG] java.nio.Bits.unaligned: available, {}
+2019-02-11 12:31:33 [DEBUG] jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+2019-02-11 12:31:33 [DEBUG] java.nio.DirectByteBuffer.<init>(long, int): {}
+2019-02-11 12:31:33 [DEBUG] sun.misc.Unsafe: {}
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.tmpdir: {} (java.io.tmpdir)
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.bitMode: {} (sun.arch.data.model)
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.maxDirectMemory: {} bytes
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.uninitializedArrayAllocationThreshold: {}
+2019-02-11 12:31:33 [DEBUG] java.nio.ByteBuffer.cleaner(): available
+2019-02-11 12:31:33 [DEBUG] -Dio.netty.noPreferDirect: {}
+2019-02-11 12:31:33 [DEBUG] org.jctools-core.MpscChunkedArrayQueue: available
+2019-02-11 12:31:34 [DEBUG] Default DNS servers: {} (sun.net.dns.ResolverConfiguration)
+2019-02-11 12:31:34 [DEBUG] -Djava.net.preferIPv4Stack: {}
+2019-02-11 12:31:34 [DEBUG] -Djava.net.preferIPv6Addresses: {}
+2019-02-11 12:31:34 [DEBUG] Loopback interface: {} ({}, {})
+2019-02-11 12:31:34 [DEBUG] {}: {}
+2019-02-11 12:31:34 [DEBUG] -Dio.netty.buffer.checkAccessible: true
+2019-02-11 12:31:34 [DEBUG] -Dio.netty.buffer.checkBounds: true
+2019-02-11 12:31:34 [DEBUG] Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@4fd71c53
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.numHeapArenas: 8
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.numDirectArenas: 8
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.pageSize: 8192
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.maxOrder: 11
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.chunkSize: 16777216
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.tinyCacheSize: 512
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.smallCacheSize: 256
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.normalCacheSize: 64
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.cacheTrimInterval: 8192
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.allocator.useCacheForAllThreads: true
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+2019-02-11 12:31:36 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.processId: 7830 (auto-detected)
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.machineId: 1c:39:47:ff:fe:c3:ba:81 (auto-detected)
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.allocator.type: pooled
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.threadLocalDirectBufferSize: 0
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+2019-02-11 12:31:37 [DEBUG] Channel became active
+2019-02-11 12:31:37 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:31:37 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:31:37 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212666,[B@36a2da9c,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:31:37 [DEBUG] Loaded raw data: openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: LinkIOT Dashboard
+servers:
+  - url: /v1
+paths:
+  /auth/login:
+    get:
+      operationId: getLogin
+      summary: 用户登录
+      parameters:
+        - name: user
+          in: query
+          description: 用户名
+          required: true
+          schema:
+            type: string
+        - name: pass
+          in: query
+          description: 密码
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 登录结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /auth/logout:
+    get:
+      operationId: getLogout
+      summary: 用户登出
+      responses:
+        200:
+          description: 登出结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /admin/user/count:
+    get:
+      operationId: countUser
+      summary: 统计用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /admin/user:
+    get:
+      operationId: listUser
+      summary: 管理员列表用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 列表结果
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /user:
+    get:
+      operationId: getUser
+      summary: 查询用户信息
+      security:
+        - user: []
+      responses:
+        200:
+          description: 查询结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      operationId: putUser
+      summary: 用户注册
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+                - nickname
+                - level
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                nickname:
+                  type: string
+                level:
+                  type: integer
+                  format: int32
+                adminId:
+                  type: integer
+                  format: int32
+      responses:
+        200:
+          description: 注册结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postUser
+      summary: 修改用户信息
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                nickname:
+                  type: string
+                password:
+                  type: string
+                avator:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: 修改用户
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: delUser
+      summary: 删除用户
+      security:
+        - admin: []
+      parameters:
+        - name: username
+          in: query
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/device/{deviceId}:
+    get:
+      operationId: getDeviceDetail
+      summary: 获取设备详细信息
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备详细信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceDetail"
+  /db/devices/count:
+    get:
+      operationId: countDevices
+      summary: 统计设备
+      security:
+        - user: []
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/devices:
+    get:
+      operationId: listDevices
+      summary: 获取用户创建的所有设备
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          description: 起始列表位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 本次列表数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 设备列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+    put:
+      operationId: putDevice
+      summary: 创建新的设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: 设备名称
+                description:
+                  type: string
+                  description: 设备描述
+                script:
+                  type: string
+                  description: 设备绑定脚本
+      responses:
+        200:
+          description: 是否成功创建设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postDevice
+      summary: 更新设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceId
+              properties:
+                deviceId:
+                  type: string
+                  description: 设备ID
+                name:
+                  type: string
+                  description: 新的设备名称
+                description:
+                  type: string
+                  description: 新的设备描述
+                script:
+                  type: string
+                  description: 新的设备脚本
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteDevice
+      summary: 删除设备
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: query
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/state/{deviceId}:
+    get:
+      operationId: getState
+      summary: 获取当前设备状态
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceState"
+    post:
+      operationId: postState
+      summary: 用户设置新的设备状态
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 用户设置的新状态
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/close/{deviceId}:
+    get:
+      operationId: forceClose
+      summary: 强制下线设备
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否成功下线设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensors/count/{deviceId}:
+    get:
+      operationId: countSensors
+      summary: 统计传感器
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensors/{deviceId}:
+    get:
+      operationId: getSensors
+      summary: 某一个设备的传感器列表
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: 设备ID
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: true
+          description: 列表起始位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 记录数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 传感器列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sensor"
+    put:
+      operationId: putSensor
+      summary: 创建传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - dataType
+                - showType
+              properties:
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postSensor
+      summary: 更新传感器信息
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sensorId
+              properties:
+                sensorId:
+                  type: integer
+                  format: int32
+                  description: 传感器ID
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否成功更新传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteSensor
+      summary: 删除传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+      responses:
+        200:
+          description: 是否成功删除传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensor/data/count/{deviceId}/{sensorId}:
+    get:
+      operationId: countData
+      summary: 统计传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensor/data/{deviceId}/{sensorId}:
+    get:
+      operationId: listData
+      summary: 获取传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+          description: 数据列表起始位置
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 数据列表记录数
+      responses:
+        200:
+          description: 数据列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Data"
+  /log/user/count:
+    get:
+      operationId: countUserLogs
+      summary: 统计用户日志
+      security:
+        - user: []
+      parameters:
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/user:
+    get:
+      operationId: getUserLogs
+      summary: 获取用户日志
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: 日志类型
+      responses:
+        200:
+          description: 用户日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserLog"
+  /log/alarm/count:
+    get:
+      operationId: countAlarmLogs
+      summary: 统计报警历史
+      security:
+        - user: []
+      parameters:
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/alarm:
+    get:
+      operationId: getAlarmLogs
+      summary: 获取报警历史
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 报警日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlarmLog"
+    post:
+      operationId: postAlarmLog
+      summary: 提交解决结果
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - logId
+                - handle
+              properties:
+                logId:
+                  type: integer
+                  format: int32
+                handle:
+                  type: string
+      responses:
+        200:
+          description: 是否成功修改报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteAlarmLog
+      summary: 删除报警日志
+      security:
+        - admin: []
+      parameters:
+        - name: logId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 是否成功删除报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+           type: string
+        nickname:
+          type: string
+        avatar:
+          type: string
+        createTime:
+          type: string
+        createdDeviceNumber:
+          type: integer
+          format: int32
+        password:
+          type: string
+        level:
+          type: integer
+          format: int32
+        phone:
+          type: string
+    SimpleStatus:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          format: int64
+        message:
+          type: string
+    Device:
+      type: object
+      required:
+        - name
+        - deviceId
+        - secret
+        - description
+        - state
+        - lastLoginTime
+      properties:
+        name:
+          type: string
+        deviceId:
+          type: string
+        secret:
+          type: string
+        description:
+          type: string
+        state:
+          type: integer
+          format: int32
+        lastLoginTime:
+          type: string
+    DeviceDetail:
+      type: object
+      required:
+        - detail
+        - script
+      properties:
+        detail:
+          type: string
+        script:
+          type: string
+    DeviceState:
+      type: object
+      required:
+        - status
+        - message
+        - state
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        state:
+          type: object
+    Sensor:
+      type: object
+      required:
+        - id
+        - name
+        - deviceId
+        - dataType
+        - showType
+        - description
+        - updateTime
+        - createTime
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        deviceId:
+          type: string
+        dataType:
+          type: integer
+          format: int32
+        showType:
+          type: string
+        description:
+          type: string
+        updateTime:
+          type: string
+        createTime:
+          type: string
+    Data:
+      type: object
+      required:
+        - data
+        - updateTime
+      properties:
+        data:
+          type: string
+        updateTime:
+          type: string
+    UserLog:
+      type: object
+      required:
+        - id
+        - username
+        - action
+        - createTime
+        - type
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          format: int32
+        action:
+          type: string
+        createTime:
+          type: string
+        type:
+          type: integer
+    AlarmLog:
+      type: object
+      required:
+        - id
+        - deviceId
+        - data
+        - createTime
+        - level
+        - handle
+      properties:
+        id:
+          type: integer
+          format: int32
+        deviceId:
+          type: string
+        data:
+          type: string
+        createTime:
+          type: string
+        level:
+          type: integer
+          format: int32
+        handle:
+          type: string
+    Count:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+
+
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.recycler.maxCapacityPerThread: 4096
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.recycler.maxSharedCapacityFactor: 2
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.recycler.linkCapacity: 16
+2019-02-11 12:31:37 [DEBUG] -Dio.netty.recycler.ratio: 8
+2019-02-11 12:31:37 [DEBUG] Connected to database
+2019-02-11 12:31:37 [DEBUG] Parsed rootNode: {"openapi":"3.0.0","info":{"version":"1.0.0","title":"LinkIOT Dashboard"},"servers":[{"url":"/v1"}],"paths":{"/auth/login":{"get":{"operationId":"getLogin","summary":"用户登录","parameters":[{"name":"user","in":"query","description":"用户名","required":true,"schema":{"type":"string"}},{"name":"pass","in":"query","description":"密码","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"登录结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/auth/logout":{"get":{"operationId":"getLogout","summary":"用户登出","responses":{"200":{"description":"登出结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/admin/user/count":{"get":{"operationId":"countUser","summary":"统计用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/admin/user":{"get":{"operationId":"listUser","summary":"管理员列表用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"列表结果","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/User"}}}}}}}},"/user":{"get":{"operationId":"getUser","summary":"查询用户信息","security":[{"user":[]}],"responses":{"200":{"description":"查询结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}},"put":{"operationId":"putUser","summary":"用户注册","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["username","password","nickname","level"],"properties":{"username":{"type":"string"},"password":{"type":"string"},"nickname":{"type":"string"},"level":{"type":"integer","format":"int32"},"adminId":{"type":"integer","format":"int32"}}}}}},"responses":{"200":{"description":"注册结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postUser","summary":"修改用户信息","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"password":{"type":"string"},"avator":{"type":"string"},"phone":{"type":"string"}}}}}},"responses":{"200":{"description":"修改用户","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"delUser","summary":"删除用户","security":[{"admin":[]}],"parameters":[{"name":"username","in":"query","description":"用户名","schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/{deviceId}":{"get":{"operationId":"getDeviceDetail","summary":"获取设备详细信息","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备详细信息","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceDetail"}}}}}}},"/db/devices/count":{"get":{"operationId":"countDevices","summary":"统计设备","security":[{"user":[]}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/devices":{"get":{"operationId":"listDevices","summary":"获取用户创建的所有设备","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"description":"起始列表位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"本次列表数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"设备列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}}}},"put":{"operationId":"putDevice","summary":"创建新的设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name"],"properties":{"name":{"type":"string","description":"设备名称"},"description":{"type":"string","description":"设备描述"},"script":{"type":"string","description":"设备绑定脚本"}}}}}},"responses":{"200":{"description":"是否成功创建设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postDevice","summary":"更新设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["deviceId"],"properties":{"deviceId":{"type":"string","description":"设备ID"},"name":{"type":"string","description":"新的设备名称"},"description":{"type":"string","description":"新的设备描述"},"script":{"type":"string","description":"新的设备脚本"}}}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteDevice","summary":"删除设备","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"query","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/state/{deviceId}":{"get":{"operationId":"getState","summary":"获取当前设备状态","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备状态","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceState"}}}}}},"post":{"operationId":"postState","summary":"用户设置新的设备状态","parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"requestBody":{"description":"用户设置的新状态","required":true,"content":{"application/json":{"schema":{"type":"object"}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/close/{deviceId}":{"get":{"operationId":"forceClose","summary":"强制下线设备","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否成功下线设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensors/count/{deviceId}":{"get":{"operationId":"countSensors","summary":"统计传感器","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensors/{deviceId}":{"get":{"operationId":"getSensors","summary":"某一个设备的传感器列表","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"description":"设备ID","schema":{"type":"string"}},{"name":"offset","in":"query","required":true,"description":"列表起始位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"记录数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"传感器列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Sensor"}}}}}}},"put":{"operationId":"putSensor","summary":"创建传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name","dataType","showType"],"properties":{"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否创建成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postSensor","summary":"更新传感器信息","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["sensorId"],"properties":{"sensorId":{"type":"integer","format":"int32","description":"传感器ID"},"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否成功更新传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteSensor","summary":"删除传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"}],"responses":{"200":{"description":"是否成功删除传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensor/data/count/{deviceId}/{sensorId}":{"get":{"operationId":"countData","summary":"统计传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensor/data/{deviceId}/{sensorId}":{"get":{"operationId":"listData","summary":"获取传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"in32"},"description":"数据列表起始位置"},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"数据列表记录数"}],"responses":{"200":{"description":"数据列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Data"}}}}}}}},"/log/user/count":{"get":{"operationId":"countUserLogs","summary":"统计用户日志","security":[{"user":[]}],"parameters":[{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/user":{"get":{"operationId":"getUserLogs","summary":"获取用户日志","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"in32"}},{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"},"description":"日志类型"}],"responses":{"200":{"description":"用户日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/UserLog"}}}}}}}},"/log/alarm/count":{"get":{"operationId":"countAlarmLogs","summary":"统计报警历史","security":[{"user":[]}],"parameters":[{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/alarm":{"get":{"operationId":"getAlarmLogs","summary":"获取报警历史","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"报警日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/AlarmLog"}}}}}}},"post":{"operationId":"postAlarmLog","summary":"提交解决结果","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["logId","handle"],"properties":{"logId":{"type":"integer","format":"int32"},"handle":{"type":"string"}}}}}},"responses":{"200":{"description":"是否成功修改报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteAlarmLog","summary":"删除报警日志","security":[{"admin":[]}],"parameters":[{"name":"logId","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"是否成功删除报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}}},"components":{"schemas":{"User":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"avatar":{"type":"string"},"createTime":{"type":"string"},"createdDeviceNumber":{"type":"integer","format":"int32"},"password":{"type":"string"},"level":{"type":"integer","format":"int32"},"phone":{"type":"string"}}},"SimpleStatus":{"type":"object","required":["status","message"],"properties":{"status":{"type":"integer","format":"int64"},"message":{"type":"string"}}},"Device":{"type":"object","required":["name","deviceId","secret","description","state","lastLoginTime"],"properties":{"name":{"type":"string"},"deviceId":{"type":"string"},"secret":{"type":"string"},"description":{"type":"string"},"state":{"type":"integer","format":"int32"},"lastLoginTime":{"type":"string"}}},"DeviceDetail":{"type":"object","required":["detail","script"],"properties":{"detail":{"type":"string"},"script":{"type":"string"}}},"DeviceState":{"type":"object","required":["status","message","state"],"properties":{"status":{"type":"integer","format":"int32"},"message":{"type":"string"},"state":{"type":"object"}}},"Sensor":{"type":"object","required":["id","name","deviceId","dataType","showType","description","updateTime","createTime"],"properties":{"id":{"type":"integer","format":"int32"},"name":{"type":"string"},"deviceId":{"type":"string"},"dataType":{"type":"integer","format":"int32"},"showType":{"type":"string"},"description":{"type":"string"},"updateTime":{"type":"string"},"createTime":{"type":"string"}}},"Data":{"type":"object","required":["data","updateTime"],"properties":{"data":{"type":"string"},"updateTime":{"type":"string"}}},"UserLog":{"type":"object","required":["id","username","action","createTime","type"],"properties":{"id":{"type":"integer","format":"int32"},"username":{"type":"string","format":"int32"},"action":{"type":"string"},"createTime":{"type":"string"},"type":{"type":"integer"}}},"AlarmLog":{"type":"object","required":["id","deviceId","data","createTime","level","handle"],"properties":{"id":{"type":"integer","format":"int32"},"deviceId":{"type":"string"},"data":{"type":"string"},"createTime":{"type":"string"},"level":{"type":"integer","format":"int32"},"handle":{"type":"string"}}},"Count":{"type":"object","properties":{"count":{"type":"integer","format":"int32"}}}}}}
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:31:37 [DEBUG] avoiding infinite loop
+2019-02-11 12:41:54 [DEBUG] -Dio.netty.noJdkZlibDecoder: false
+2019-02-11 12:41:54 [DEBUG] -Dio.netty.noJdkZlibEncoder: false
+2019-02-11 12:43:29 [DEBUG] Channel became active
+2019-02-11 12:43:29 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:43:29 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:43:29 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212667,[B@296bce49,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:43:29 [DEBUG] Connected to database
+2019-02-11 12:43:29 [DEBUG] Channel became active
+2019-02-11 12:43:29 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:43:29 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:43:29 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212668,[B@4ddf9b9b,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:43:29 [DEBUG] Connected to database
+2019-02-11 12:44:08 [DEBUG] Channel became active
+2019-02-11 12:44:08 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:44:08 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:44:08 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212669,[B@179a592a,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:44:08 [DEBUG] Connected to database
+2019-02-11 12:45:16 [DEBUG] Using SLF4J as the default logging framework
+2019-02-11 12:45:16 [DEBUG] -D{}: {}
+2019-02-11 12:45:16 [DEBUG] -D{}: {}
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.eventLoopThreads: {}
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.noKeySetOptimization: {}
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.selectorAutoRebuildThreshold: {}
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.noUnsafe: {}
+2019-02-11 12:45:16 [DEBUG] Java version: {}
+2019-02-11 12:45:16 [DEBUG] sun.misc.Unsafe.theUnsafe: available
+2019-02-11 12:45:16 [DEBUG] sun.misc.Unsafe.copyMemory: available
+2019-02-11 12:45:16 [DEBUG] java.nio.Buffer.address: available
+2019-02-11 12:45:16 [DEBUG] direct buffer constructor: available
+2019-02-11 12:45:16 [DEBUG] java.nio.Bits.unaligned: available, {}
+2019-02-11 12:45:16 [DEBUG] jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+2019-02-11 12:45:16 [DEBUG] java.nio.DirectByteBuffer.<init>(long, int): {}
+2019-02-11 12:45:16 [DEBUG] sun.misc.Unsafe: {}
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.tmpdir: {} (java.io.tmpdir)
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.bitMode: {} (sun.arch.data.model)
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.maxDirectMemory: {} bytes
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.uninitializedArrayAllocationThreshold: {}
+2019-02-11 12:45:16 [DEBUG] java.nio.ByteBuffer.cleaner(): available
+2019-02-11 12:45:16 [DEBUG] -Dio.netty.noPreferDirect: {}
+2019-02-11 12:45:16 [DEBUG] org.jctools-core.MpscChunkedArrayQueue: available
+2019-02-11 12:45:17 [DEBUG] Default DNS servers: {} (sun.net.dns.ResolverConfiguration)
+2019-02-11 12:45:17 [DEBUG] -Djava.net.preferIPv4Stack: {}
+2019-02-11 12:45:17 [DEBUG] -Djava.net.preferIPv6Addresses: {}
+2019-02-11 12:45:17 [DEBUG] Loopback interface: {} ({}, {})
+2019-02-11 12:45:17 [DEBUG] {}: {}
+2019-02-11 12:45:17 [DEBUG] -Dio.netty.buffer.checkAccessible: true
+2019-02-11 12:45:17 [DEBUG] -Dio.netty.buffer.checkBounds: true
+2019-02-11 12:45:17 [DEBUG] Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@1db5ed23
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.numHeapArenas: 8
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.numDirectArenas: 8
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.pageSize: 8192
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.maxOrder: 11
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.chunkSize: 16777216
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.tinyCacheSize: 512
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.smallCacheSize: 256
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.normalCacheSize: 64
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.cacheTrimInterval: 8192
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.allocator.useCacheForAllThreads: true
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+2019-02-11 12:45:19 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.processId: 8533 (auto-detected)
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.machineId: 1c:39:47:ff:fe:c3:ba:81 (auto-detected)
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.allocator.type: pooled
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.threadLocalDirectBufferSize: 0
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+2019-02-11 12:45:21 [DEBUG] Channel became active
+2019-02-11 12:45:21 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:45:21 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:45:21 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212670,[B@3971d680,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.recycler.maxCapacityPerThread: 4096
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.recycler.maxSharedCapacityFactor: 2
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.recycler.linkCapacity: 16
+2019-02-11 12:45:21 [DEBUG] -Dio.netty.recycler.ratio: 8
+2019-02-11 12:45:22 [DEBUG] Connected to database
+2019-02-11 12:45:22 [DEBUG] Loaded raw data: openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: LinkIOT Dashboard
+servers:
+  - url: /v1
+paths:
+  /auth/login:
+    get:
+      operationId: getLogin
+      summary: 用户登录
+      parameters:
+        - name: user
+          in: query
+          description: 用户名
+          required: true
+          schema:
+            type: string
+        - name: pass
+          in: query
+          description: 密码
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 登录结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /auth/logout:
+    get:
+      operationId: getLogout
+      summary: 用户登出
+      responses:
+        200:
+          description: 登出结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /admin/user/count:
+    get:
+      operationId: countUser
+      summary: 统计用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /admin/user:
+    get:
+      operationId: listUser
+      summary: 管理员列表用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 列表结果
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /user:
+    get:
+      operationId: getUser
+      summary: 查询用户信息
+      security:
+        - user: []
+      responses:
+        200:
+          description: 查询结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      operationId: putUser
+      summary: 用户注册
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+                - nickname
+                - level
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                nickname:
+                  type: string
+                level:
+                  type: integer
+                  format: int32
+                adminId:
+                  type: integer
+                  format: int32
+      responses:
+        200:
+          description: 注册结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postUser
+      summary: 修改用户信息
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                nickname:
+                  type: string
+                password:
+                  type: string
+                avator:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: 修改用户
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: delUser
+      summary: 删除用户
+      security:
+        - admin: []
+      parameters:
+        - name: username
+          in: query
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/device/{deviceId}:
+    get:
+      operationId: getDeviceDetail
+      summary: 获取设备详细信息
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备详细信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceDetail"
+  /db/devices/count:
+    get:
+      operationId: countDevices
+      summary: 统计设备
+      security:
+        - user: []
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/devices:
+    get:
+      operationId: listDevices
+      summary: 获取用户创建的所有设备
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          description: 起始列表位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 本次列表数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 设备列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+    put:
+      operationId: putDevice
+      summary: 创建新的设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: 设备名称
+                description:
+                  type: string
+                  description: 设备描述
+                script:
+                  type: string
+                  description: 设备绑定脚本
+      responses:
+        200:
+          description: 是否成功创建设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postDevice
+      summary: 更新设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceId
+              properties:
+                deviceId:
+                  type: string
+                  description: 设备ID
+                name:
+                  type: string
+                  description: 新的设备名称
+                description:
+                  type: string
+                  description: 新的设备描述
+                script:
+                  type: string
+                  description: 新的设备脚本
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteDevice
+      summary: 删除设备
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: query
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/state/{deviceId}:
+    get:
+      operationId: getState
+      summary: 获取当前设备状态
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceState"
+    post:
+      operationId: postState
+      summary: 用户设置新的设备状态
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 用户设置的新状态
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/close/{deviceId}:
+    get:
+      operationId: forceClose
+      summary: 强制下线设备
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否成功下线设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensors/count/{deviceId}:
+    get:
+      operationId: countSensors
+      summary: 统计传感器
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensors/{deviceId}:
+    get:
+      operationId: getSensors
+      summary: 某一个设备的传感器列表
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: 设备ID
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: true
+          description: 列表起始位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 记录数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 传感器列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sensor"
+    put:
+      operationId: putSensor
+      summary: 创建传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - dataType
+                - showType
+              properties:
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postSensor
+      summary: 更新传感器信息
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sensorId
+              properties:
+                sensorId:
+                  type: integer
+                  format: int32
+                  description: 传感器ID
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否成功更新传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteSensor
+      summary: 删除传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+      responses:
+        200:
+          description: 是否成功删除传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensor/data/count/{deviceId}/{sensorId}:
+    get:
+      operationId: countData
+      summary: 统计传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensor/data/{deviceId}/{sensorId}:
+    get:
+      operationId: listData
+      summary: 获取传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+          description: 数据列表起始位置
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 数据列表记录数
+      responses:
+        200:
+          description: 数据列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Data"
+  /log/user/count:
+    get:
+      operationId: countUserLogs
+      summary: 统计用户日志
+      security:
+        - user: []
+      parameters:
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/user:
+    get:
+      operationId: getUserLogs
+      summary: 获取用户日志
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: 日志类型
+      responses:
+        200:
+          description: 用户日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserLog"
+  /log/alarm/count:
+    get:
+      operationId: countAlarmLogs
+      summary: 统计报警历史
+      security:
+        - user: []
+      parameters:
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/alarm:
+    get:
+      operationId: getAlarmLogs
+      summary: 获取报警历史
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 报警日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlarmLog"
+    post:
+      operationId: postAlarmLog
+      summary: 提交解决结果
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - logId
+                - handle
+              properties:
+                logId:
+                  type: integer
+                  format: int32
+                handle:
+                  type: string
+      responses:
+        200:
+          description: 是否成功修改报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteAlarmLog
+      summary: 删除报警日志
+      security:
+        - admin: []
+      parameters:
+        - name: logId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 是否成功删除报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+           type: string
+        nickname:
+          type: string
+        avatar:
+          type: string
+        createTime:
+          type: string
+        createdDeviceNumber:
+          type: integer
+          format: int32
+        password:
+          type: string
+        level:
+          type: integer
+          format: int32
+        phone:
+          type: string
+    SimpleStatus:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          format: int64
+        message:
+          type: string
+    Device:
+      type: object
+      required:
+        - name
+        - deviceId
+        - secret
+        - description
+        - state
+        - lastLoginTime
+      properties:
+        name:
+          type: string
+        deviceId:
+          type: string
+        secret:
+          type: string
+        description:
+          type: string
+        state:
+          type: integer
+          format: int32
+        lastLoginTime:
+          type: string
+    DeviceDetail:
+      type: object
+      required:
+        - detail
+        - script
+      properties:
+        detail:
+          type: string
+        script:
+          type: string
+    DeviceState:
+      type: object
+      required:
+        - status
+        - message
+        - state
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        state:
+          type: object
+    Sensor:
+      type: object
+      required:
+        - id
+        - name
+        - deviceId
+        - dataType
+        - showType
+        - description
+        - updateTime
+        - createTime
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        deviceId:
+          type: string
+        dataType:
+          type: integer
+          format: int32
+        showType:
+          type: string
+        description:
+          type: string
+        updateTime:
+          type: string
+        createTime:
+          type: string
+    Data:
+      type: object
+      required:
+        - data
+        - updateTime
+      properties:
+        data:
+          type: string
+        updateTime:
+          type: string
+    UserLog:
+      type: object
+      required:
+        - id
+        - username
+        - action
+        - createTime
+        - type
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          format: int32
+        action:
+          type: string
+        createTime:
+          type: string
+        type:
+          type: integer
+    AlarmLog:
+      type: object
+      required:
+        - id
+        - deviceId
+        - data
+        - createTime
+        - level
+        - handle
+      properties:
+        id:
+          type: integer
+          format: int32
+        deviceId:
+          type: string
+        data:
+          type: string
+        createTime:
+          type: string
+        level:
+          type: integer
+          format: int32
+        handle:
+          type: string
+    Count:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+
+
+2019-02-11 12:45:22 [DEBUG] Parsed rootNode: {"openapi":"3.0.0","info":{"version":"1.0.0","title":"LinkIOT Dashboard"},"servers":[{"url":"/v1"}],"paths":{"/auth/login":{"get":{"operationId":"getLogin","summary":"用户登录","parameters":[{"name":"user","in":"query","description":"用户名","required":true,"schema":{"type":"string"}},{"name":"pass","in":"query","description":"密码","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"登录结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/auth/logout":{"get":{"operationId":"getLogout","summary":"用户登出","responses":{"200":{"description":"登出结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/admin/user/count":{"get":{"operationId":"countUser","summary":"统计用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/admin/user":{"get":{"operationId":"listUser","summary":"管理员列表用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"列表结果","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/User"}}}}}}}},"/user":{"get":{"operationId":"getUser","summary":"查询用户信息","security":[{"user":[]}],"responses":{"200":{"description":"查询结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}},"put":{"operationId":"putUser","summary":"用户注册","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["username","password","nickname","level"],"properties":{"username":{"type":"string"},"password":{"type":"string"},"nickname":{"type":"string"},"level":{"type":"integer","format":"int32"},"adminId":{"type":"integer","format":"int32"}}}}}},"responses":{"200":{"description":"注册结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postUser","summary":"修改用户信息","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"password":{"type":"string"},"avator":{"type":"string"},"phone":{"type":"string"}}}}}},"responses":{"200":{"description":"修改用户","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"delUser","summary":"删除用户","security":[{"admin":[]}],"parameters":[{"name":"username","in":"query","description":"用户名","schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/{deviceId}":{"get":{"operationId":"getDeviceDetail","summary":"获取设备详细信息","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备详细信息","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceDetail"}}}}}}},"/db/devices/count":{"get":{"operationId":"countDevices","summary":"统计设备","security":[{"user":[]}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/devices":{"get":{"operationId":"listDevices","summary":"获取用户创建的所有设备","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"description":"起始列表位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"本次列表数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"设备列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}}}},"put":{"operationId":"putDevice","summary":"创建新的设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name"],"properties":{"name":{"type":"string","description":"设备名称"},"description":{"type":"string","description":"设备描述"},"script":{"type":"string","description":"设备绑定脚本"}}}}}},"responses":{"200":{"description":"是否成功创建设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postDevice","summary":"更新设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["deviceId"],"properties":{"deviceId":{"type":"string","description":"设备ID"},"name":{"type":"string","description":"新的设备名称"},"description":{"type":"string","description":"新的设备描述"},"script":{"type":"string","description":"新的设备脚本"}}}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteDevice","summary":"删除设备","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"query","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/state/{deviceId}":{"get":{"operationId":"getState","summary":"获取当前设备状态","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备状态","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceState"}}}}}},"post":{"operationId":"postState","summary":"用户设置新的设备状态","parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"requestBody":{"description":"用户设置的新状态","required":true,"content":{"application/json":{"schema":{"type":"object"}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/close/{deviceId}":{"get":{"operationId":"forceClose","summary":"强制下线设备","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否成功下线设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensors/count/{deviceId}":{"get":{"operationId":"countSensors","summary":"统计传感器","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensors/{deviceId}":{"get":{"operationId":"getSensors","summary":"某一个设备的传感器列表","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"description":"设备ID","schema":{"type":"string"}},{"name":"offset","in":"query","required":true,"description":"列表起始位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"记录数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"传感器列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Sensor"}}}}}}},"put":{"operationId":"putSensor","summary":"创建传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name","dataType","showType"],"properties":{"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否创建成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postSensor","summary":"更新传感器信息","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["sensorId"],"properties":{"sensorId":{"type":"integer","format":"int32","description":"传感器ID"},"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否成功更新传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteSensor","summary":"删除传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"}],"responses":{"200":{"description":"是否成功删除传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensor/data/count/{deviceId}/{sensorId}":{"get":{"operationId":"countData","summary":"统计传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensor/data/{deviceId}/{sensorId}":{"get":{"operationId":"listData","summary":"获取传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"in32"},"description":"数据列表起始位置"},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"数据列表记录数"}],"responses":{"200":{"description":"数据列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Data"}}}}}}}},"/log/user/count":{"get":{"operationId":"countUserLogs","summary":"统计用户日志","security":[{"user":[]}],"parameters":[{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/user":{"get":{"operationId":"getUserLogs","summary":"获取用户日志","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"in32"}},{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"},"description":"日志类型"}],"responses":{"200":{"description":"用户日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/UserLog"}}}}}}}},"/log/alarm/count":{"get":{"operationId":"countAlarmLogs","summary":"统计报警历史","security":[{"user":[]}],"parameters":[{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/alarm":{"get":{"operationId":"getAlarmLogs","summary":"获取报警历史","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"报警日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/AlarmLog"}}}}}}},"post":{"operationId":"postAlarmLog","summary":"提交解决结果","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["logId","handle"],"properties":{"logId":{"type":"integer","format":"int32"},"handle":{"type":"string"}}}}}},"responses":{"200":{"description":"是否成功修改报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteAlarmLog","summary":"删除报警日志","security":[{"admin":[]}],"parameters":[{"name":"logId","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"是否成功删除报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}}},"components":{"schemas":{"User":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"avatar":{"type":"string"},"createTime":{"type":"string"},"createdDeviceNumber":{"type":"integer","format":"int32"},"password":{"type":"string"},"level":{"type":"integer","format":"int32"},"phone":{"type":"string"}}},"SimpleStatus":{"type":"object","required":["status","message"],"properties":{"status":{"type":"integer","format":"int64"},"message":{"type":"string"}}},"Device":{"type":"object","required":["name","deviceId","secret","description","state","lastLoginTime"],"properties":{"name":{"type":"string"},"deviceId":{"type":"string"},"secret":{"type":"string"},"description":{"type":"string"},"state":{"type":"integer","format":"int32"},"lastLoginTime":{"type":"string"}}},"DeviceDetail":{"type":"object","required":["detail","script"],"properties":{"detail":{"type":"string"},"script":{"type":"string"}}},"DeviceState":{"type":"object","required":["status","message","state"],"properties":{"status":{"type":"integer","format":"int32"},"message":{"type":"string"},"state":{"type":"object"}}},"Sensor":{"type":"object","required":["id","name","deviceId","dataType","showType","description","updateTime","createTime"],"properties":{"id":{"type":"integer","format":"int32"},"name":{"type":"string"},"deviceId":{"type":"string"},"dataType":{"type":"integer","format":"int32"},"showType":{"type":"string"},"description":{"type":"string"},"updateTime":{"type":"string"},"createTime":{"type":"string"}}},"Data":{"type":"object","required":["data","updateTime"],"properties":{"data":{"type":"string"},"updateTime":{"type":"string"}}},"UserLog":{"type":"object","required":["id","username","action","createTime","type"],"properties":{"id":{"type":"integer","format":"int32"},"username":{"type":"string","format":"int32"},"action":{"type":"string"},"createTime":{"type":"string"},"type":{"type":"integer"}}},"AlarmLog":{"type":"object","required":["id","deviceId","data","createTime","level","handle"],"properties":{"id":{"type":"integer","format":"int32"},"deviceId":{"type":"string"},"data":{"type":"string"},"createTime":{"type":"string"},"level":{"type":"integer","format":"int32"},"handle":{"type":"string"}}},"Count":{"type":"object","properties":{"count":{"type":"integer","format":"int32"}}}}}}
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:45:22 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:35 [DEBUG] Using SLF4J as the default logging framework
+2019-02-11 12:47:35 [DEBUG] -D{}: {}
+2019-02-11 12:47:35 [DEBUG] -D{}: {}
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.eventLoopThreads: {}
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.noKeySetOptimization: {}
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.selectorAutoRebuildThreshold: {}
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.noUnsafe: {}
+2019-02-11 12:47:35 [DEBUG] Java version: {}
+2019-02-11 12:47:35 [DEBUG] sun.misc.Unsafe.theUnsafe: available
+2019-02-11 12:47:35 [DEBUG] sun.misc.Unsafe.copyMemory: available
+2019-02-11 12:47:35 [DEBUG] java.nio.Buffer.address: available
+2019-02-11 12:47:35 [DEBUG] direct buffer constructor: available
+2019-02-11 12:47:35 [DEBUG] java.nio.Bits.unaligned: available, {}
+2019-02-11 12:47:35 [DEBUG] jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+2019-02-11 12:47:35 [DEBUG] java.nio.DirectByteBuffer.<init>(long, int): {}
+2019-02-11 12:47:35 [DEBUG] sun.misc.Unsafe: {}
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.tmpdir: {} (java.io.tmpdir)
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.bitMode: {} (sun.arch.data.model)
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.maxDirectMemory: {} bytes
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.uninitializedArrayAllocationThreshold: {}
+2019-02-11 12:47:35 [DEBUG] java.nio.ByteBuffer.cleaner(): available
+2019-02-11 12:47:35 [DEBUG] -Dio.netty.noPreferDirect: {}
+2019-02-11 12:47:35 [DEBUG] org.jctools-core.MpscChunkedArrayQueue: available
+2019-02-11 12:47:35 [DEBUG] Default DNS servers: {} (sun.net.dns.ResolverConfiguration)
+2019-02-11 12:47:35 [DEBUG] -Djava.net.preferIPv4Stack: {}
+2019-02-11 12:47:35 [DEBUG] -Djava.net.preferIPv6Addresses: {}
+2019-02-11 12:47:35 [DEBUG] Loopback interface: {} ({}, {})
+2019-02-11 12:47:35 [DEBUG] {}: {}
+2019-02-11 12:47:36 [DEBUG] -Dio.netty.buffer.checkAccessible: true
+2019-02-11 12:47:36 [DEBUG] -Dio.netty.buffer.checkBounds: true
+2019-02-11 12:47:36 [DEBUG] Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@3e8cf9a5
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.numHeapArenas: 8
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.numDirectArenas: 8
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.pageSize: 8192
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.maxOrder: 11
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.chunkSize: 16777216
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.tinyCacheSize: 512
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.smallCacheSize: 256
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.normalCacheSize: 64
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.cacheTrimInterval: 8192
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.allocator.useCacheForAllThreads: true
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+2019-02-11 12:47:38 [DEBUG] -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.processId: 8667 (auto-detected)
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.machineId: 1c:39:47:ff:fe:c3:ba:81 (auto-detected)
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.allocator.type: pooled
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.threadLocalDirectBufferSize: 0
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.maxThreadLocalCharBufferSize: 16384
+2019-02-11 12:47:51 [DEBUG] Channel became active
+2019-02-11 12:47:51 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:47:51 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:47:51 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212671,[B@6c073b57,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:47:51 [DEBUG] Loaded raw data: openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: LinkIOT Dashboard
+servers:
+  - url: /v1
+paths:
+  /auth/login:
+    get:
+      operationId: getLogin
+      summary: 用户登录
+      parameters:
+        - name: user
+          in: query
+          description: 用户名
+          required: true
+          schema:
+            type: string
+        - name: pass
+          in: query
+          description: 密码
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 登录结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /auth/logout:
+    get:
+      operationId: getLogout
+      summary: 用户登出
+      responses:
+        200:
+          description: 登出结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /admin/user/count:
+    get:
+      operationId: countUser
+      summary: 统计用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /admin/user:
+    get:
+      operationId: listUser
+      summary: 管理员列表用户
+      security:
+        - admin: []
+      parameters:
+        - name: adminId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 列表结果
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /user:
+    get:
+      operationId: getUser
+      summary: 查询用户信息
+      security:
+        - user: []
+      responses:
+        200:
+          description: 查询结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      operationId: putUser
+      summary: 用户注册
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+                - nickname
+                - level
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                nickname:
+                  type: string
+                level:
+                  type: integer
+                  format: int32
+                adminId:
+                  type: integer
+                  format: int32
+      responses:
+        200:
+          description: 注册结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postUser
+      summary: 修改用户信息
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                nickname:
+                  type: string
+                password:
+                  type: string
+                avator:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: 修改用户
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: delUser
+      summary: 删除用户
+      security:
+        - admin: []
+      parameters:
+        - name: username
+          in: query
+          description: 用户名
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/device/{deviceId}:
+    get:
+      operationId: getDeviceDetail
+      summary: 获取设备详细信息
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备详细信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceDetail"
+  /db/devices/count:
+    get:
+      operationId: countDevices
+      summary: 统计设备
+      security:
+        - user: []
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/devices:
+    get:
+      operationId: listDevices
+      summary: 获取用户创建的所有设备
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          description: 起始列表位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 本次列表数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 设备列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+    put:
+      operationId: putDevice
+      summary: 创建新的设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: 设备名称
+                description:
+                  type: string
+                  description: 设备描述
+                script:
+                  type: string
+                  description: 设备绑定脚本
+      responses:
+        200:
+          description: 是否成功创建设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postDevice
+      summary: 更新设备
+      security:
+        - admin: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceId
+              properties:
+                deviceId:
+                  type: string
+                  description: 设备ID
+                name:
+                  type: string
+                  description: 新的设备名称
+                description:
+                  type: string
+                  description: 新的设备描述
+                script:
+                  type: string
+                  description: 新的设备脚本
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteDevice
+      summary: 删除设备
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: query
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否删除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/state/{deviceId}:
+    get:
+      operationId: getState
+      summary: 获取当前设备状态
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 设备状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceState"
+    post:
+      operationId: postState
+      summary: 用户设置新的设备状态
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 用户设置的新状态
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: 是否更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+
+  /db/device/close/{deviceId}:
+    get:
+      operationId: forceClose
+      summary: 强制下线设备
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          description: 设备ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 是否成功下线设备
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensors/count/{deviceId}:
+    get:
+      operationId: countSensors
+      summary: 统计传感器
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensors/{deviceId}:
+    get:
+      operationId: getSensors
+      summary: 某一个设备的传感器列表
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: 设备ID
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: true
+          description: 列表起始位置
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          description: 记录数量
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 传感器列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sensor"
+    put:
+      operationId: putSensor
+      summary: 创建传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - dataType
+                - showType
+              properties:
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    post:
+      operationId: postSensor
+      summary: 更新传感器信息
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sensorId
+              properties:
+                sensorId:
+                  type: integer
+                  format: int32
+                  description: 传感器ID
+                name:
+                  type: string
+                  description: 传感器名称
+                dataType:
+                  type: integer
+                  format: int32
+                  description: 数据类型
+                showType:
+                  type: string
+                  description: 数据展示方式
+                description:
+                  type: string
+                  description: 传感器描述
+      responses:
+        200:
+          description: 是否成功更新传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteSensor
+      summary: 删除传感器
+      security:
+        - admin: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+      responses:
+        200:
+          description: 是否成功删除传感器
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+  /db/sensor/data/count/{deviceId}/{sensorId}:
+    get:
+      operationId: countData
+      summary: 统计传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /db/sensor/data/{deviceId}/{sensorId}:
+    get:
+      operationId: listData
+      summary: 获取传感器数据
+      security:
+        - user: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 设备ID
+        - name: sensorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 传感器ID
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+          description: 数据列表起始位置
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+          description: 数据列表记录数
+      responses:
+        200:
+          description: 数据列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Data"
+  /log/user/count:
+    get:
+      operationId: countUserLogs
+      summary: 统计用户日志
+      security:
+        - user: []
+      parameters:
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/user:
+    get:
+      operationId: getUserLogs
+      summary: 获取用户日志
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: in32
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          description: 日志类型
+      responses:
+        200:
+          description: 用户日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserLog"
+  /log/alarm/count:
+    get:
+      operationId: countAlarmLogs
+      summary: 统计报警历史
+      security:
+        - user: []
+      parameters:
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 统计结果
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Count"
+  /log/alarm:
+    get:
+      operationId: getAlarmLogs
+      summary: 获取报警历史
+      security:
+        - user: []
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: 报警日志列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlarmLog"
+    post:
+      operationId: postAlarmLog
+      summary: 提交解决结果
+      security:
+        - user: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - logId
+                - handle
+              properties:
+                logId:
+                  type: integer
+                  format: int32
+                handle:
+                  type: string
+      responses:
+        200:
+          description: 是否成功修改报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+    delete:
+      operationId: deleteAlarmLog
+      summary: 删除报警日志
+      security:
+        - admin: []
+      parameters:
+        - name: logId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 是否成功删除报警日志
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleStatus"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+           type: string
+        nickname:
+          type: string
+        avatar:
+          type: string
+        createTime:
+          type: string
+        createdDeviceNumber:
+          type: integer
+          format: int32
+        password:
+          type: string
+        level:
+          type: integer
+          format: int32
+        phone:
+          type: string
+    SimpleStatus:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          format: int64
+        message:
+          type: string
+    Device:
+      type: object
+      required:
+        - name
+        - deviceId
+        - secret
+        - description
+        - state
+        - lastLoginTime
+      properties:
+        name:
+          type: string
+        deviceId:
+          type: string
+        secret:
+          type: string
+        description:
+          type: string
+        state:
+          type: integer
+          format: int32
+        lastLoginTime:
+          type: string
+    DeviceDetail:
+      type: object
+      required:
+        - detail
+        - script
+      properties:
+        detail:
+          type: string
+        script:
+          type: string
+    DeviceState:
+      type: object
+      required:
+        - status
+        - message
+        - state
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        state:
+          type: object
+    Sensor:
+      type: object
+      required:
+        - id
+        - name
+        - deviceId
+        - dataType
+        - showType
+        - description
+        - updateTime
+        - createTime
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        deviceId:
+          type: string
+        dataType:
+          type: integer
+          format: int32
+        showType:
+          type: string
+        description:
+          type: string
+        updateTime:
+          type: string
+        createTime:
+          type: string
+    Data:
+      type: object
+      required:
+        - data
+        - updateTime
+      properties:
+        data:
+          type: string
+        updateTime:
+          type: string
+    UserLog:
+      type: object
+      required:
+        - id
+        - username
+        - action
+        - createTime
+        - type
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+          format: int32
+        action:
+          type: string
+        createTime:
+          type: string
+        type:
+          type: integer
+    AlarmLog:
+      type: object
+      required:
+        - id
+        - deviceId
+        - data
+        - createTime
+        - level
+        - handle
+      properties:
+        id:
+          type: integer
+          format: int32
+        deviceId:
+          type: string
+        data:
+          type: string
+        createTime:
+          type: string
+        level:
+          type: integer
+          format: int32
+        handle:
+          type: string
+    Count:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+
+
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.recycler.maxCapacityPerThread: 4096
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.recycler.maxSharedCapacityFactor: 2
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.recycler.linkCapacity: 16
+2019-02-11 12:47:51 [DEBUG] -Dio.netty.recycler.ratio: 8
+2019-02-11 12:47:51 [DEBUG] Connected to database
+2019-02-11 12:47:51 [DEBUG] Parsed rootNode: {"openapi":"3.0.0","info":{"version":"1.0.0","title":"LinkIOT Dashboard"},"servers":[{"url":"/v1"}],"paths":{"/auth/login":{"get":{"operationId":"getLogin","summary":"用户登录","parameters":[{"name":"user","in":"query","description":"用户名","required":true,"schema":{"type":"string"}},{"name":"pass","in":"query","description":"密码","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"登录结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/auth/logout":{"get":{"operationId":"getLogout","summary":"用户登出","responses":{"200":{"description":"登出结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/admin/user/count":{"get":{"operationId":"countUser","summary":"统计用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/admin/user":{"get":{"operationId":"listUser","summary":"管理员列表用户","security":[{"admin":[]}],"parameters":[{"name":"adminId","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"列表结果","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/User"}}}}}}}},"/user":{"get":{"operationId":"getUser","summary":"查询用户信息","security":[{"user":[]}],"responses":{"200":{"description":"查询结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}},"put":{"operationId":"putUser","summary":"用户注册","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["username","password","nickname","level"],"properties":{"username":{"type":"string"},"password":{"type":"string"},"nickname":{"type":"string"},"level":{"type":"integer","format":"int32"},"adminId":{"type":"integer","format":"int32"}}}}}},"responses":{"200":{"description":"注册结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postUser","summary":"修改用户信息","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"password":{"type":"string"},"avator":{"type":"string"},"phone":{"type":"string"}}}}}},"responses":{"200":{"description":"修改用户","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"delUser","summary":"删除用户","security":[{"admin":[]}],"parameters":[{"name":"username","in":"query","description":"用户名","schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/{deviceId}":{"get":{"operationId":"getDeviceDetail","summary":"获取设备详细信息","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备详细信息","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceDetail"}}}}}}},"/db/devices/count":{"get":{"operationId":"countDevices","summary":"统计设备","security":[{"user":[]}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/devices":{"get":{"operationId":"listDevices","summary":"获取用户创建的所有设备","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"description":"起始列表位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"本次列表数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"设备列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Device"}}}}}}},"put":{"operationId":"putDevice","summary":"创建新的设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name"],"properties":{"name":{"type":"string","description":"设备名称"},"description":{"type":"string","description":"设备描述"},"script":{"type":"string","description":"设备绑定脚本"}}}}}},"responses":{"200":{"description":"是否成功创建设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postDevice","summary":"更新设备","security":[{"admin":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["deviceId"],"properties":{"deviceId":{"type":"string","description":"设备ID"},"name":{"type":"string","description":"新的设备名称"},"description":{"type":"string","description":"新的设备描述"},"script":{"type":"string","description":"新的设备脚本"}}}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteDevice","summary":"删除设备","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"query","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否删除成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/state/{deviceId}":{"get":{"operationId":"getState","summary":"获取当前设备状态","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"设备状态","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DeviceState"}}}}}},"post":{"operationId":"postState","summary":"用户设置新的设备状态","parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"requestBody":{"description":"用户设置的新状态","required":true,"content":{"application/json":{"schema":{"type":"object"}}}},"responses":{"200":{"description":"是否更新成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/device/close/{deviceId}":{"get":{"operationId":"forceClose","summary":"强制下线设备","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","description":"设备ID","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"是否成功下线设备","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensors/count/{deviceId}":{"get":{"operationId":"countSensors","summary":"统计传感器","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensors/{deviceId}":{"get":{"operationId":"getSensors","summary":"某一个设备的传感器列表","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"description":"设备ID","schema":{"type":"string"}},{"name":"offset","in":"query","required":true,"description":"列表起始位置","schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"description":"记录数量","schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"传感器列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Sensor"}}}}}}},"put":{"operationId":"putSensor","summary":"创建传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["name","dataType","showType"],"properties":{"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否创建成功","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"post":{"operationId":"postSensor","summary":"更新传感器信息","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["sensorId"],"properties":{"sensorId":{"type":"integer","format":"int32","description":"传感器ID"},"name":{"type":"string","description":"传感器名称"},"dataType":{"type":"integer","format":"int32","description":"数据类型"},"showType":{"type":"string","description":"数据展示方式"},"description":{"type":"string","description":"传感器描述"}}}}}},"responses":{"200":{"description":"是否成功更新传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteSensor","summary":"删除传感器","security":[{"admin":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"}],"responses":{"200":{"description":"是否成功删除传感器","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}},"/db/sensor/data/count/{deviceId}/{sensorId}":{"get":{"operationId":"countData","summary":"统计传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"}},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/db/sensor/data/{deviceId}/{sensorId}":{"get":{"operationId":"listData","summary":"获取传感器数据","security":[{"user":[]}],"parameters":[{"name":"deviceId","in":"path","required":true,"schema":{"type":"string"},"description":"设备ID"},{"name":"sensorId","in":"path","required":true,"schema":{"type":"integer","format":"int32"},"description":"传感器ID"},{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"in32"},"description":"数据列表起始位置"},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"},"description":"数据列表记录数"}],"responses":{"200":{"description":"数据列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Data"}}}}}}}},"/log/user/count":{"get":{"operationId":"countUserLogs","summary":"统计用户日志","security":[{"user":[]}],"parameters":[{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/user":{"get":{"operationId":"getUserLogs","summary":"获取用户日志","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"in32"}},{"name":"username","in":"query","required":false,"schema":{"type":"string"}},{"name":"type","in":"query","required":false,"schema":{"type":"integer","format":"int32"},"description":"日志类型"}],"responses":{"200":{"description":"用户日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/UserLog"}}}}}}}},"/log/alarm/count":{"get":{"operationId":"countAlarmLogs","summary":"统计报警历史","security":[{"user":[]}],"parameters":[{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"统计结果","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Count"}}}}}}},"/log/alarm":{"get":{"operationId":"getAlarmLogs","summary":"获取报警历史","security":[{"user":[]}],"parameters":[{"name":"offset","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"limit","in":"query","required":true,"schema":{"type":"integer","format":"int32"}},{"name":"level","in":"query","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"deviceId","in":"query","required":false,"schema":{"type":"string"}}],"responses":{"200":{"description":"报警日志列表","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/AlarmLog"}}}}}}},"post":{"operationId":"postAlarmLog","summary":"提交解决结果","security":[{"user":[]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","required":["logId","handle"],"properties":{"logId":{"type":"integer","format":"int32"},"handle":{"type":"string"}}}}}},"responses":{"200":{"description":"是否成功修改报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}},"delete":{"operationId":"deleteAlarmLog","summary":"删除报警日志","security":[{"admin":[]}],"parameters":[{"name":"logId","in":"query","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"是否成功删除报警日志","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SimpleStatus"}}}}}}}},"components":{"schemas":{"User":{"type":"object","properties":{"username":{"type":"string"},"nickname":{"type":"string"},"avatar":{"type":"string"},"createTime":{"type":"string"},"createdDeviceNumber":{"type":"integer","format":"int32"},"password":{"type":"string"},"level":{"type":"integer","format":"int32"},"phone":{"type":"string"}}},"SimpleStatus":{"type":"object","required":["status","message"],"properties":{"status":{"type":"integer","format":"int64"},"message":{"type":"string"}}},"Device":{"type":"object","required":["name","deviceId","secret","description","state","lastLoginTime"],"properties":{"name":{"type":"string"},"deviceId":{"type":"string"},"secret":{"type":"string"},"description":{"type":"string"},"state":{"type":"integer","format":"int32"},"lastLoginTime":{"type":"string"}}},"DeviceDetail":{"type":"object","required":["detail","script"],"properties":{"detail":{"type":"string"},"script":{"type":"string"}}},"DeviceState":{"type":"object","required":["status","message","state"],"properties":{"status":{"type":"integer","format":"int32"},"message":{"type":"string"},"state":{"type":"object"}}},"Sensor":{"type":"object","required":["id","name","deviceId","dataType","showType","description","updateTime","createTime"],"properties":{"id":{"type":"integer","format":"int32"},"name":{"type":"string"},"deviceId":{"type":"string"},"dataType":{"type":"integer","format":"int32"},"showType":{"type":"string"},"description":{"type":"string"},"updateTime":{"type":"string"},"createTime":{"type":"string"}}},"Data":{"type":"object","required":["data","updateTime"],"properties":{"data":{"type":"string"},"updateTime":{"type":"string"}}},"UserLog":{"type":"object","required":["id","username","action","createTime","type"],"properties":{"id":{"type":"integer","format":"int32"},"username":{"type":"string","format":"int32"},"action":{"type":"string"},"createTime":{"type":"string"},"type":{"type":"integer"}}},"AlarmLog":{"type":"object","required":["id","deviceId","data","createTime","level","handle"],"properties":{"id":{"type":"integer","format":"int32"},"deviceId":{"type":"string"},"data":{"type":"string"},"createTime":{"type":"string"},"level":{"type":"integer","format":"int32"},"handle":{"type":"string"}}},"Count":{"type":"object","properties":{"count":{"type":"integer","format":"int32"}}}}}}
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:47:51 [DEBUG] avoiding infinite loop
+2019-02-11 12:48:12 [DEBUG] -Dio.netty.noJdkZlibDecoder: false
+2019-02-11 12:48:12 [DEBUG] -Dio.netty.noJdkZlibEncoder: false
+2019-02-11 12:48:13 [DEBUG] Channel became active
+2019-02-11 12:48:13 [DEBUG] Connected to link.hdussta.cn/106.14.205.30:3306
+2019-02-11 12:48:13 [DEBUG] Auth plugin data length was 21
+2019-02-11 12:48:13 [DEBUG] handshake message was HandshakeMessage(5.7.15-log,212672,[B@13b4b929,-2113931265,33,2,mysql_native_password)
+2019-02-11 12:48:13 [DEBUG] Connected to database
+2019-02-11 12:49:19 [DEBUG] validate( {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $)
+2019-02-11 12:49:19 [DEBUG] validate( {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $)
+2019-02-11 12:49:19 [DEBUG] validate( {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $)
+2019-02-11 12:49:19 [DEBUG] validate( "asd", {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $.name)
+2019-02-11 12:49:19 [DEBUG] validate( "{\"image\":\"/assets/img/avatar.png\"}", {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $.description)
+2019-02-11 12:49:19 [DEBUG] validate( "OzVGr9Tow", {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $.deviceId)
+2019-02-11 12:49:19 [DEBUG] validate( "funcMsg(things,{\"username\":\"867653608@qq.com\"})", {"name":"asd","description":"{\"image\":\"/assets/img/avatar.png\"}","script":"funcMsg(things,{\"username\":\"867653608@qq.com\"})","deviceId":"OzVGr9Tow"}, $.script)
