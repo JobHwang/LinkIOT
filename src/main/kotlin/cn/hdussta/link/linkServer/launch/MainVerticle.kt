@@ -1,5 +1,6 @@
 package cn.hdussta.link.linkServer.launch
 
+import cn.hdussta.link.linkServer.common.*
 import cn.hdussta.link.linkServer.dashboard.DashBoardVerticle
 import cn.hdussta.link.linkServer.data.ScriptVerticle
 import cn.hdussta.link.linkServer.manager.ManagerVerticle
@@ -34,6 +35,7 @@ class MainVerticle : AbstractVerticle() {
     InternalLoggerFactory.setDefaultFactory(Log4JLoggerFactory.INSTANCE)
     GlobalScope.launch(vertx.dispatcher()) {
       val config = ConfigRetriever.create(vertx, ConfigRetrieverOptions().addStore(configFile)).getConfigAwait()
+      configureTables(config.getJsonObject("tables"))
       awaitResult<String> {
         vertx.deployVerticle(ScriptVerticle(), DeploymentOptions().setConfig(config), it)
       }.let(::println)
@@ -56,6 +58,30 @@ class MainVerticle : AbstractVerticle() {
 
     }.invokeOnCompletion {
       startFuture.complete()
+    }
+  }
+
+  private fun configureTables(config:JsonObject){
+    if(config.containsKey("sensor")){
+      SENSOR_TABLE = config.getString("sensor")
+    }
+    if(config.containsKey("device")){
+      DEVICE_TABLE = config.getString("device")
+    }
+    if(config.containsKey("user")){
+      USER_TABLE = config.getString("user")
+    }
+    if(config.containsKey("device_log")){
+      DEVICE_LOG_TABLE = config.getString("device_log")
+    }
+    if(config.containsKey("user_log")){
+      USER_LOG_TABLE = config.getString("user_log")
+    }
+    if(config.containsKey("alarm_log")){
+      ALARM_LOG_TABLE = config.getString("alarm_log")
+    }
+    if(config.containsKey("data")){
+      DATA_TABLE = {type:String->config.getString("data")+"_$type"}
     }
   }
 }

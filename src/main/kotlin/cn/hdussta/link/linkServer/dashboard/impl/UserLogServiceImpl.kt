@@ -66,7 +66,7 @@ class UserLogServiceImpl(private val vertx: Vertx,private val sqlClient: AsyncSQ
         if(username!=null) return resultHandler.handleError(-1,"权限不足")
         "SELECT l.id,u.email,l.action,l.create_time,l.type FROM $USER_LOG_TABLE l JOIN $USER_TABLE u ON l.user_id = u.id WHERE l.user_id=${context.getUid()}"+
           (if(type!=null) " AND l.type=$type" else "") +
-          " ORDER BY id DESC LIMIT $offset,$limit"
+          " ORDER BY l.id DESC LIMIT $offset,$limit"
       }
       UserLevel.ADMIN.ordinal->{
         val adminId = context.getAdmin()
@@ -75,7 +75,7 @@ class UserLogServiceImpl(private val vertx: Vertx,private val sqlClient: AsyncSQ
           " WHERE (u.admin_id=$adminId OR u.id=$uid)" +
           (if(username!=null) " AND u.email LIKE ?" else "") +
           (if(type!=null) " AND l.type=$type" else "") +
-          " ORDER BY id DESC LIMIT $offset,$limit"
+          " ORDER BY l.id DESC LIMIT $offset,$limit"
       }
       UserLevel.SUPER.ordinal->{
         "SELECT l.id,u.email,l.action,l.create_time,l.type" +
@@ -83,7 +83,7 @@ class UserLogServiceImpl(private val vertx: Vertx,private val sqlClient: AsyncSQ
           " WHERE 1=1" +
           (if(username!=null) " AND u.email LIKE ?" else "") +
           (if(type!=null) " AND l.type=$type" else "") +
-          " ORDER BY id DESC LIMIT $offset,$limit"
+          " ORDER BY l.create_time DESC LIMIT $offset,$limit"
       }
       else->return resultHandler.handleError(-1,"未知的等级")
     }

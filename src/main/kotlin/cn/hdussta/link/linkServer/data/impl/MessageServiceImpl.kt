@@ -14,7 +14,7 @@ class MessageServiceImpl(private val discovery: ServiceDiscovery) : AbstractData
   override suspend fun handle(info: DeviceInfo, data: JsonObject, param: JsonObject) {
     val username = param.getString("username")
     val json = JsonObject()
-      .put("deviceName", info.name)
+      .put("device",JsonObject().put("name",info.name).put("id",info.id))
       .put("data", data)
       .put("action","data")
     ms?.let {

@@ -91,10 +91,10 @@ class DeviceServiceImpl(private val vertx: Vertx, private val sqlClient: SQLClie
       val result = sqlClient.querySingleWithParamsAwait("SELECT id FROM $DEVICE_TABLE WHERE deviceid=? AND ownerid=?"
         , JsonArray().add(deviceId).add(context.getAdmin()))
       if (result != null) {
-        val state = awaitResult<String> { managerService.getState(deviceId,it) }
+        val state = awaitResult<String?> { managerService.getState(deviceId,it) }
         resultHandler.handleJson(JsonObject().put("status", 1)
           .put("message", GET_STATE_SUCCESS)
-          .put("state", JsonObject(state)))
+          .put("state", if(state==null || state=="null" || state=="") JsonObject() else JsonObject(state)))
       }else {
         resultHandler.handleError(-1, NO_AUTH)
       }

@@ -24,11 +24,17 @@ import io.vertx.kotlin.ext.sql.queryWithParamsAwait
 import io.vertx.kotlin.ext.sql.updateWithParamsAwait
 import io.vertx.kotlin.ext.web.sstore.deleteAwait
 import io.vertx.kotlin.ext.web.sstore.getAwait
+import io.vertx.servicediscovery.ServiceDiscovery
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class DeviceManagerServiceImpl(private val vertx: Vertx, private val eventBus: EventBus, private val asyncDeviceMap: AsyncMap<String, String>, private val sqlClient: SQLClient, private val sessionStore: SessionStore,private val scriptService: ScriptService): DeviceManagerService {
+class DeviceManagerServiceImpl(private val vertx: Vertx
+                               , private val eventBus: EventBus
+                               , private val asyncDeviceMap: AsyncMap<String, String>
+                               , private val sqlClient: SQLClient
+                               , private val sessionStore: SessionStore
+                               , private val scriptService: ScriptService): DeviceManagerService {
   private val logger = LoggerFactory.getLogger(DeviceManagerService::class.java)
 
   private fun publishCommand(action:String,body:JsonObject){

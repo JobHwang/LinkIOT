@@ -11,5 +11,14 @@
     "ssl": true,
     "username": "867653608@qq.com",
     "password": "bhqdlzovtapdbbhb"
+  },
+  "tables":{
+    "sensor":"sstalink_sensor",
+    "device":"sstalink_device",
+    "user":"sstalink_user",
+    "device_log":"sstalink_device_log",
+    "user_log":"sstalink_user_log",
+    "alarm_log":"sstalink_alarm_log",
+    "data":"sstalink_data"
   }
 }

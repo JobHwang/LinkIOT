@@ -43,7 +43,6 @@ class AlarmServiceImpl(private val discovery: ServiceDiscovery):AbstractDataHand
     param.getString("username")?.let { username->
       val json = JsonObject()
         .put("device",JsonObject().put("name",info.name).put("id",info.id))
-        .put("deviceName", info.name)
         .put("data", data)
         .put("action","alarm")
         .put("level",level)

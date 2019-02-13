@@ -1,9 +1,9 @@
 package cn.hdussta.link.linkServer.common
 
-const val SENSOR_TABLE = "sstalink_sensor"
-const val DEVICE_TABLE = "sstalink_device"
-const val USER_TABLE = "sstalink_user"
-const val DEVICE_LOG_TABLE = "sstalink_device_log"
-const val USER_LOG_TABLE = "sstalink_user_log"
-const val ALARM_LOG_TABLE = "sstalink_alarm_log"
-val DATA_TABLE = {type:String->"sstalink_data_$type"}
+var SENSOR_TABLE = "sstalink_sensor"
+var DEVICE_TABLE = "sstalink_device"
+var USER_TABLE = "sstalink_user"
+var DEVICE_LOG_TABLE = "sstalink_device_log"
+var USER_LOG_TABLE = "sstalink_user_log"
+var ALARM_LOG_TABLE = "sstalink_alarm_log"
+var DATA_TABLE = {type:String->"sstalink_data_$type"}
